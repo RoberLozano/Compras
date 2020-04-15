@@ -50,11 +50,14 @@ recognition.onresult = function(event) {
   // console.log(`Tamaño: ${size}`);
 
   // console.log('Confidence: ' + last.confidence);
+  var time= Date.now();
 
   console.log(`${last.transcript}  (${last.confidence}) `);
 
+ 
+
   if(last.confidence<0.9) console.log(event.results[event.results.length-1]);
-  else hablado.innerHTML += last.transcript+ "<br>"
+  else hablado.innerHTML +=last.transcript+ " [" +time+ "]<br>"
 
   // console.log(event.results[0][0].transcript);
   // console.log(event.results);
