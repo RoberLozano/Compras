@@ -63,7 +63,7 @@ recognition.onresult = function(event) {
  return;
 
   if(last.confidence<0.8) console.log(event.results[event.results.length-1]);
-  else hablado.innerHTML +=last.transcript+ " [" +time+ "]<br>"
+  else hablado.innerHTML +=last.transcript+"<br>"   //+ " [" +time+ "]<br>"
   lastTime=time;
 
   // console.log(event.results[0][0].transcript);
