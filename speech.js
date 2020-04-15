@@ -37,6 +37,11 @@ function hablar() {
   
 }
 
+// Controlo cuando genera los resultados para evitar el eco en Android https://issuetracker.google.com/issues/152628934
+// eliminarlo cuando el bug sea resuelto
+var lastTime=0;
+
+
 recognition.onresult = function(event) {
   // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
   // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
@@ -52,12 +57,14 @@ recognition.onresult = function(event) {
   // console.log('Confidence: ' + last.confidence);
   var time= Date.now();
 
-  console.log(`${last.transcript}  (${last.confidence}) `);
+  console.log(`${last.transcript}  (${last.confidence}) [${time}]`);
 
- 
+ if((time-lastTime)>10) //si es el eco del anterior salimos
+ return;
 
-  if(last.confidence<0.9) console.log(event.results[event.results.length-1]);
+  if(last.confidence<0.8) console.log(event.results[event.results.length-1]);
   else hablado.innerHTML +=last.transcript+ " [" +time+ "]<br>"
+  lastTime=time;
 
   // console.log(event.results[0][0].transcript);
   // console.log(event.results);
