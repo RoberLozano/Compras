@@ -11,23 +11,29 @@ var recognition = new SpeechRecognition();
 var speechRecognitionList = new SpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1);
 recognition.grammars = speechRecognitionList;
+
+//true para que escuche todo el tiempo
 recognition.continuous = true;
 recognition.lang = 'es-ES';
 recognition.interimResults = false;
-recognition.maxAlternatives = 1;
+recognition.maxAlternatives = 3;
 
-var hablar = document.getElementById('hablar');
+var boton;
+var hablado;
 
+// document.body.onclick = function() {
+//   recognition.start();
+//   console.log('Ready to receive a color command.');
+// }
 
-document.body.onclick = function() {
-  recognition.start();
-  console.log('Ready to receive a color command.');
-}
-
-function hablar(boton) {
+function hablar() {
   console.log('Botón de hablar pulsado');
   recognition.start();
   console.log('Preparado para escuchar');
+  boton= document.getElementById("hablar");
+  hablado= document.getElementById("hablado");
+  boton.style.color = "green";
+  
   
 }
 
@@ -40,20 +46,33 @@ recognition.onresult = function(event) {
   // These also have getters so they can be accessed like arrays.
   // The second [0] returns the SpeechRecognitionAlternative at position 0.
   // We then return the transcript property of the SpeechRecognitionAlternative object
-  var color = event.results[0][0].transcript;
-  diagnostic.textContent = 'Result received: ' + color + '.';
-  bg.style.backgroundColor = color;
-  console.log('Confidence: ' + event.results[0][0].confidence);
+  let last=event.results[event.results.length-1][0];
+  // console.log(`Tamaño: ${size}`);
+
+  // console.log('Confidence: ' + last.confidence);
+
+  console.log(`${last.transcript}  (${last.confidence}) `);
+
+  if(last.confidence<0.9) console.log(event.results[event.results.length-1]);
+  else hablado.innerHTML += last.transcript+ "<br>"
+
+  // console.log(event.results[0][0].transcript);
+  // console.log(event.results);
+  
 }
 
 recognition.onspeechend = function() {
   recognition.stop();
+  boton.style.color = "";
 }
 
 recognition.onnomatch = function(event) {
-  diagnostic.textContent = "I didn't recognise that color.";
+  console.log("I didn't recognise that color.");
+  boton.style.color = "red";
 }
 
 recognition.onerror = function(event) {
-  diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
+  console.log('Error occurred in recognition: ' + event.error);
+  boton.style.color = "red";
+  
 }

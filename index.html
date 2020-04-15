@@ -65,6 +65,7 @@
     </div>
 
     <div><button id="hablar" onclick="hablar()">Hablar</button></div>
+    <div id="hablado"></div>
     <div>
 
         <canvas id="barChart"></canvas>
@@ -485,48 +486,6 @@
         });
     }
 
-    function setCaracteristica(personaje) {
-      var name= $('#campoNombre').val();
-       database.ref("personajes").child("caracteristicas").child($('#campoNombre').val()).set(parseInt($('#campoValor').val()));
-    }
-    // function setCaracteristicas(personaje) {
-    //   var name= $('#campoNombre').val();
-    //    database.ref("personajes").child("caracteristicas").set({
-    //       FUE:15, //another way you could write is $('#myForm [name="fullname"]').
-    //       CON: 15,
-    //       TAM: 15,
-    //       INT: 15,
-    //       POD: 15,
-    //       DES: 15,
-    //      ASP: 15,
-    //     });
-    //   }
-
-      function setCaracteristicas(personaje) {
-      var name= $('#campoNombre').val();
-      var mapa=new Map();
-        var i;
-      for( i=0;i<CP.length;i++){
-        // database.ref("personajes").child("caracteristicas").child(i).set(parseInt($('#campoValor').val()));
-        // var rd=Math.floor(Math.random() * 20) + 1;
-        var rd= new D(3,6);
-        var d = new D(3,6);
-        
-        rd=d.norm();
-
-         database.ref("personajes").child("caracteristicas").child(i+separador+CP[i]).set(rd);
-        
-        mapa.set(CP[i], rd);
-        console.log(CP[i]+":"+ rd);
-        }
-        
-        // database.ref("personajes").child("PF").set((mapa.get("FUE")+mapa.get("CON"))/2);
-        // database.ref("personajes").child("PM").set((mapa.get("POD")+mapa.get("INT"))/2);
-        // database.ref("personajes").child("PG").set((mapa.get("CON")+mapa.get("TAM"))/2);
-      
-      }
-
-
 
     $("#buscar").on("keyup", function() {
           var value = $(this).val().toLowerCase();
@@ -535,7 +494,7 @@
           });
         });
 
-  
+  //Carga las Habilidades (listas) al principio
     fbHabilidadesCollection.on('value',function(habilidades){
 
       $("#habilidades").children().remove();
