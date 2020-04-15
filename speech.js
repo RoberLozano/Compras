@@ -24,6 +24,13 @@ document.body.onclick = function() {
   console.log('Ready to receive a color command.');
 }
 
+function hablar(boton) {
+  console.log('Botón de hablar pulsado');
+  recognition.start();
+  console.log('Preparado para escuchar');
+  
+}
+
 recognition.onresult = function(event) {
   // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
   // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
