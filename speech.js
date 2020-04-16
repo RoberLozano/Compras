@@ -59,7 +59,7 @@ recognition.onresult = function(event) {
 
   console.log(`${last.transcript}  (${last.confidence}) [${time}]`);
 
- if((time-lastTime)<10) //si es el eco del anterior salimos (menos de 10 ms)
+ if((time-lastTime)<70) //si es el eco del anterior salimos (menos de 70 ms)
  return;
 
   if(last.confidence<0.8) console.log(event.results[event.results.length-1]);
