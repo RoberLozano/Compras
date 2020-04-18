@@ -4,7 +4,7 @@ Página web con la que poder consultar y añadir articulos a un lista de compras
 - [x] Visualizar listas
 - [x] Escoger columnas a mostrar
 - [x] Permitir añadir articulos por voz
-- [ ] editar artículos
+- [ ] [Editar artículos](https://github.com/RoberLozano/Compras/issues/2)
 - [ ] usuarios
 - [ ] historial compras
 - [ ] estilos CSS
