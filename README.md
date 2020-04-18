@@ -3,7 +3,7 @@ Página web con la que poder consultar y añadir articulos a un lista de compras
 
 - [x] Visualizar listas
   - [x] Visualizar listas
-  - [ ] Escoger librería de tablas
+  - [ ] Escoger librería de tablas :question:
 - [x] Escoger columnas a mostrar :hammer_and_wrench:
 - [x] Permitir añadir articulos por voz :hammer_and_wrench:
 - [ ] [Editar artículos](https://github.com/RoberLozano/Compras/issues/2)
