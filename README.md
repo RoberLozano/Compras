@@ -13,5 +13,8 @@ Página web con la que poder consultar y añadir articulos a un lista de compras
 
 La página se puede visitar [aquí](https://roberlozano.github.io/Compras/index.html)
 
+Para requerir alguna [funcionalidad](https://github.com/RoberLozano/Compras/issues/new) (marcar el label `enhancement`), o para informar de algun [bug](https://github.com/RoberLozano/Compras/issues/new) (marcarlo como `bug`)
+
+
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
