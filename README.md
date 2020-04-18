@@ -1,4 +1,5 @@
-## Welcome to GitHub Pages
+## Compras
+Página web con la que poder consultar y añadir articulos a un lista de compras. Versión de prueba
 
 You can use the [editor on GitHub](https://github.com/RoberLozano/Compras/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
