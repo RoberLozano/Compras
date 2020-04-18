@@ -94,9 +94,9 @@
           mic
         </span></button></div>
     <div id="hablado"></div>
+    <button onclick="borrarArticulo()">Deshacer</button>
     <div>
-
-      <button onclick="añadir()">Añadir</button>
+      
 
       <canvas id="barChart"></canvas>
       <canvas id="radarChart"></canvas>
@@ -130,6 +130,8 @@
     var fbListasCollection = database.ref('/listas/');
     var fbActual;
 
+    //para deshacer
+    var lastArticulo;
     //SELECTS
 
     // el select guay
@@ -326,7 +328,18 @@ var newPostRef = database.ref(ruta).push();
 articulo=articulo.listar(ruta,newPostRef.key,"Rober",articulo.unidades, articulo.precio);
 // articulo.id=newPostRef.key;
 newPostRef.set(articulo)
+lastArticulo=articulo
+
+}
+
+function borrarArticulo(a=lastArticulo,lista){
+  console.log(a);
   
+  let ruta=`/listas/${$("#listas").val()}/${a.id}`
+  console.log(ruta);
+  
+  database.ref(ruta).remove()
+
 }
 
     function editar(objeto) {

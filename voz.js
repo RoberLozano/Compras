@@ -80,23 +80,25 @@ recognition.onresult = function(event) {
 
   let a=new Articulo();
   a.dictado(last.transcript);
-  console.log(a);
+  // console.log(a);
 
   writeArticulo(a);
+
+
   
   // let numProp=a.propiedades();
   
 
   //#region alternativas solo si la primera lectura tiene baja confianza
     // TODO: solo si la primera lectura tiene baja confianza
-    var articulos=[];
-    for (let index = 0; index < recognition.maxAlternatives; index++) {
-      console.log(lastArray[index].transcript +":"+lastArray[index].confidence);
-        // console.log("CREA:");
-      // articulos[index]=new Articulo();
-      // articulos[index].dictado(lastArray[index].transcript);
-      // console.log(articulos[index]+":"+articulos[index].propiedades());
-    }
+    // var articulos=[];
+    // for (let index = 0; index < recognition.maxAlternatives; index++) {
+    //   console.log(lastArray[index].transcript +":"+lastArray[index].confidence);
+    //     // console.log("CREA:");
+    //   // articulos[index]=new Articulo();
+    //   // articulos[index].dictado(lastArray[index].transcript);
+    //   // console.log(articulos[index]+":"+articulos[index].propiedades());
+    // }
     // console.log(articulos);
   //#endregion 
   

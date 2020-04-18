@@ -228,7 +228,8 @@ class ArticuloLista extends Articulo {
 		super(nombre, cantidad, marca, ENA);
 		this.unidades = unidades
 		this.precio = precio ? precio : 0; //por si es null o undefined
-		this.lista = lista
+		this.id=id;
+		this.lista = lista;
 		this.total = unidades * precio;
 	}
 }
