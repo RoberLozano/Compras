@@ -7,6 +7,8 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 var colors = [ 'agua' , 'azul' , 'beis', 'negro', 'blanco', 'blue', 'marron', 'chocolate', 'coral', 'escarlata','rojo', 'verde']
 var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;'
 
+var resultado="";
+
 var recognition = new SpeechRecognition();
 var speechRecognitionList = new SpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1);
@@ -26,16 +28,23 @@ var hablado;
 //   console.log('Ready to receive a color command.');
 // }
 
+
 function hablar() {
+  boton= document.getElementById("hablar");
+  hablado= document.getElementById("hablado");
+  if(boton.style.color=="green") //ya esta escuchando y se para
+  {
+    recognition.stop();
+    return;
+  }
   console.log('Botón de hablar pulsado');
   recognition.start();
   console.log('Preparado para escuchar');
-  boton= document.getElementById("hablar");
-  hablado= document.getElementById("hablado");
+
   boton.style.color = "green";
   
-  
 }
+
 
 // Controlo cuando genera los resultados para evitar el eco en Android https://issuetracker.google.com/issues/152628934
 // eliminarlo cuando el bug sea resuelto
@@ -52,19 +61,47 @@ recognition.onresult = function(event) {
   // The second [0] returns the SpeechRecognitionAlternative at position 0.
   // We then return the transcript property of the SpeechRecognitionAlternative object
   let last=event.results[event.results.length-1][0];
+  let lastArray=event.results[event.results.length-1];
   // console.log(`Tamaño: ${size}`);
 
   // console.log('Confidence: ' + last.confidence);
   var time= Date.now();
 
   console.log(`${last.transcript}  (${last.confidence}) [${time}]`);
+  
 
- if((time-lastTime)<70) //si es el eco del anterior salimos (menos de 70 ms)
+ if((time-lastTime)<100) //si es el eco del anterior salimos (menos de 70 ms)
  return;
 
-  if(last.confidence<0.8) console.log(event.results[event.results.length-1]);
-  else hablado.innerHTML +=last.transcript+"<br>"   //+ " [" +time+ "]<br>"
+  if(last.confidence<0.5) console.log(event.results[event.results.length-1]);
+  else hablado.innerHTML +=last.transcript+ " [" +time+ "] <br>"
   lastTime=time;
+
+
+  let a=new Articulo();
+  a.dictado(last.transcript);
+  console.log(a);
+
+  writeArticulo(a);
+  
+  // let numProp=a.propiedades();
+  
+
+  //#region alternativas solo si la primera lectura tiene baja confianza
+    // TODO: solo si la primera lectura tiene baja confianza
+    var articulos=[];
+    for (let index = 0; index < recognition.maxAlternatives; index++) {
+      console.log(lastArray[index].transcript +":"+lastArray[index].confidence);
+        // console.log("CREA:");
+      // articulos[index]=new Articulo();
+      // articulos[index].dictado(lastArray[index].transcript);
+      // console.log(articulos[index]+":"+articulos[index].propiedades());
+    }
+    // console.log(articulos);
+  //#endregion 
+  
+  // writeArticulo(new Articulo(last.transcript));
+
 
   // console.log(event.results[0][0].transcript);
   // console.log(event.results);

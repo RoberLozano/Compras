@@ -33,7 +33,7 @@
   <!-- charts -->
   <script src=https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js></script>
   <script src="compras.js"></script>
-  <script src="speech.js"></script>
+  <script src="voz.js"></script>
 
 </head>
 
@@ -43,7 +43,7 @@
     <div class="jumbotron">
       <button class="btn float-right" onclick="pantalla()"><i class="material-icons">fullscreen</i></button>
       <button class="btn float-right" onclick="dark()"><i class="material-icons">invert_colors</i></button>
-      <h1>Compras</h1>
+      <h1>Compras <span style="font-size: medium;color:red">βeta</span><span style="font-size: small;color:red"> 0.007</span></h1>
 
     </div>
 
@@ -54,9 +54,9 @@
     </datalist>
     <button onclick="cargarRuta()">Cargar Ruta</button> -->
 
-    <select id="habilidades" style="font: 1.2em sans-serif;">
+    <select id="listas" style="font: 1.2em sans-serif;">
     </select>
-    <button onclick="cargarHabilidad()">Cargar Lista</button>
+    <button onclick="cargarLista()">Cargar Lista</button>
 
 
     <div>
@@ -64,9 +64,10 @@
       <select class="selectpicker" id="columnas" multiple data-live-search="true" data-width="fit" multiple
         title="Seleccione columnas a mostrar">
         <option selected>nombre</option>
-        <option>xp</option>
-        <option>tipo</option>
-        <option selected>valor</option>
+        <option>unidades</option>
+        <option>cantidad</option>
+        <option selected>precio</option>
+        <option selected>total</option>
       </select>
 
       <p>Busca en cualquier campo:</p>
@@ -76,7 +77,7 @@
       <table id="tabla" class="table">
         <thead id="header">
 
-          <!-- <th>Habilidad</th>
+          <!-- <th>Lista</th>
                   <th>Valor</th> -->
 
         </thead>
@@ -94,6 +95,8 @@
         </span></button></div>
     <div id="hablado"></div>
     <div>
+
+      <button onclick="añadir()">Añadir</button>
 
       <canvas id="barChart"></canvas>
       <canvas id="radarChart"></canvas>
@@ -124,121 +127,32 @@
     firebase.initializeApp(config);
     var database = firebase.database();
 
-
-
-    //this function is called when the submit button is clicked
-
-    var fbHabilidadesCollection = database.ref('/listas/');
-    var fbCaracteristicas = database.ref('/caracteristicas/');
+    var fbListasCollection = database.ref('/listas/');
     var fbActual;
-    //constante con las Características del Personaje
-    //indice de las características
-
-
-    //Charts
-
-    // 	var barChartData = {
-    // 		labels: CP,
-    // 		datasets: [{
-    // 			label: 'Humana',
-    // 			backgroundColor: 'rgba(250, 0, 0, .9)',
-    // 			borderColor: 'rgba(250, 0, 0, 1)',
-    // 			borderWidth: 1,
-    // 			data: [15, 15, 15, 29, 37, 23, 17]				
-    // 		}, {
-    // 			label: 'Dragón',
-    // 			backgroundColor: 'rgba(0, 0, 0, .7)',
-    // 			borderColor: 'rgba(0, 0, 0, 1)',
-    // 			borderWidth: 1,
-    // 			data: [34, 33, 34, 29, 37, 18, 22]
-    // 		}]
-
-    // 	};
-
-    // 		var ctx = document.getElementById('barChart').getContext('2d');
-    // 		var myBarChart = new Chart(ctx, {
-    // 			type: 'bar',
-    // 			data: barChartData,
-    // 			options: {
-    // 				responsive: true,
-    // 				legend: {
-    // 					position: 'top',
-    // 				},
-    // 				title: {
-    // 					display: true,
-    // 					text: 'Características'
-    // 				},
-    //         scales: {
-    //         yAxes: [{
-    //           ticks: {
-    //           beginAtZero: true
-    //         }
-    //       }]
-    //     }
-    // 			}
-    // 		});
-
-
-    //    //radar
-    // var ctxR = document.getElementById("radarChart").getContext('2d');
-    // var myRadarChart = new Chart(ctxR, {
-    //   type: 'radar',
-    //   data: {
-    //     labels: CP,
-    //     datasets: [{
-    //         label: "Humana",
-    //         data: [15, 15, 15, 29, 37, 23, 17],
-    //         backgroundColor: [
-    //           'rgba(105, 0, 132, .2)',
-    //         ],
-    //         borderColor: [
-    //           'rgba(200, 99, 132, .7)',
-    //         ],
-    //         borderWidth: 2
-    //       },
-    //       {
-    //         label: "Dragón",
-    //         data: [34, 33, 34, 19, 37, 18, 22],
-    //         backgroundColor: [
-    //           'rgba(0, 250, 220, .2)',
-    //         ],
-    //         borderColor: [
-    //           'rgba(0, 213, 132, .7)',
-    //         ],
-    //         borderWidth: 2
-    //       }
-    //     ]
-    //   },
-    //   options: {
-    //     scales: {
-    //       yAxes: [{
-    //         ticks: {
-    //           beginAtZero: true
-    //         }
-    //       }]
-    //     }
-    //   }
-    // });
 
     //SELECTS
 
     // el select guay
     $('selectpicker').selectpicker();
 
-    $('selectpicker').on('show.bs.select', function (e) {
-      // console.log("aparece "+$('select').val());
-      colAntes = $('selectpicker').val()
+    var colAntes=""
+    var colDespues="";
+
+    $('#columnas').on('show.bs.select', function (e) {
+      console.log("aparece "+$('#columnas').val());
+      colAntes = $('#columnas').val()
     });
 
-    //para tabla habilidades
+    //para tabla listas
     $('#columnas').on('hidden.bs.select', function (e) {
-      // console.log("se esconde "+$('#columnas').val());
+      console.log("se esconde "+$('#columnas').val());
       colDespues = $('#columnas').val()
-      // console.log(colAntes+"->"+colDespues);
+      console.log(colAntes+"->"+colDespues);
 
       if (colAntes.join(',') == colDespues.join(',')) return; //si son iguales no hago nada
       // si no son iguales vuelvo a cargar con las nuevas columnas
-      tablaHabilidades();
+      createHeader()
+      tablaLista();
     });
 
     function isNumber(value) {
@@ -251,6 +165,9 @@
     function quitarNumero(str) {
       var s = str.substring(str.search(separador) + 1);
       return s;
+    }
+    function añadir(){
+      writeArticulo(new Articulo("nombre","cantidad","marca","ENA=0"));
     }
 
     function addData(chart, label, data) {
@@ -266,6 +183,7 @@
     //MIAS
 
     //FULLSCREEN
+
     function pantalla() {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
@@ -285,97 +203,87 @@
 
     }
 
-    // var elem = document.documentElement;
-    // function openFullscreen() {
-    //   if (elem.requestFullscreen) {
-    //     elem.requestFullscreen();
-    //   } else if (elem.mozRequestFullScreen) { /* Firefox */
-    //     elem.mozRequestFullScreen();
-    //   } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-    //     elem.webkitRequestFullscreen();
-    //   } else if (elem.msRequestFullscreen) { /* IE/Edge */
-    //     elem.msRequestFullscreen();
-    //   }
-    // }
-
-    // function closeFullscreen() {
-    //   if (document.exitFullscreen) {
-    //     document.exitFullscreen();
-    //   } else if (document.mozCancelFullScreen) {
-    //     document.mozCancelFullScreen();
-    //   } else if (document.webkitExitFullscreen) {
-    //     document.webkitExitFullscreen();
-    //   } else if (document.msExitFullscreen) {
-    //     document.msExitFullscreen();
-    //   }
-    // }
 
     var objetoActual = "";
 
-    function cargarHabilidad() {
-      console.log($("#habilidades").val());
-      var fbHabilidadActual = database.ref('/listas/' + $("#habilidades").val());
-      // fbHabilidadActual.orderByChild("valor").on('value',function(habilidades){
-      fbHabilidadActual.on('value', function (habilidades) {
+    function cargarLista() {
+      console.log($("#listas").val());
+      var fbListaActual = database.ref('/listas/' + $("#listas").val());
+      // fbListaActual.orderByChild("valor").on('value',function(listas){
+      fbListaActual.on('value', function (listas) {
 
-        clear();
-        var a;
-        let visibles = ["nombre", "unidades", "precio", "total"]
-        //this is saying foreach order do the following function...
-        habilidades.forEach(function (firebaseHabilidadReference) {
+        // let visibles = ["nombre", "unidades", "precio", "total"]
+        visibles = $("#columnas").val();
+        var articulos = [];
+
+        listas.forEach(function (firebaseListaReference) {
           //this gets the actual data (JSON) for the order.
           // var order = firebaseOrderReference.val().nombre;
           // var precio = firebaseOrderReference.val().precioF;
-          a = firebaseHabilidadReference.val();
-          var art = new Articulo();
+          let a = firebaseListaReference.val();
+          var art = new Articulo(a.nombre);
           art.setAll(a);
-          console.log(a); //check your console to see it!
-          // addObjet2Table(a);
-
-          objetoTabla(art, "myTable", visibles)
-
-          // addTable(a.nombre,a.valor);
+          // console.log(a); //check your console to see it!
+          articulos.push(a);
         });
 
         //poner el header
-        createHeader(visibles);
+        createHeader();
+        // poblar la tabla
+        tablaLista(articulos);
+
         // $('#header').css('textTransform', 'capitalize');
       });
-
       // $('#myTable').css('textTransform', 'capitalize');
-
     }
 
-    function cargarRuta() {
-      console.log($("#rutas").val());
-      var fbHabilidadActual = database.ref($("#rutas").val());
-      // fbHabilidadActual.orderByChild("valor").on('value',function(habilidades){
-      fbHabilidadActual.on('value', function (habilidades) {
+    var lastLista;
+    function tablaLista(lista) {
+      if(lista)lastLista=lista
+      else lista=lastLista
 
-        clear();
-        var a;
-        //this is saying foreach order do the following function...
-        habilidades.forEach(function (firebaseHabilidadReference) {
-          //this gets the actual data (JSON) for the order.
-          // var order = firebaseOrderReference.val().nombre;
-          // var precio = firebaseOrderReference.val().precioF;
-          a = firebaseHabilidadReference.val();
-          console.log(a); //check your console to see it!
-          addObjet2Table(a);
+      var visibles = $("#columnas").val();
 
 
-          // addTable(a.nombre,a.valor);
-        });
+      // visibles.push(v);
 
-        //poner el header
-        createHeader(a);
-        $('#header').css('textTransform', 'capitalize');
-      });
-
-      // $('#myTable').css('textTransform', 'capitalize');
-
+      clear();
+      for (a of lista) {
+        console.log(a);
+        objetoTabla(a, "myTable", visibles)
+      };
     }
 
+
+    // function cargarRuta() {
+    //   console.log($("#rutas").val());
+    //   var fbListaActual = database.ref($("#rutas").val());
+    //   // fbListaActual.orderByChild("valor").on('value',function(listas){
+    //   fbListaActual.on('value', function (listas) {
+
+    //     clear();
+    //     var a;
+    //     //this is saying foreach order do the following function...
+    //     listas.forEach(function (firebaseListaReference) {
+    //       //this gets the actual data (JSON) for the order.
+    //       // var order = firebaseOrderReference.val().nombre;
+    //       // var precio = firebaseOrderReference.val().precioF;
+    //       a = firebaseListaReference.val();
+    //       console.log(a); //check your console to see it!
+    //       addObjet2Table(a);
+
+
+    //       // addTable(a.nombre,a.valor);
+    //     });
+
+    //     //poner el header
+    //     createHeader(a);
+    //     $('#header').css('textTransform', 'capitalize');
+    //   });
+
+    //   // $('#myTable').css('textTransform', 'capitalize');
+
+    // }
 
 
     function objetoTabla(object, tabla, visibles) {
@@ -386,57 +294,40 @@
       for (key of visibles) {//Esto serían todas
         var cell = row.insertCell(i);
         let valor;
-        //Hacer un get de property en vez de método
-        // if (key.includes("()")) {//si es un método
-        //   valor = eval("object." + key);
-        // }
-        // else {
         if (i == 0) id = object[key];
-        // crearEventos(object, cell, key);
-        // console.log(object[key]);
         valor = object[key];
-        // }
 
         if (valor === undefined) valor = "";
-
         cell.innerHTML = '<i data-toggle="tooltip"  id="' + id + "|" + key + "|" + valor + '" title=' + key + '>' + valor + '</i>';
         // crearEventos(object, cell, key);
         i++;
       }
 
-
     }
 
 
-    function addObjet2Table(object) {
-      objetoActual = object;
-      const keys = Object.keys(object);
-      const values = Object.values(object);
+/**
+ * Saves a new articulo to the Firebase DB.
+ */
+function writeArticulo(articulo,lista) {
 
-      var table = document.getElementById("myTable");
-      var row = table.insertRow();
-      var id = -1
-      for (i = 0; i < keys.length; i++) {
-        if (i == 0) id = values[i];
-        var k = keys[i];
-        var v = values[i];
-        var cell = row.insertCell(i);
+  // // Get a key for a new Post.
+  // var newPostKey = database.ref('/listas/' + $("#listas").val()).push().key;
+  // // Write the new post's data simultaneously in the posts list and the user's post list.
+  // var updates = {};
+  // updates['/listas/'+$("#listas").val()+"/" + newPostKey] = articulo;
+  // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+// return firebase.database().ref().update(updates);
 
-        cell.addEventListener("click", function () {
-          // alert(id+"|"+keys[i]+"|"+values[i]);
-          console.log(object);
-          editar(object);
+let ruta='/listas/' + $("#listas").val();
 
-        });
+var newPostRef = database.ref(ruta).push();
 
-
-        cell.innerHTML = '<i data-toggle="tooltip"  id="' + id + "|" + keys[i] + "|" + values[i] + '" title=' + typeof (values[i]) + '>' + values[i] + '</i>';
-        // cell.tooltip({title: "<h1><strong>HTML</strong> $keys[i] <code>the</code> <em>tooltip</em></h1>", html: true, placement: "bottom"});
-        console.log(keys[i] + ":" + values[i]); //check your console to see it!
-      }
-
-
-    }
+articulo=articulo.listar(ruta,newPostRef.key,"Rober",articulo.unidades, articulo.precio);
+// articulo.id=newPostRef.key;
+newPostRef.set(articulo)
+  
+}
 
     function editar(objeto) {
       // console.log("Editar:"+objeto );
@@ -461,16 +352,6 @@
 
     }
 
-    function setHabilidad(param) {
-
-      var name = $('#campoNombre').val();
-      fbHabilidadesCollection.child(name).set({
-        nombre: name, //another way you could write is $('#myForm [name="fullname"]').
-        "tipo": $('#tipo').val(),
-        valor: $('#campoValor').val(), //another way you could write is $('#myForm [name="fullname"]').
-
-      });
-    }
 
     function editarObjeto() {
 
@@ -502,34 +383,15 @@
 
       // console.log(obj);
 
-      fbHabilidadesCollection.child(id).set(objetoActual);
+      fbListasCollection.child(id).set(objetoActual);
 
       //  var name= objetoActual.nombre;
-      //   fbHabilidadesCollection.child(name).set(obj);
+      //   fbListasCollection.child(name).set(obj);
     }
 
 
-
-    // function createHeader(object){
-    //   var th = document.getElementById("header");
-    //   const keys = Object.keys(object);
-    //   th.innerHTML=""; //clear header
-    //   var row =th.insertRow(0);
-
-    //   for(i = 0; i < keys.length; i++)
-    //     {
-    //       var cell = row.insertCell(i);
-
-    //       cell.innerHTML ='<b>'+ quitarNumero(keys[i])+'</b>'  ;
-    //       // var text = document.createTextNode(keys[i]); //cell
-
-    //       // $("#header").children.add("<th>Valor</th>");
-    //     }
-    //     th.appendChild(row);
-
-    // }
-
-    function createHeader(visibles, header = "header") {
+    function createHeader(header = "header") {
+      visibles=$("#columnas").val()
       var th = document.getElementById(header);
       th.innerHTML = ""; //clear header
       var row = th.insertRow(0);
@@ -537,7 +399,7 @@
         var cell = row.insertCell(i);
         cell.innerHTML = '<b>' + visibles[i] + '</b>';
       }
-      // if (header === "header") {//si es habilidades
+      // if (header === "header") {//si es listas
       //   // El total si sale siempre cambiar cuando se aplique tb a inventario
       //   // a no ser que ponga el peso total
       //   cell = row.insertCell();
@@ -546,9 +408,6 @@
       // }
 
     }
-
-
-
 
     function clear() {
       $("#myTable").children().remove();
@@ -559,17 +418,22 @@
       //       }
     }
 
-    function addHabilidad(habilidad) {
-      var x = document.getElementById("habilidades");
+
+    /**
+     * Añade un elemento a un select
+     * @param {string} element a añadir
+     * @param {select} select id del select
+     */
+    function addElement2Select(element, select) {
+      var x = document.getElementById(select);
       var option = document.createElement("option");
-      option.text = habilidad;
+      option.text = element;
       x.add(option);
     }
 
-
-    function writeHabilidad(userId, name, valor) {
+    function writeLista(userId, name, valor) {
       var name = $('#campoNombre').val();
-      fbHabilidadesCollection.child(name).set({
+      fbListasCollection.child(name).set({
         nombre: name, //another way you could write is $('#myForm [name="fullname"]').
         tipo: $('#tipo').val(),
         valor: $('#campoValor').val(), //another way you could write is $('#myForm [name="fullname"]').
@@ -577,7 +441,7 @@
       });
     }
 
-
+    //BUSCAR
     $("#buscar").on("keyup", function () {
       var value = $(this).val().toLowerCase();
       $("#myTable tr").filter(function () {
@@ -585,16 +449,17 @@
       });
     });
 
-    //Carga las Habilidades (listas) al principio
-    fbHabilidadesCollection.on('value', function (habilidades) {
+    //Carga las Listas (listas) al principio
+    fbListasCollection.on('value', function (listas) {
 
-      $("#habilidades").children().remove();
-      //this is saying foreach Habilidad do the following function...
-      habilidades.forEach(function (firebaseHabilidadReference) {
-        //this gets the actual data (JSON) for the Habilidad.
-        var habilidad = firebaseHabilidadReference.key;
-        console.log(habilidad); //check your console to see it!
-        addHabilidad(habilidad);
+      $("#listas").children().remove();
+      //this is saying foreach Lista do the following function...
+      listas.forEach(function (firebaseListaReference) {
+        //this gets the actual data (JSON) for the Lista.
+        var lista = firebaseListaReference.key;
+        // console.log(lista); //check your console to see it!
+        // addLista(lista);
+        addElement2Select(lista, "listas")
       });
     });
 
