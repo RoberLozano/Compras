@@ -148,9 +148,28 @@
               </div>
               <div class="row">
                 <div class="input-field col s6">
+                  <input id="last_name" type="text" class="validate">
+                  <label for="last_name">Motivo</label>
+                </div>
+                <input type="text" class="datepicker" placeholder="fecha">
+               
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input type="text" class="timepicker" placeholder="hora">
+                  <label for="first_name">Hora</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="last_name" type="text" class="validate">
+                  <label for="last_name">Last Name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
                   <input placeholder="Placeholder" id="first_name" type="text" class="validate">
                   <label for="first_name">First Name</label>
                 </div>
+               
                 <div class="input-field col s6">
                   <input id="last_name" type="text" class="validate">
                   <label for="last_name">Last Name</label>
@@ -196,26 +215,15 @@
                   <label for="last_name">Last Name</label>
                 </div>
               </div>
-              <div class="row">
-                <div class="input-field col s6">
-                  <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-                  <label for="first_name">First Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="last_name" type="text" class="validate">
-                  <label for="last_name">Last Name</label>
-                </div>
+
+              <div class="input-field col s6">
+                <input type="range" id="test5" min="0" max="100" />
+                <label for="last_name">Precio</label>
               </div>
-              <div class="row">
-                <div class="input-field col s6">
-                  <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-                  <label for="first_name">First Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="last_name" type="text" class="validate">
-                  <label for="last_name">Last Name</label>
-                </div>
-              </div>
+
+              <p class="range-field">
+                <input type="range" id="test5" min="0" max="100" />
+              </p>
 
               <div class="row">
                 <div class="input-field col s12">
@@ -281,6 +289,8 @@
     $(document).ready(function(){
     $('.fixed-action-btn').floatingActionButton();
     $('.modal').modal();
+    $('.datepicker').datepicker();
+    $('.timepicker').timepicker();
   });
   </script>
 </body>
