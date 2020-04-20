@@ -98,6 +98,9 @@ function dark() {
   element.classList.toggle("dark-mode");
   //  document.getElementById('tabla').classList.toggle("table-dark");
   document.getElementById('tabla').classList.toggle("dark-mode");
+  $("i").toggleClass("dark-mode");
+  
+
 
   // $('#tabla').DataTable();
 
