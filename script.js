@@ -33,6 +33,20 @@ $('selectpicker').selectpicker();
 // $('#table_id').DataTable();
 
 
+//Carga las Listas (listas) al principio
+fbListasCollection.on('value', function (listas) {
+
+  $("#listas").children().remove();
+  //this is saying foreach Lista do the following function...
+  listas.forEach(function (firebaseListaReference) {
+    //this gets the actual data (JSON) for the Lista.
+    var lista = firebaseListaReference.key;
+    console.log(lista); //check your console to see it!
+    // addLista(lista);
+    addElement2Select(lista, "listas")
+  });
+});
+
 var colAntes = ""
 var colDespues = "";
 
@@ -210,7 +224,7 @@ function objetoTabla(object, tabla, visibles) {
 
 function crearEventos(objeto, cell, key) {
     cell.addEventListener('click', function () {
-      editar(objeto)
+      editar(objeto,"modal")
   });
 
 }
@@ -267,11 +281,11 @@ function editar(objeto,editor) {
   var editor = document.getElementById(editor);
   editor.innerHTML = ""; //clear editor
   for( key in objeto) {
-    editor.innerHTML = editor.innerHTML + ' <b>' + k.toUpperCase() + ':</b>' +
+    editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
     `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
   }
 
-  editor.innerHTML = editor.innerHTML + '<button onclick="editarObjeto(objeto)">Guardar</button>'
+  // editor.innerHTML = editor.innerHTML + '<button onclick="editarObjeto(objeto)">Guardar</button>'
 
   $( "#ok" ).on( "click", function() {
     editarObjeto(objeto)
@@ -324,6 +338,7 @@ function clear() {
   //       }
 }
 
+// addElement2Select("HOLA","listas")
 
 /**
  * Añade un elemento a un select
@@ -331,10 +346,14 @@ function clear() {
  * @param {select} select id del select
  */
 function addElement2Select(element, select) {
+  
+  
   var x = document.getElementById(select);
   var option = document.createElement("option");
   option.text = element;
   x.add(option);
+  console.log(x);
+  console.log(option);
 }
 
 function writeLista(userId, name, valor) {
@@ -355,19 +374,7 @@ $("#buscar").on("keyup", function () {
   });
 });
 
-//Carga las Listas (listas) al principio
-fbListasCollection.on('value', function (listas) {
 
-  $("#listas").children().remove();
-  //this is saying foreach Lista do the following function...
-  listas.forEach(function (firebaseListaReference) {
-    //this gets the actual data (JSON) for the Lista.
-    var lista = firebaseListaReference.key;
-    // console.log(lista); //check your console to see it!
-    // addLista(lista);
-    addElement2Select(lista, "listas")
-  });
-});
 
 // $(document).ready( function () {
 // $('#tabla').DataTable();
