@@ -208,7 +208,7 @@ function objetoTabla(object, tabla, visibles) {
   }
 }
 
-function crearEventos(object, cell, key) {
+function crearEventos(objeto, cell, key) {
     cell.addEventListener('click', function () {
       editar(objeto)
   });
