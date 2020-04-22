@@ -273,7 +273,8 @@ function editar(objeto,editor) {
   }
 
   editor.innerHTML = editor.innerHTML + '<button onclick="editarObjeto(objeto)">Guardar</button>'
-  $( "#ok" ).click(function() {
+
+  $( "#ok" ).on( "click", function() {
     editarObjeto(objeto)
     objeto.guardar();
   });
