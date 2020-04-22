@@ -209,11 +209,9 @@ function objetoTabla(object, tabla, visibles) {
 }
 
 function crearEventos(object, cell, key) {
-    cell.addEventListener.on( "touch", function() {
-      // console.log(object);
-      // editar(object, "modal")
-      alert("EDITAR")
-    });
+    cell.addEventListener('click', function () {
+      alert("log")
+  });
 
 }
 
