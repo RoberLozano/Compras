@@ -210,7 +210,7 @@ function objetoTabla(object, tabla, visibles) {
 
 function crearEventos(object, cell, key) {
     cell.addEventListener('click', function () {
-      alert("log")
+      editar(objeto)
   });
 
 }
