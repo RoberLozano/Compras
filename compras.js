@@ -121,7 +121,10 @@ class Articulo {
 	dictado(dictado) {
 		// unidades = 1;
 		// isOk = false;
-		var r = dictado.toLowerCase().trim();
+		//probar sin minusculas a ver
+		// var r = dictado.toLowerCase().trim();
+		var r = dictado
+		r=r+" " //para el caso de que la magnitud (l) esté sin espacio al final
 
 		//TODO: tratar lo de los números como texto
 		r = r.replace(" una ", " 1 ");
@@ -151,7 +154,7 @@ class Articulo {
 			// console.log(ctds[c]["valor"]);
 			// console.log(ctds[c]["palabras"]);
 
-			var re = new RegExp(palabras);
+			var re = new RegExp(palabras,'i');
 			let s = r.replace(re, simbolo);
 
 			// console.log(s);
@@ -231,6 +234,11 @@ class ArticuloLista extends Articulo {
 		this.id=id;
 		this.lista = lista;
 		this.total = unidades * precio;
+	}
+
+	guardar(){
+		console.log(`Articulo ${this.nombre} guardado en ${this.lista}`);
+		guardarArticulo(this);
 	}
 }
 

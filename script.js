@@ -33,25 +33,28 @@ $('selectpicker').selectpicker();
 // $('#table_id').DataTable();
 
 
-var colAntes=""
-var colDespues="";
+var colAntes = ""
+var colDespues = "";
 
 $('#columnas').on('show.bs.select', function (e) {
-  console.log("aparece "+$('#columnas').val());
+  console.log("aparece " + $('#columnas').val());
   colAntes = $('#columnas').val()
 });
 
 //para tabla listas
 $('#columnas').on('hidden.bs.select', function (e) {
-  console.log("se esconde "+$('#columnas').val());
+  console.log("se esconde " + $('#columnas').val());
   colDespues = $('#columnas').val()
-  console.log(colAntes+"->"+colDespues);
+  console.log(colAntes + "->" + colDespues);
 
   if (colAntes.join(',') == colDespues.join(',')) return; //si son iguales no hago nada
   // si no son iguales vuelvo a cargar con las nuevas columnas
   createHeader()
   tablaLista();
 });
+
+
+
 
 function isNumber(value) {
   if (value instanceof Number)
@@ -64,8 +67,8 @@ function quitarNumero(str) {
   var s = str.substring(str.search(separador) + 1);
   return s;
 }
-function añadir(){
-  writeArticulo(new Articulo("nombre","cantidad","marca","ENA=0"));
+function añadir() {
+  nuevoArticulo(new Articulo("nombre", "cantidad", "marca", "ENA=0"));
 }
 
 function addData(chart, label, data) {
@@ -99,7 +102,7 @@ function dark() {
   //  document.getElementById('tabla').classList.toggle("table-dark");
   document.getElementById('tabla').classList.toggle("dark-mode");
   $("i").toggleClass("dark-mode");
-  
+
 
 
   // $('#tabla').DataTable();
@@ -124,16 +127,21 @@ function cargarLista() {
       // var order = firebaseOrderReference.val().nombre;
       // var precio = firebaseOrderReference.val().precioF;
       let a = firebaseListaReference.val();
-      var art = new Articulo(a.nombre);
+      var clase = ArticuloLista;
+      // var art = new ArticuloLista(a.nombre);
+      var art= new clase(a.nombre);
       art.setAll(a);
+      
       // console.log(a); //check your console to see it!
-      articulos.push(a);
+      articulos.push(art);
     });
 
     //poner el header
     createHeader();
     // poblar la tabla
     tablaLista(articulos);
+    console.log(articulos);
+    
 
     // $('#header').css('textTransform', 'capitalize');
   });
@@ -142,11 +150,10 @@ function cargarLista() {
 
 var lastLista;
 function tablaLista(lista) {
-  if(lista)lastLista=lista
-  else lista=lastLista
+  if (lista) lastLista = lista
+  else lista = lastLista
 
   var visibles = $("#columnas").val();
-
 
   // visibles.push(v);
 
@@ -158,154 +165,139 @@ function tablaLista(lista) {
 }
 
 
-// function cargarRuta() {
-//   console.log($("#rutas").val());
-//   var fbListaActual = database.ref($("#rutas").val());
-//   // fbListaActual.orderByChild("valor").on('value',function(listas){
-//   fbListaActual.on('value', function (listas) {
-
-//     clear();
-//     var a;
-//     //this is saying foreach order do the following function...
-//     listas.forEach(function (firebaseListaReference) {
-//       //this gets the actual data (JSON) for the order.
-//       // var order = firebaseOrderReference.val().nombre;
-//       // var precio = firebaseOrderReference.val().precioF;
-//       a = firebaseListaReference.val();
-//       console.log(a); //check your console to see it!
-//       addObjet2Table(a);
-
-
-//       // addTable(a.nombre,a.valor);
-//     });
-
-//     //poner el header
-//     createHeader(a);
-//     $('#header').css('textTransform', 'capitalize');
-//   });
-
-//   // $('#myTable').css('textTransform', 'capitalize');
-
-// }
-
-
+/** Crea una fila en una tabla con las propiedades de objeto
+ * 
+ * @param {Object} object el objeto que creará la fila
+ * @param {string} tabla id de la tabla
+ * @param {string[]} visibles la lista de nombres de propiedades a mostrar
+ */
 function objetoTabla(object, tabla, visibles) {
   var table = document.getElementById(tabla);
   var row = table.insertRow();
 
   var i = 0
-  for (key of visibles) {//Esto serían todas
-    var cell = row.insertCell(i);
-    let valor;
-    if (i == 0) id = object[key];
-    valor = object[key];
+  if (visibles) //si solo se han de mostrar los visibles
+    for (key of visibles) {//Esto serían todas
+      var cell = creaCelda(object,key);
+    }
+  else { //si se muestran todos
+    for (key in object) {//Esto serían todas daría problemas con encabezado y decolocaría NO USAR por ahora
+      var cell = creaCelda(object,key);
+    }
 
-    if (valor === undefined) valor = "";
-    cell.innerHTML = '<i data-toggle="tooltip"  id="' + id + "|" + key + "|" + valor + '" title=' + key + '>' + valor + '</i>';
-    // crearEventos(object, cell, key);
-    i++;
   }
 
+  /** Crea una celda con la propiedead de un objeto
+   * 
+   * @param {Object} object el objeto que creará la fila 
+   * @param {string} key la propiedad del objeto que se mostrará en al celda
+   */
+  function creaCelda(object,key) {
+    var cell = row.insertCell(i);
+    let valor;
+    if (i == 0)
+      id = object[key];
+    valor = object[key];
+    if (valor === undefined) //si no existe ese valor, imprime un string vacío
+      valor = "";
+
+    cell.innerHTML = '<i data-toggle="tooltip"  id="' + id + "|" + key + "|" + valor + '" title=' + key + '>' + valor + '</i>';
+    crearEventos(object, cell, key);
+    i++;
+    return cell;
+  }
 }
+
+function crearEventos(object, cell, key) {
+    cell.addEventListener("click", function () {
+      console.log(object);
+      editar(object, "modal")
+    });
+
+}
+
 
 
 /**
 * Saves a new articulo to the Firebase DB.
 */
-function writeArticulo(articulo,lista) {
+function nuevoArticulo(articulo, lista) {
 
-// // Get a key for a new Post.
-// var newPostKey = database.ref('/listas/' + $("#listas").val()).push().key;
-// // Write the new post's data simultaneously in the posts list and the user's post list.
-// var updates = {};
-// updates['/listas/'+$("#listas").val()+"/" + newPostKey] = articulo;
-// updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-// return firebase.database().ref().update(updates);
+  // // Get a key for a new Post.
+  // var newPostKey = database.ref('/listas/' + $("#listas").val()).push().key;
+  // // Write the new post's data simultaneously in the posts list and the user's post list.
+  // var updates = {};
+  // updates['/listas/'+$("#listas").val()+"/" + newPostKey] = articulo;
+  // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+  // return firebase.database().ref().update(updates);
 
-let ruta='/listas/' + $("#listas").val();
+  let ruta = '/listas/' + $("#listas").val();
 
-var newPostRef = database.ref(ruta).push();
+  var newPostRef = database.ref(ruta).push();
 
-articulo=articulo.listar(ruta,newPostRef.key,"Rober",articulo.unidades, articulo.precio);
-// articulo.id=newPostRef.key;
-newPostRef.set(articulo)
-lastArticulo=articulo
-
-}
-
-function borrarArticulo(a=lastArticulo,lista){
-console.log(a);
-
-let ruta=`/listas/${$("#listas").val()}/${a.id}`
-console.log(ruta);
-
-database.ref(ruta).remove()
+  articulo = articulo.listar(ruta, newPostRef.key, "Rober", articulo.unidades, articulo.precio);
+  // articulo.id=newPostRef.key;
+  newPostRef.set(articulo)
+  lastArticulo = articulo
 
 }
 
-function editar(objeto) {
-  // console.log("Editar:"+objeto );
-  const keys = Object.keys(objeto);
-  const values = Object.values(objeto);
+function borrarArticulo(a = lastArticulo, lista) {
+  console.log(a);
 
-  var editor = document.getElementById("editor");
+  let ruta = `/listas/${$("#listas").val()}/${a.id}`
+  console.log(ruta);
+
+  database.ref(ruta).remove()
+
+}
+
+function guardarArticulo(articulo, lista) {
+  let ruta = '/listas/' + $("#listas").val();
+  var ref= database.ref(ruta).child(articulo.id)
+  ref.set(articulo)
+}
+
+/**
+ * 
+ * @param {Articulo} objeto el articulo a editar
+ * @param {modal-context} editor el contexto de la ventana modal que aparecera para editar
+ */
+function editar(objeto,editor) {
+
+  var editor = document.getElementById(editor);
   editor.innerHTML = ""; //clear editor
-  var id = -1;
-  var k = -1
-  var v = -1;
-  for (i = 0; i < keys.length; i++) {
-    if (i == 0) id = values[i];
-    k = keys[i];
-    v = values[i];
-
-    editor.innerHTML = editor.innerHTML + ' <b>' + k.toUpperCase() + ':</b>' + '<input data-toggle="tooltip"  id="edit' + keys[i] + '" value=' + values[i] + ' title=' + keys[i] + ' >';
-    // cell.tooltip({title: "<h1><strong>HTML</strong> $keys[i] <code>the</code> <em>tooltip</em></h1>", html: true, placement: "bottom"});
-    // console.log(keys[i]+":"+values[i]); //check your console to see it!
+  for( key in objeto) {
+    editor.innerHTML = editor.innerHTML + ' <b>' + k.toUpperCase() + ':</b>' +
+    `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
   }
-  editor.innerHTML = editor.innerHTML + '<button onclick="editarObjeto()">Guardar</button>'
+
+  editor.innerHTML = editor.innerHTML + '<button onclick="editarObjeto(objeto)">Guardar</button>'
+  $( "#ok" ).click(function() {
+    editarObjeto(objeto)
+    objeto.guardar();
+  });
+ 
+  var instance = M.Modal.getInstance(document.getElementById("modal1"));
+  instance.open();
 
 }
 
-
-function editarObjeto() {
-
-  const keys = Object.keys(objetoActual);
-  var values = Object.values(objetoActual);
-
-  console.log("Editar objeto:");
-  //guardo los valores editados en el objeto
-  for (i = 0; i < keys.length; i++) {
-    var valor = $('#edit' + keys[i]).val();
-    if (isNumber(valor)) values[i] = +valor;
-    else values[i] = valor;
-    // console.log($('#edit'+keys[i]).val());
-    // console.log(keys[i]+":"+values[i]);
-    objetoActual[keys[i]] = values[i];
+/** Guarda los cambios de edición que se hacen en la ventana modal en el artículo
+ * 
+ * @param {Articulo} objeto el articulo en que se guardaran los cambios editados
+ */
+function editarObjeto(objeto) {
+  for( key in objeto) {
+    var valor = $('#edit' + key).val();
+    if (isNumber(valor)) objeto[key] = +valor;
+    else objeto[key] = valor;
   }
-
-  console.log(objetoActual);
-
-  var id = values[0]; //Imaginamos que el id es el 1er campo
-
-  // const entries = new Map([
-  //     keys,
-  //     values
-  //   ]);
-
-  // const obj = Object.fromEntries(entries);
-  //  console.log(keys[i]+":"+values[i]); //check your console to see it!
-
-  // console.log(obj);
-
-  fbListasCollection.child(id).set(objetoActual);
-
-  //  var name= objetoActual.nombre;
-  //   fbListasCollection.child(name).set(obj);
 }
 
 
 function createHeader(header = "header") {
-  visibles=$("#columnas").val()
+  visibles = $("#columnas").val()
   var th = document.getElementById(header);
   th.innerHTML = ""; //clear header
   var row = th.insertRow(0);
