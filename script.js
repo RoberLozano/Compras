@@ -222,9 +222,26 @@ function objetoTabla(object, tabla, visibles) {
   }
 }
 
+// console.log(document.getElementById("columnas").options.foreach(x=> x.name));
+
+/**Da un array con todos los nombres de las columnas
+ * puede servir para editar esos valores solo
+ * @see{editar}
+ * @see{editarObjeto}
+ * 
+ * @returns un string[] con los nombres
+ */
+function darColumnas() {
+  var todasColumnas = [];
+  $('#columnas > option').each(function () {
+    todasColumnas.push(this.text);
+  });
+  return todasColumnas;
+}
+
 function crearEventos(objeto, cell, key) {
     cell.addEventListener('click', function () {
-      editar(objeto,"modal")
+      editar(objeto,"modal",visibles)
   });
 
 }
@@ -274,12 +291,21 @@ function guardarArticulo(articulo, lista) {
 /**
  * 
  * @param {Articulo} objeto el articulo a editar
- * @param {modal-context} editor el contexto de la ventana modal que aparecera para editar
+ * @param {modal} editor el contexto de la ventana modal que aparecera para editar
+ * @param {string[]} propiedades lista de las propiedades a editar,
+ *                                si null o undefined muestra todas
+ * @fires editarObjeto
+ * @see {@link editarObjeto}
  */
-function editar(objeto,editor) {
-
+function editar(objeto,editor,propiedades) {
   var editor = document.getElementById(editor);
   editor.innerHTML = ""; //clear editor
+  if(propiedades)
+  for( key of propiedades) {
+    editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
+    `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
+  }
+  else
   for( key in objeto) {
     editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
     `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
@@ -300,8 +326,11 @@ function editar(objeto,editor) {
 /** Guarda los cambios de edición que se hacen en la ventana modal en el artículo
  * 
  * @param {Articulo} objeto el articulo en que se guardaran los cambios editados
+ * @param {string[]} propiedades lista de las propiedades a editar,
+ *                                si null o undefined edita todas
+ * @see {@link editar}
  */
-function editarObjeto(objeto) {
+function editarObjeto(objeto,propiedades) {
   for( key in objeto) {
     var valor = $('#edit' + key).val();
     if (isNumber(valor)) objeto[key] = +valor;

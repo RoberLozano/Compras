@@ -29,12 +29,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.9/js/bootstrap-select.min.js"></script>
-    <!-- MATERIALIZE Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- MATERIALIZE Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <!-- MATERIALIZE Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
+  <!-- MATERIALIZE Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
   <!-- datatable -->
   <!-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
 
@@ -48,14 +48,39 @@
 </head>
 
 <body>
+
+  <ul id="slide-out" class="sidenav">
+    <li>
+      <div class="user-view">
+        <div class="background black">
+          <img src="images/cared.jpg">
+        </div>
+        <a href="#user"><img class="circle" src="images/Niwelbel.jpg"></a>
+        <a href="#name"><span class="white-text name">Rober Lozano</span></a>
+        <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+      </div>
+    </li>
+    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li><a href="#!">Second Link</a></li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+  </ul>
+  <a href="#" data-target="slide-out" class="sidenav-trigger "><i class="material-icons">menu</i></a>
+  
+
   <div class="container">
 
     <!-- <div class="jumbotron"> -->
-      <button class="btn float-right" onclick="pantalla()"><i class="material-icons">fullscreen</i></button>
-      <button class="btn float-right" onclick="pantalla()"><i class="material-icons cyan-text text-darken-4">fullscreen</i></button>
-      <button class="btn float-right" onclick="dark()"><i class="material-icons">invert_colors</i></button>
-      <button class="btn float-right" onclick="dark()"><i class="material-icons">brightness_medium</i></button>
-      <h1>Compras <span style="font-size: medium;color:red">βeta</span><span style="font-size: small;color:red"> 0.0071</span></h1>
+    <button class="btn float-right" onclick="pantalla()"><i class="material-icons">fullscreen</i></button>
+    <button class="btn float-right" onclick="pantalla()"><i
+        class="material-icons cyan-text text-darken-4">fullscreen</i></button>
+    <button class="btn float-right" onclick="dark()"><i class="material-icons">invert_colors</i></button>
+    <button class="btn float-right" onclick="dark()"><i class="material-icons">brightness_medium</i></button>
+    <h1>Compras <span style="font-size: medium;color:red">βeta</span><span style="font-size: small;color:red">
+        0.0071</span></h1>
 
     <!-- </div> -->
 
@@ -122,7 +147,7 @@
 
       <!-- Modal Structure -->
       <div id="modal1" class="modal">
-          <div class ="modal-content" id="modal">
+        <div class="modal-content" id="modal">
           <h4>Modal Header</h4>
           <div class="input-field col s6">
             <input id="last_name" type="text" class="validate">
@@ -130,8 +155,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button id="cancelar"  class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
-          <button id="ok"  class="btn modal-close waves-effect waves-light green">Aceptar</button>
+          <button id="cancelar" class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
+          <button id="ok" class="btn modal-close waves-effect waves-light green">Aceptar</button>
         </div>
       </div>
 
@@ -153,19 +178,22 @@
       <li><a class="btn-floating red" id="hablar" onclick="hablar()"><i class="material-icons">mic</i></a></li>
       <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
       <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li> 
+      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
     </ul>
   </div>
 
+
+
   <script src="script.js"></script>
   <script>
-  // M.AutoInit();
-    $(document).ready(function(){
-    $('.fixed-action-btn').floatingActionButton();
-    $('.modal').modal();
-    $('.datepicker').datepicker();
-    $('.timepicker').timepicker();
-  });
+    // M.AutoInit();
+    $(document).ready(function () {
+      $('.sidenav').sidenav();
+      $('.fixed-action-btn').floatingActionButton();
+      $('.modal').modal();
+      $('.datepicker').datepicker();
+      $('.timepicker').timepicker();
+    });
   </script>
 </body>
 
