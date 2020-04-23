@@ -12,9 +12,9 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
-    <!-- MATERIALIZE Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    
+  <!-- MATERIALIZE Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- datatable -->
@@ -28,12 +28,12 @@
     }
 
     .container {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 15px;
-  margin-left: 0px;
-  width: 100%;
-}
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-right: 15px;
+      margin-left: 0px;
+      width: 100%;
+    }
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -44,7 +44,7 @@
 
   <!-- MATERIALIZE Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
+
 
   <!-- datatable -->
   <!-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
@@ -63,8 +63,9 @@
   <div class="navbar-fixed">
     <nav class="black">
       <div class="nav-wrapper">
-        <a data-target="slide-out" class="sidenav-trigger brand-logo left"><i class="material-icons">menu</i>Compras <span style="font-size: medium;color:red">βeta</span><span style="font-size: small;color:red">
-          0.0071</span></a>
+        <a data-target="slide-out" class="sidenav-trigger brand-logo left"><i class="material-icons">menu</i>Compras
+          <span style="font-size: medium;color:red">βeta</span><span style="font-size: small;color:red">
+            0.0071</span></a>
         <ul class="right">
           <li><a onclick="buscar()"><i class="material-icons">search</i></a></li>
           <!-- <li><a onclick="dark()"><i class="material-icons">brightness_medium</i></a></li> -->
@@ -77,12 +78,12 @@
 
   <div id="buscador" class="navbar-fixed" style="display: none;">
     <nav class="red">
-      <div class="nav-wrapper" >
-          <div class="input-field">
-            <input id="buscar" type="search" required placeholder="Buscar..">
-            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-            <i class="material-icons" onclick="buscar()">close</i>
-          </div>
+      <div class="nav-wrapper">
+        <div class="input-field">
+          <input id="buscar" type="search" required placeholder="Buscar..">
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons" onclick="buscar()">close</i>
+        </div>
       </div>
     </nav>
   </div>
@@ -148,19 +149,19 @@
     <button onclick="cargarRuta()">Cargar Ruta</button> -->
 
     <div class="col input-field col s6" style>
-      <select  multiple >
+      <select multiple>
         <option value="" disabled selected>Multiselect</option>
         <option value="" data-icon="images/cared.jpg" class="circle left">example 1</option>
         <option value="" data-icon="images/cared.jpg" class="circle">example 2</option>
-        <option value="" data-icon="images/cared.jpg">example 3</option>
+        <option value="" data-icon="images/Niwelbel.jpg">example 3</option>
       </select>
       <label>Imagenes</label>
     </div>
 
     <div class="col input-field col s6" style>
       <select multiple>
-        <option value="" disabled selected>Select An option</option>
-        <option value="1" data-icon="https://www.tutorialsplane.com/wp-content/uploads/2016/12/profile.000.jpg" class="left circle">Item 1</option>
+        <option value="1" data-icon="https://www.tutorialsplane.com/wp-content/uploads/2016/12/profile.000.jpg"
+          class="left circle">Item 1</option>
         <option value="2">Item 2</option>
         <option value="3">Item 3</option>
         <option value="4">Item 4</option>
@@ -200,15 +201,18 @@
     <div id=editor>
     </div>
 
-    <div><button id="hablar" onclick="hablar()">Hablar <span id="mic" class="material-icons"
-          style="vertical-align: -6px;">
-          mic
-        </span></button></div>
-    <div id="hablado"></div>
+    <div>
+      <button id="hablar" onclick="hablar()">Hablar
+        <span id="mic" class="material-icons"
+          style="vertical-align: -6px;"> mic</span>
+      </button>
+    </div>
     <button onclick="borrarArticulo()">Deshacer</button>
+    <div id="hablado"></div>
+    
 
-      <!-- //MATERIALIZE -->
-      <!-- <div class="row">
+    <!-- //MATERIALIZE -->
+    <!-- <div class="row">
         <form class="col s12">
           <div class="row">
             <div class="input-field col s12">
@@ -220,28 +224,28 @@
         </form>
       </div> -->
 
-      <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 
-      <!-- Modal Structure -->
-      <div id="modal1" class="modal">
-        <div class="modal-content" id="modal">
-          <h4>Modal Header</h4>
-          <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate">
-            <label for="last_name">Last Name</label>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button id="cancelar" class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
-          <button id="ok" class="btn modal-close waves-effect waves-light green">Aceptar</button>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content" id="modal">
+        <h4>Modal Header</h4>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
         </div>
       </div>
+      <div class="modal-footer">
+        <button id="cancelar" class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
+        <button id="ok" class="btn modal-close waves-effect waves-light green">Aceptar</button>
+      </div>
+    </div>
 
 
 
-      <canvas id="barChart"></canvas>
-      <canvas id="radarChart"></canvas>
-   
+    <canvas id="barChart"></canvas>
+    <canvas id="radarChart"></canvas>
+
 
 
   </div>
