@@ -67,7 +67,15 @@ $('#columnas').on('hidden.bs.select', function (e) {
   tablaLista();
 });
 
+function buscar(){
+  let x=document.getElementById("buscador");
 
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 
 function isNumber(value) {
@@ -375,14 +383,10 @@ function clear() {
  * @param {select} select id del select
  */
 function addElement2Select(element, select) {
-  
-  
   var x = document.getElementById(select);
   var option = document.createElement("option");
   option.text = element;
   x.add(option);
-  console.log(x);
-  console.log(option);
 }
 
 function writeLista(userId, name, valor) {
