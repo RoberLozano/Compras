@@ -67,8 +67,8 @@ $('#columnas').on('hidden.bs.select', function (e) {
   tablaLista();
 });
 
-function buscar(){
-  let x=document.getElementById("buscador");
+function buscar() {
+  let x = document.getElementById("buscador");
 
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -151,9 +151,9 @@ function cargarLista() {
       let a = firebaseListaReference.val();
       var clase = ArticuloLista;
       // var art = new ArticuloLista(a.nombre);
-      var art= new clase(a.nombre);
+      var art = new clase(a.nombre);
       art.setAll(a);
-      
+
       // console.log(a); //check your console to see it!
       articulos.push(art);
     });
@@ -163,7 +163,7 @@ function cargarLista() {
     // poblar la tabla
     tablaLista(articulos);
     console.log(articulos);
-    
+
 
     // $('#header').css('textTransform', 'capitalize');
   });
@@ -198,13 +198,15 @@ function objetoTabla(object, tabla, visibles) {
   var row = table.insertRow();
 
   var i = 0
+  //el checkbox siempre
+  creaCelda(object, 'ok');
   if (visibles) //si solo se han de mostrar los visibles
     for (key of visibles) {//Esto serían todas
-      var cell = creaCelda(object,key);
+      var cell = creaCelda(object, key);
     }
   else { //si se muestran todos
     for (key in object) {//Esto serían todas daría problemas con encabezado y decolocaría NO USAR por ahora
-      var cell = creaCelda(object,key);
+      var cell = creaCelda(object, key);
     }
 
   }
@@ -214,21 +216,41 @@ function objetoTabla(object, tabla, visibles) {
    * @param {Object} object el objeto que creará la fila 
    * @param {string} key la propiedad del objeto que se mostrará en al celda
    */
-  function creaCelda(object,key) {
+  function creaCelda(object, key) {
+
     var cell = row.insertCell(i);
+
     let valor;
-    if (i == 0)
-      id = object[key];
+    // if (i == 0)
+    //   id = object[key];
+    id = object.id;
     valor = object[key];
     if (valor === undefined) //si no existe ese valor, imprime un string vacío
       valor = "";
 
-    cell.innerHTML = '<i data-toggle="tooltip"  id="' + id + "|" + key + "|" + valor + '" title=' + key + '>' + valor + '</i>';
+    if (key == "ok") {
+      valor=(valor=='true' )? true : false;
+
+      valor = `<label>
+      <input type="checkbox" id="cb${id}"  ${valor ? "checked" : ""} />
+      <span></span>
+    </label>`
+      // variable is a boolean
+      // valor = valor ? `<input type="checkbox" ${valor?"checked":""}  onchange = "AutoCalculateMandateOnChange(this) />` : `<label>
+      //   <input type="checkbox" />
+      //   <span></span>
+      // </label>`
+      // console.log(`VALOR: ${valor}`);
+      
+    }
+    cell.innerHTML = `<i data-toggle="tooltip"  id="${id}|${key}" title="${key}"> ${valor}</i>`
+    // cell.innerHTML = '<i data-toggle="tooltip"  id="' + id + "|" + key + "|" + valor + '" title=' + key + '>' + valor + '</i>';
     crearEventos(object, cell, key);
     i++;
     return cell;
   }
 }
+
 
 // console.log(document.getElementById("columnas").options.foreach(x=> x.name));
 
@@ -248,9 +270,20 @@ function darColumnas() {
 }
 
 function crearEventos(objeto, cell, key) {
+  if (key == "ok") {
+    let cb = document.getElementById("cb" + objeto.id);
+    cb.addEventListener('change', function () {
+      objeto.ok=this.checked;
+      //TODO: guardarlo inmediatamente?
+      objeto.guardar()
+    });
+  }
+  else { //si  no es ok
     cell.addEventListener('click', function () {
-      editar(objeto,"modal",visibles)
-  });
+      // editar(objeto, "modal", visibles)
+      editar(objeto, "modal") //por ahora editar todas, luego poner opcion en menú
+    });
+  }
 
 }
 
@@ -292,7 +325,7 @@ function borrarArticulo(a = lastArticulo, lista) {
 
 function guardarArticulo(articulo, lista) {
   let ruta = '/listas/' + $("#listas").val();
-  var ref= database.ref(ruta).child(articulo.id)
+  var ref = database.ref(ruta).child(articulo.id)
   ref.set(articulo)
 }
 
@@ -305,27 +338,27 @@ function guardarArticulo(articulo, lista) {
  * @fires editarObjeto
  * @see {@link editarObjeto}
  */
-function editar(objeto,editor,propiedades) {
+function editar(objeto, editor, propiedades) {
   var editor = document.getElementById(editor);
   editor.innerHTML = ""; //clear editor
-  if(propiedades)
-  for( key of propiedades) {
-    editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
-    `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
-  }
+  if (propiedades)
+    for (key of propiedades) {
+      editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
+        `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
+    }
   else
-  for( key in objeto) {
-    editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
-    `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
-  }
+    for (key in objeto) {
+      editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
+        `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
+    }
 
   // editor.innerHTML = editor.innerHTML + '<button onclick="editarObjeto(objeto)">Guardar</button>'
 
-  $( "#ok" ).on( "click", function() {
+  $("#ok").on("click", function () {
     editarObjeto(objeto)
     objeto.guardar();
   });
- 
+
   var instance = M.Modal.getInstance(document.getElementById("modal1"));
   instance.open();
 
@@ -338,8 +371,8 @@ function editar(objeto,editor,propiedades) {
  *                                si null o undefined edita todas
  * @see {@link editar}
  */
-function editarObjeto(objeto,propiedades) {
-  for( key in objeto) {
+function editarObjeto(objeto, propiedades) {
+  for (key in objeto) {
     var valor = $('#edit' + key).val();
     if (isNumber(valor)) objeto[key] = +valor;
     else objeto[key] = valor;
@@ -352,8 +385,14 @@ function createHeader(header = "header") {
   var th = document.getElementById(header);
   th.innerHTML = ""; //clear header
   var row = th.insertRow(0);
-  for (var i in visibles) {
-    var cell = row.insertCell(i);
+  //el primero el chechbox
+  var cb = row.insertCell(0);
+  cb.innerHTML = `<label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>`
+  for (var i in visibles) { //+1 del checkbox que es el 0
+    var cell = row.insertCell(+i + 1);
     cell.innerHTML = '<b>' + visibles[i] + '</b>';
   }
   // if (header === "header") {//si es listas

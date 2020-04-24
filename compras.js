@@ -227,13 +227,14 @@ class Articulo {
 
 
 class ArticuloLista extends Articulo {
-	constructor(nombre, cantidad, marca, ENA = 0, precio, unidades, id, lista, usuario = "") {
+	constructor(nombre, cantidad, marca, ENA = 0, precio, unidades, id, lista, usuario = "",ok=false) {
 		super(nombre, cantidad, marca, ENA);
 		this.unidades = unidades
 		this.precio = precio ? precio : 0; //por si es null o undefined
 		this.id=id;
 		this.lista = lista;
 		this.total = unidades * precio;
+		this.ok =ok;
 	}
 
 	guardar(){
