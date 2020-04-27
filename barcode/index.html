@@ -38,26 +38,26 @@
         });
 
         Quagga.onDetected(function (data) {
-            var code=data.codeResult.code+"";
-            if(code.length==13){
-                let cs=code.slice(-1);
-                let ean=code.slice(0,12);
-                if (cs==(ean13_checksum(ean)+"")){
-                    
-                    if (resultados.get(code)==undefined) {
-                        resultados.set(code, +resultados.get(code)+1)
+            var code = data.codeResult.code + "";
+            if (code.length == 13) {
+                let cs = code.slice(-1);
+                let ean = code.slice(0, 12);
+                if (cs == (ean13_checksum(ean) + "")) {
+
+                    if (resultados.get(code) == undefined) {
+                        resultados.set(code, 0)
                     }
                     else
-                        resultados.set(code,0)
+                        resultados.set(code, +resultados.get(code) + 1)
 
-                        document.querySelector('#resultado').innerText = code +" : "+ resultados.get(code);
+                    document.querySelector('#resultado').innerText = code + " : " + resultados.get(code);
                 }
-                else{
+                else {
                     console.log(code);
                 }
             }
-            
-            
+
+
         });
 
         // Cálculo del dígito de control EAN
