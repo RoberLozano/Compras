@@ -26,8 +26,17 @@
                 target: document.querySelector('#camera')    // Or '#yourElement' (optional)
             },
             decoder: {
-                readers: ['ean_reader']
-            }
+  readers: [
+    'ean_reader'
+  ],
+  debug: {
+      drawBoundingBox: false,
+      showFrequency: false,
+      drawScanline: true,
+      showPattern: false
+  },
+  multiple: false
+}
         }, function (err) {
             if (err) {
                 console.log(err);
