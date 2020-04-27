@@ -42,7 +42,7 @@
             if(code.length==13){
                 let cs=code.slice(-1);
                 let ean=code.slice(0,12);
-                if (cs==(ean13_checksum(ean)+""){
+                if (cs==(ean13_checksum(ean)+"")){
                     document.querySelector('#resultado').innerText = data.codeResult.code;
                 }
                 else{
