@@ -43,11 +43,14 @@
                 let cs=code.slice(-1);
                 let ean=code.slice(0,12);
                 if (cs==(ean13_checksum(ean)+"")){
-                    document.querySelector('#resultado').innerText = data.codeResult.code;
+                    
                     if (resultados.get(code)) {
                         resultados.set(code, +resultados.get(code)+1)
                     }
-                    resultados.set(code,0)
+                    else
+                        resultados.set(code,0)
+
+                        document.querySelector('#resultado').innerText = code +":"+ resultados.get(code);
                 }
                 else{
                     console.log(code);
