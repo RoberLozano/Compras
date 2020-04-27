@@ -1,11 +1,27 @@
 {
   "lock": false,
-  "active": null,
+  "active": "73d316965609fc4cf60385337cd65c01d48f9642",
   "sets": {
     "default": {
       "source": "default",
       "name": "Default",
-      "tasks": {}
+      "tasks": {
+        "73d316965609fc4cf60385337cd65c01d48f9642": {
+          "name": "barrras",
+          "data": [
+            "c:\\GitHub\\Compras\\camera.html",
+            "c:\\GitHub\\Compras\\README.md",
+            "c:\\GitHub\\Compras\\.vscode\\launch.json",
+            "c:\\GitHub\\Compras\\\\script.js",
+            "c:\\GitHub\\Compras\\script.js",
+            "c:\\GitHub\\Compras\\compras.js",
+            "c:\\GitHub\\Compras\\barras.js",
+            "c:\\GitHub\\Compras\\voz.js",
+            "c:\\GitHub\\Compras\\index.html",
+            "c:\\GitHub\\Compras\\barcode\\index.html"
+          ]
+        }
+      }
     }
   }
 }

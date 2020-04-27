@@ -123,7 +123,7 @@ function dark() {
   element.classList.toggle("dark-mode");
   //  document.getElementById('tabla').classList.toggle("table-dark");
   document.getElementById('tabla').classList.toggle("dark-mode");
-  $("i").toggleClass("dark-mode");
+  // $("i").toggleClass("dark-mode");
 
 
 
@@ -167,6 +167,8 @@ function cargarLista() {
 
     // $('#header').css('textTransform', 'capitalize');
   });
+
+  $("#beta").html($("#listas").val())
   // $('#myTable').css('textTransform', 'capitalize');
 }
 
@@ -251,6 +253,25 @@ function objetoTabla(object, tabla, visibles) {
   }
 }
 
+function abrirOpciones(){
+//TODO:
+}
+
+function guardarOpciones(){}
+
+function guardarUsuario(usuario,email){
+
+  usuario=$("#usuario").val();
+  email=$("#email").val();
+
+  // if(!!usuario) console.log("usuario",usuario);
+  // if(!!email)   console.log("email",email);
+  if(!!usuario) localStorage.setItem("usuario",usuario)
+  if(!!email) localStorage.setItem("email",email)
+}
+
+
+
 
 // console.log(document.getElementById("columnas").options.foreach(x=> x.name));
 
@@ -270,6 +291,7 @@ function darColumnas() {
 }
 
 function crearEventos(objeto, cell, key) {
+
   if (key == "ok") {
     let cb = document.getElementById("cb" + objeto.id);
     cb.addEventListener('change', function () {
@@ -277,6 +299,16 @@ function crearEventos(objeto, cell, key) {
       //TODO: guardarlo inmediatamente?
       objeto.guardar()
     });
+  }
+  else //TODO change localStorage to op
+  // if (localStorage.marcaSpan && key=="nombre" && objeto.marca) {
+  if (key=="nombre" && objeto.marca) {
+    cell.innerHTML+=
+    ` <span class="new badge" data-badge-caption="${objeto.marca}"> </span>`
+  //   `<div class="chip">
+  //   ${objeto.marca}
+  // </div>`
+    
   }
   else { //si  no es ok
     cell.addEventListener('click', function () {
@@ -382,6 +414,8 @@ function editarObjeto(objeto, propiedades) {
 
 function createHeader(header = "header") {
   visibles = $("#columnas").val()
+  console.log("VISIBLES:"+visibles);
+  
   var th = document.getElementById(header);
   th.innerHTML = ""; //clear header
   var row = th.insertRow(0);
@@ -393,6 +427,9 @@ function createHeader(header = "header") {
                   </label>`
   for (var i in visibles) { //+1 del checkbox que es el 0
     var cell = row.insertCell(+i + 1);
+    if(visibles[i]=="unidades") //TODO: ñapa
+    cell.innerHTML = '<b>' + "ud" + '</b>';
+    else
     cell.innerHTML = '<b>' + visibles[i] + '</b>';
   }
   // if (header === "header") {//si es listas

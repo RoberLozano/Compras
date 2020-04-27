@@ -34,6 +34,21 @@
       margin-left: 0px;
       width: 100%;
     }
+
+    .sidenav li>a {
+  align-items: center;
+  display: flex!important;
+  justify-content: space-between!important;
+
+}
+
+    /* .td{
+      font-family: "Times New Roman", "Lucida Grande", Arial;
+      font-weight: bold;
+      font-style: normal;
+    } */
+
+
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -63,21 +78,19 @@
   <div class="navbar-fixed">
     <nav class="black">
       <div class="nav-wrapper">
-        <a data-target="slide-out" class="sidenav-trigger brand-logo left"><i class="material-icons">menu</i>Compras
-          <span style="font-size: medium;color:red">βeta</span><span style="font-size: small;color:red">
+        <a data-target="slide-out" class="sidenav-trigger show-on-large brand-logo left"><i class="material-icons">menu</i>Compras
+          <span id="beta" style="font-size: medium;color:red">βeta</span><span style="font-size: small;color:red">
             0.0077</span></a>
         <ul class="right">
           <li><a onclick="buscar()"><i class="material-icons">search</i></a></li>
-          <li><a onclick="dark()"><i class="material-icons">brightness_medium</i></a></li>
           <li><a onclick="pantalla()"><i class="material-icons">fullscreen</i></a></li>
-          <!-- <li><a href="https://github.com/RoberLozano/Compras/">Github</a></li> -->
         </ul>
       </div>
     </nav>
   </div>
 
   <div id="buscador" class="navbar-fixed" style="display: none;">
-    <nav class="red">
+    <nav class="red accent-4">
       <div class="nav-wrapper">
         <div class="input-field">
           <input id="buscar" type="search" required placeholder="Buscar..">
@@ -94,12 +107,16 @@
         <div class="background black">
           <img src="images/cared.jpg">
         </div>
-        <a href="#user"><img class="circle" src="images/Niwelbel.jpg"></a>
-        <a href="#name"><span class="white-text name">Rober Lozano</span></a>
-        <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+        <a ><img class="circle" src="images/Niwelbel.jpg"></a>
+        <a class="modal-trigger" href="#user"><span class="white-text name">Rober Lozano</span></a>
+        <a class="modal-trigger" href="#user"><span class="white-text email">email@mail.com</span></a>
       </div>
     </li>
-    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li>
+      <select id="listas" class="bootstrap-select"  onchange="cargarLista()" style="font: 1.2em sans-serif;"></select>
+      <button class="btn">+</button>
+      <!-- <button onclick="cargarLista()">Cargar Lista</button> -->
+  </li>
     <li><a href="#!">Second Link</a></li>
     <li>
       <div class="divider"></div>
@@ -122,9 +139,14 @@
           </label>
         </span>
       </a></li>
-    <li><a class="subheader">Subheader</a></li>
+
+    <li><a class="subheader">Opciones</a></li>
+    <!-- <li><a onclick="dark()">Modo oscuro <i class="material-icons">brightness_medium</i></a></li> -->
+    <li><a class="waves-effect" onclick="dark()">Modo oscuro <i class="material-icons">brightness_medium</i></a></li>
+    <li><a class="waves-effect" href="https://github.com/RoberLozano/Compras/">Github</a></li>
     <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
   </ul>
+  
   <!-- <a data-target="slide-out" class="sidenav-trigger "><i class="material-icons">menu</i></a> -->
 
 
@@ -151,17 +173,17 @@
     </div> -->
 
 
-    <select id="listas" class="bootstrap-select" style="font: 1.2em sans-serif;">
+    <!-- <select id="listas" class="bootstrap-select" style="font: 1.2em sans-serif;">
     </select>
-    <button onclick="cargarLista()">Cargar Lista</button>
+    <button onclick="cargarLista()">Cargar Lista</button> -->
 
 
     <div>
 
       <select class="selectpicker" id="columnas" multiple data-live-search="true" data-width="fit" multiple
         title="Seleccione columnas a mostrar">
+        <option selected label="ud">unidades</option>
         <option selected>nombre</option>
-        <option>unidades</option>
         <option>cantidad</option>
         <option selected>precio</option>
         <option selected>total</option>
@@ -222,16 +244,43 @@
       </div>
     </div>
 
+    <div id="user" class="modal">
+      <div class="modal-content" id="modalid-ct">
+        <h4>Usuario</h4>
+        <div class="input-field col s6">
+          <input id="usuario" type="text" class="validate" val=`${localStorage.usuario}`>
+          <label for="usuario">Usuario</label>
+        </div>
+          <div class="input-field col s1">
+            <input id="email" type="email" class="validate">
+            <label for="email">Email</label>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
+        <button id="opk" class="btn modal-close waves-effect waves-light green" onclick="guardarUsuario()">Aceptar</button>
+      </div>
+    </div>
 
-
-    <canvas id="barChart"></canvas>
-    <canvas id="radarChart"></canvas>
-
-
+    <div id="opciones" class="modal">
+      <div class="modal-content" id="opciones-ct">
+        <h4>Opciones</h4>
+        <!-- <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Usuario</label>
+        </div>
+          <div class="input-field col s1">
+            <input id="email" type="email" class="validate">
+            <label for="email">Email</label>
+          </div>
+      </div> -->
+      <div class="modal-footer">
+        <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
+        <button id="opOk" class="btn modal-close waves-effect waves-light green">Aceptar</button>
+      </div>
+    </div>
 
   </div>
-
-  <button>Hola</button>
 
   <!-- MATERIALIZE -->
   <div class="fixed-action-btn">
@@ -252,6 +301,8 @@
   <script>
     // M.AutoInit();
     $(document).ready(function () {
+      //options
+
       $('.sidenav').sidenav();
       // $('select').formSelect();
       $('.fixed-action-btn').floatingActionButton();

@@ -12,7 +12,7 @@ const ctds = {
 	EUROS: {
 		simbolo: "€",
 		valor: 100,
-		palabras: "(euros|euro)",
+		palabras: "(€|euros|euro)",
 		tipo: TipoCantidad.PRECIO
 	},
 
@@ -31,7 +31,7 @@ const ctds = {
 	GRAMO: {
 		simbolo: "GR",
 		valor: 1,
-		palabras: "(gramos|gramo|grs|gr|g^[a-z])",
+		palabras: "(gramos|gramo|grs|gr|g)",
 		tipo: TipoCantidad.MASA
 	},
 	CENTILITRO: {
@@ -49,7 +49,7 @@ const ctds = {
 	LITRO: {
 		simbolo: "Li",
 		valor: 1000,
-		palabras: "(litros|litro| ls| l )",
+		palabras: "(litros|litro| ls|l)",
 		tipo: TipoCantidad.VOLUMEN
 	},
 
@@ -80,6 +80,78 @@ class Articulo {
 		this.cantidad = cantidad
 		this.marca = marca
 		this.ENA = ENA
+	}
+
+	/**
+	 * 
+	 * @param {string} ctd escanea un string buscando el valor de cantidad
+	 * @todo también aceptaria precios y unidades
+	 */
+	setCantidad(ctd,tipoConcreto){
+		if (isNumber(ctd)) this.cantidad=ctd;
+		else this.buscarCantidades(ctd,tipoConcreto);//otra ñapa
+
+		console.log(this);
+		
+
+	}
+
+	//TODO-: ver si hago algo con esto
+	// litros da fallo si va seguido del numero
+	buscarCantidades(r,tipoConcreto){
+		for (let c in ctds) {
+
+			var simbolo = ctds[c]["simbolo"]
+			var valor = ctds[c]["valor"]
+			var palabras = ctds[c]["palabras"]
+			var tipo = ctds[c]["tipo"]
+
+			// var re = new RegExp(palabras,'i');
+			// let s = r.replace(re, simbolo);
+
+			let todo=palabras.replace(" ","","g")//me salto los espacios
+
+			// console.log(s);
+			
+			// let s=r.replace(/(kilogramos|kilos|kilogramo|kilo|kg)/gi, "KG");
+			var n = new RegExp("(\\d+[,\\d+]*)\\s*" + todo,"i")
+			let encontrado = r.match(n);
+
+			if (encontrado) {
+				console.log(encontrado);
+				let numero = encontrado[1].replace(',', '.');
+				r=r.replace(encontrado[0],""); //borramos lo que ya hemos hecho
+				console.log(numero);
+				var cifra = parseFloat(numero) * valor;
+				// console.log(r);
+				
+				console.log(cifra + tipo);
+				if(tipoConcreto) if (tipoConcreto.lastIndexOf(tipo)<0) return;
+
+				switch (tipo) {//TODO: mirar si debo sumar cantidades del mismo tipo
+					case TipoCantidad.MASA:
+					case TipoCantidad.VOLUMEN: this.cantidad=cifra;
+						break;
+					case TipoCantidad.PRECIO: this.precio = cifra;
+						break;
+					//TODO: unidades
+					case TipoCantidad.UNIDADES: this.unidades = cifra;
+						break;
+					default: console.log("What magnitude is it?");
+				}
+			}
+
+			// if(s!=r) 
+			// console.log("REPLACE: "+s);
+
+
+
+			//("(\\d+([,\\s]*\\d+)*\\s*" + simbolo + ")");
+
+
+
+		}
+
 	}
 
 	setAll(o) {
@@ -131,6 +203,7 @@ class Articulo {
 		r = r.replace(" un ", " 1 ");
 		r = r.replace(" dos ", " 2 ");
 		r = r.replace(" tres ", " 3 ");
+
 
 		var p;
 		var m;
