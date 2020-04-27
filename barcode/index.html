@@ -17,6 +17,8 @@
 
     <script>
 
+        var resultados = new Map();
+
         Quagga.init({
             inputStream: {
                 name: "Live",
@@ -36,9 +38,33 @@
         });
 
         Quagga.onDetected(function (data) {
-            console.log(data.codeResult.code);
-            document.querySelector('#resultado').innerText = data.codeResult.code;
+            var code=data.codeResult.code+"";
+            if(code.length==13){
+                let cs=code.slice(-1);
+                let ean=code.slice(0,12);
+                if (cs==(ean13_checksum(ean)+""){
+                    document.querySelector('#resultado').innerText = data.codeResult.code;
+                }
+                else{
+                    console.log(code);
+                }
+            }
+            
+            
         });
+
+        // Cálculo del dígito de control EAN
+        function ean13_checksum(message) {
+            var checksum = 0;
+            message = message.split('').reverse();
+            for (var pos in message) {
+                checksum += message[pos] * (3 - 2 * (pos % 2));
+            }
+            return ((10 - (checksum % 10)) % 10);
+        }
+        // Valor de prueba (sin dígito de control)
+        var ean = '123456789041';
+        console.log(ean13_checksum(ean));
 
     </script>
 
