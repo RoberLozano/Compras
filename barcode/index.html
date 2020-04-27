@@ -44,6 +44,10 @@
                 let ean=code.slice(0,12);
                 if (cs==(ean13_checksum(ean)+"")){
                     document.querySelector('#resultado').innerText = data.codeResult.code;
+                    if (resultados.get(code)) {
+                        resultados.set(code, +resultados.get(code)+1)
+                    }
+                    resultados.set(code,0)
                 }
                 else{
                     console.log(code);
