@@ -44,7 +44,7 @@
                 let ean=code.slice(0,12);
                 if (cs==(ean13_checksum(ean)+"")){
                     
-                    if (resultados.get(code)) {
+                    if (resultados.get(code)==undefined) {
                         resultados.set(code, +resultados.get(code)+1)
                     }
                     else
