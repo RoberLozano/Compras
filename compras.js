@@ -73,13 +73,13 @@ class Articulo {
 	 * @param {string} nombre Nombre del producto
 	 * @param {string} cantidad cantidad de producto (en gramos, litros, etc)
 	 * @param {string} marca 
-	 * @param {number} ENA El código de barras, debería ser el id
+	 * @param {number} EAN El código de barras, debería ser el id
 	 */
-	constructor(nombre, cantidad = 0, marca = "", ENA = 0) {
+	constructor(nombre, cantidad = 0, marca = "", EAN = 0) {
 		this.nombre = nombre
 		this.cantidad = cantidad
 		this.marca = marca
-		this.ENA = ENA
+		this.EAN = EAN
 	}
 
 	/**
@@ -161,14 +161,14 @@ class Articulo {
 	}
 
 	listar(lista, id, usuario, unidades = 1, precio = 0) {
-		return new ArticuloLista(this.nombre, this.cantidad, this.marca, this.ENA, precio, unidades, id, lista, usuario);
+		return new ArticuloLista(this.nombre, this.cantidad, this.marca, this.EAN, precio, unidades, id, lista, usuario);
 	}
 	/**
-	 * Devuelve el ENA si tiene, si no false
+	 * Devuelve el EAN si tiene, si no false
 	 */
 	tieneId() {
-		//devuelvo ENA o false si no tiene
-		return this.ENA ? this.ENA : false
+		//devuelvo EAN o false si no tiene
+		return this.EAN ? this.EAN : false
 	}
 /**
  * Devuelve las propiedades establecidas
@@ -300,8 +300,8 @@ class Articulo {
 
 
 class ArticuloLista extends Articulo {
-	constructor(nombre, cantidad, marca, ENA = 0, precio, unidades, id, lista, usuario = "",ok=false) {
-		super(nombre, cantidad, marca, ENA);
+	constructor(nombre, cantidad, marca, EAN = 0, precio, unidades, id, lista, usuario = "",ok=false) {
+		super(nombre, cantidad, marca, EAN);
 		this.unidades = unidades
 		this.precio = precio ? precio : 0; //por si es null o undefined
 		this.id=id;

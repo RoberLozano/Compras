@@ -90,7 +90,7 @@ function quitarNumero(str) {
   return s;
 }
 function añadir() {
-  nuevoArticulo(new Articulo("nombre", "cantidad", "marca", "ENA=0"));
+  nuevoArticulo(new Articulo("nombre", "cantidad", "marca", "EAN=0"));
 }
 
 function addData(chart, label, data) {
@@ -313,7 +313,8 @@ function crearEventos(objeto, cell, key) {
   else { //si  no es ok
     cell.addEventListener('click', function () {
       // editar(objeto, "modal", visibles)
-      editar(objeto, "modal") //por ahora editar todas, luego poner opcion en menú
+      // editar(objeto, "modal") //por ahora editar todas, luego poner opcion en menú
+      $('#modal1').modal('open');
     });
   }
 
@@ -385,6 +386,11 @@ function editar(objeto, editor, propiedades) {
     }
 
   // editor.innerHTML = editor.innerHTML + '<button onclick="editarObjeto(objeto)">Guardar</button>'
+
+  $("#editEAN").on("click", function () {
+    console.log("click en ean");
+
+  });
 
   $("#ok").on("click", function () {
     editarObjeto(objeto)

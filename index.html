@@ -36,19 +36,17 @@
     }
 
     .sidenav li>a {
-  align-items: center;
-  display: flex!important;
-  justify-content: space-between!important;
+      align-items: center;
+      display: flex !important;
+      justify-content: space-between !important;
 
-}
+    }
 
     /* .td{
       font-family: "Times New Roman", "Lucida Grande", Arial;
       font-weight: bold;
       font-style: normal;
     } */
-
-
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -78,7 +76,8 @@
   <div class="navbar-fixed">
     <nav class="black">
       <div class="nav-wrapper">
-        <a data-target="slide-out" class="sidenav-trigger show-on-large brand-logo left"><i class="material-icons">menu</i>Compras
+        <a data-target="slide-out" class="sidenav-trigger show-on-large brand-logo left"><i
+            class="material-icons">menu</i>Compras
           <span id="beta" style="font-size: medium;color:red">βeta</span><span style="font-size: small;color:red">
             0.0077</span></a>
         <ul class="right">
@@ -107,16 +106,16 @@
         <div class="background black">
           <img src="images/cared.jpg">
         </div>
-        <a ><img class="circle" src="images/Niwelbel.jpg"></a>
+        <a><img class="circle" src="images/Niwelbel.jpg"></a>
         <a class="modal-trigger" href="#user"><span class="white-text name">Rober Lozano</span></a>
         <a class="modal-trigger" href="#user"><span class="white-text email">email@mail.com</span></a>
       </div>
     </li>
     <li>
-      <select id="listas" class="bootstrap-select"  onchange="cargarLista()" style="font: 1.2em sans-serif;"></select>
+      <select id="listas" class="bootstrap-select" onchange="cargarLista()" style="font: 1.2em sans-serif;"></select>
       <button class="btn">+</button>
       <!-- <button onclick="cargarLista()">Cargar Lista</button> -->
-  </li>
+    </li>
     <li><a href="#!">Second Link</a></li>
     <li>
       <div class="divider"></div>
@@ -146,7 +145,7 @@
     <li><a class="waves-effect" href="https://github.com/RoberLozano/Compras/">Github</a></li>
     <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
   </ul>
-  
+
   <!-- <a data-target="slide-out" class="sidenav-trigger "><i class="material-icons">menu</i></a> -->
 
 
@@ -206,13 +205,12 @@
 
     <div>
       <button id="hablar" onclick="hablar()">Hablar
-        <span id="mic" class="material-icons"
-          style="vertical-align: -6px;"> mic</span>
+        <span id="mic" class="material-icons" style="vertical-align: -6px;"> mic</span>
       </button>
     </div>
     <button onclick="borrarArticulo()">Deshacer</button>
     <div id="hablado"></div>
-    
+
 
     <!-- //MATERIALIZE -->
     <!-- <div class="row">
@@ -232,10 +230,16 @@
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
       <div class="modal-content" id="modal">
-        <h4>Modal Header</h4>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
+        <h4>Pure JS Barcode Reader</h4>
+        <div>Barcode result: <span id="dbr"></span></div>
+        <div class="select">
+          <label for="videoSource">Video source: </label><select id="videoSource"></select>
+        </div>
+        <button id="go">Read Barcode</button>
+        <div>
+          <video muted autoplay id="video" playsinline="true"></video>
+          <canvas id="pcCanvas" width="640" height="480" style="display: none; float: bottom;"></canvas>
+          <canvas id="mobileCanvas" width="240" height="320" style="display: none; float: bottom;"></canvas>
         </div>
       </div>
       <div class="modal-footer">
@@ -251,14 +255,15 @@
           <input id="usuario" type="text" class="validate" val=`${localStorage.usuario}`>
           <label for="usuario">Usuario</label>
         </div>
-          <div class="input-field col s1">
-            <input id="email" type="email" class="validate">
-            <label for="email">Email</label>
-          </div>
+        <div class="input-field col s1">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
       </div>
       <div class="modal-footer">
         <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
-        <button id="opk" class="btn modal-close waves-effect waves-light green" onclick="guardarUsuario()">Aceptar</button>
+        <button id="opk" class="btn modal-close waves-effect waves-light green"
+          onclick="guardarUsuario()">Aceptar</button>
       </div>
     </div>
 
@@ -274,43 +279,46 @@
             <label for="email">Email</label>
           </div>
       </div> -->
-      <div class="modal-footer">
-        <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
-        <button id="opOk" class="btn modal-close waves-effect waves-light green">Aceptar</button>
+        <div class="modal-footer">
+          <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
+          <button id="opOk" class="btn modal-close waves-effect waves-light green">Aceptar</button>
+        </div>
       </div>
+
+
     </div>
 
-  </div>
-
-  <!-- MATERIALIZE -->
-  <div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">mode_edit</i>
-    </a>
-    <ul>
-      <li><a class="btn-floating red" id="hablar" onclick="hablar()"><i class="material-icons">mic</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-    </ul>
-  </div>
+    <!-- MATERIALIZE -->
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating red" id="hablar" onclick="hablar()"><i class="material-icons">mic</i></a></li>
+        <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+        <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+      </ul>
+    </div>
 
 
 
-  <script src="script.js"></script>
-  <script>
-    // M.AutoInit();
-    $(document).ready(function () {
-      //options
+    <script src="script.js"></script>
+    <script async src="zxing.js"></script>
+    <script src=""></script>
+    <script>
+      // M.AutoInit();
+      $(document).ready(function () {
+        //options
 
-      $('.sidenav').sidenav();
-      // $('select').formSelect();
-      $('.fixed-action-btn').floatingActionButton();
-      $('.modal').modal();
-      // $('.datepicker').datepicker();
-      // $('.timepicker').timepicker();
-    });
-  </script>
+        $('.sidenav').sidenav();
+        // $('select').formSelect();
+        $('.fixed-action-btn').floatingActionButton();
+        $('.modal').modal();
+        // $('.datepicker').datepicker();
+        // $('.timepicker').timepicker();
+      });
+    </script>
 </body>
 
 </html>
