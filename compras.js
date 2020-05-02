@@ -314,6 +314,11 @@ class ArticuloLista extends Articulo {
 		console.log(`Articulo ${this.nombre} guardado en ${this.lista}`);
 		guardarArticulo(this);
 	}
+	borrar(){
+		console.log(`Articulo ${this.nombre} borrado de ${this.lista}`);
+		borrarArticulo(this);
+
+	}
 }
 
 

@@ -41,6 +41,10 @@
       justify-content: space-between !important;
 
     }
+    
+    .selec {
+      background: linear-gradient(315deg, #b8d0e0 0%, #a6afb9 54%, #b8d0e0 80%);
+    }
 
     /* .td{
       font-family: "Times New Roman", "Lucida Grande", Arial;
@@ -295,9 +299,10 @@
       </a>
       <ul>
         <li><a class="btn-floating red" id="hablar" onclick="hablar()"><i class="material-icons">mic</i></a></li>
-        <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-        <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+        <li><a class="btn-floating blue" onclick="copiar()" id="fb-copiar" ><i class="material-icons">content_copy</i></a></li>
+        <li><a class="btn-floating green" onclick="pegar()" id="fb-pegar" ><i class="material-icons">content_paste</i></a></li>
+        <li><a class="btn-floating orange darken-1" onclick="cortar()" id="fb-cortar"><i class="material-icons">content_cut</i></a></li>
+        <li><a class="btn-floating red accent-4" onclick="eliminar()" id="fb-eliminar" ><i class="material-icons">delete_forever</i></a></li>
       </ul>
     </div>
 

@@ -186,6 +186,8 @@ function tablaLista(lista) {
     console.log(a);
     objetoTabla(a, "myTable", visibles)
   };
+
+  checkContexto(); //para los botones de copy paste
 }
 
 
@@ -231,7 +233,7 @@ function objetoTabla(object, tabla, visibles) {
       valor = "";
 
     if (key == "ok") {
-      valor=(valor=='true' )? true : false;
+      valor = (valor == 'true') ? true : false;
 
       valor = `<label>
       <input type="checkbox" id="cb${id}"  ${valor ? "checked" : ""} />
@@ -243,7 +245,7 @@ function objetoTabla(object, tabla, visibles) {
       //   <span></span>
       // </label>`
       // console.log(`VALOR: ${valor}`);
-      
+
     }
     cell.innerHTML = `<i data-toggle="tooltip"  id="${id}|${key}" title="${key}"> ${valor}</i>`
     // cell.innerHTML = '<i data-toggle="tooltip"  id="' + id + "|" + key + "|" + valor + '" title=' + key + '>' + valor + '</i>';
@@ -253,21 +255,21 @@ function objetoTabla(object, tabla, visibles) {
   }
 }
 
-function abrirOpciones(){
-//TODO:
+function abrirOpciones() {
+  //TODO:
 }
 
-function guardarOpciones(){}
+function guardarOpciones() { }
 
-function guardarUsuario(usuario,email){
+function guardarUsuario(usuario, email) {
 
-  usuario=$("#usuario").val();
-  email=$("#email").val();
+  usuario = $("#usuario").val();
+  email = $("#email").val();
 
   // if(!!usuario) console.log("usuario",usuario);
   // if(!!email)   console.log("email",email);
-  if(!!usuario) localStorage.setItem("usuario",usuario)
-  if(!!email) localStorage.setItem("email",email)
+  if (!!usuario) localStorage.setItem("usuario", usuario)
+  if (!!email) localStorage.setItem("email", email)
 }
 
 
@@ -295,20 +297,30 @@ function crearEventos(objeto, cell, key) {
   if (key == "ok") {
     let cb = document.getElementById("cb" + objeto.id);
     cb.addEventListener('change', function () {
-      objeto.ok=this.checked;
+      objeto.ok = this.checked;
       //TODO: guardarlo inmediatamente?
       objeto.guardar()
     });
   }
   else //TODO change localStorage to op
-  // if (localStorage.marcaSpan && key=="nombre" && objeto.marca) {
-  if (key=="nombre" && objeto.marca) {
-    cell.innerHTML+=
-    ` <span class="new badge" data-badge-caption="${objeto.marca}"> </span>`
-  //   `<div class="chip">
-  //   ${objeto.marca}
-  // </div>`
-    
+    // if (localStorage.marcaSpan && key=="nombre" && objeto.marca) {
+    if (key == "nombre" && objeto.marca) {
+      cell.innerHTML +=
+        ` <span class="new badge" data-badge-caption="${objeto.marca}"> </span>`
+      //   `<div class="chip">
+      //   ${objeto.marca}
+      // </div>`
+
+    }
+    else
+
+  if (key == "total") {
+    // console.log(objeto+ " a borrar");
+    cell.addEventListener('click', function () {
+      // objeto.borrar();
+      // cell.parentElement.classList.add("selec");
+      sel(objeto,cell); //selecciona o deselecciona si ya lo está
+    });
   }
   else { //si  no es ok
     cell.addEventListener('click', function () {
@@ -351,9 +363,7 @@ function borrarArticulo(a = lastArticulo, lista) {
 
   let ruta = `/listas/${$("#listas").val()}/${a.id}`
   console.log(ruta);
-
   database.ref(ruta).remove()
-
 }
 
 function guardarArticulo(articulo, lista) {
@@ -361,6 +371,9 @@ function guardarArticulo(articulo, lista) {
   var ref = database.ref(ruta).child(articulo.id)
   ref.set(articulo)
 }
+
+
+
 
 /**
  * 
@@ -420,8 +433,8 @@ function editarObjeto(objeto, propiedades) {
 
 function createHeader(header = "header") {
   visibles = $("#columnas").val()
-  console.log("VISIBLES:"+visibles);
-  
+  console.log("VISIBLES:" + visibles);
+
   var th = document.getElementById(header);
   th.innerHTML = ""; //clear header
   var row = th.insertRow(0);
@@ -433,10 +446,10 @@ function createHeader(header = "header") {
                   </label>`
   for (var i in visibles) { //+1 del checkbox que es el 0
     var cell = row.insertCell(+i + 1);
-    if(visibles[i]=="unidades") //TODO: ñapa
-    cell.innerHTML = '<b>' + "ud" + '</b>';
+    if (visibles[i] == "unidades") //TODO: ñapa
+      cell.innerHTML = '<b>' + "ud" + '</b>';
     else
-    cell.innerHTML = '<b>' + visibles[i] + '</b>';
+      cell.innerHTML = '<b>' + visibles[i] + '</b>';
   }
   // if (header === "header") {//si es listas
   //   // El total si sale siempre cambiar cuando se aplique tb a inventario
@@ -472,13 +485,13 @@ function addElement2Select(element, select) {
 }
 
 function writeLista(userId, name, valor) {
-  var name = $('#campoNombre').val();
-  fbListasCollection.child(name).set({
-    nombre: name, //another way you could write is $('#myForm [name="fullname"]').
-    tipo: $('#tipo').val(),
-    valor: $('#campoValor').val(), //another way you could write is $('#myForm [name="fullname"]').
+  // var name = $('#campoNombre').val();
+  // fbListasCollection.child(name).set({
+  //   nombre: name, //another way you could write is $('#myForm [name="fullname"]').
+  //   tipo: $('#tipo').val(),
+  //   valor: $('#campoValor').val(), //another way you could write is $('#myForm [name="fullname"]').
 
-  });
+  // });
 }
 
 //BUSCAR
@@ -488,6 +501,118 @@ $("#buscar").on("keyup", function () {
     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
   });
 });
+
+//#region edición
+
+var selected = [];
+var copiado = [];
+
+
+function checkContexto() {
+  if(selected.length<1){
+    $("#fb-copiar").hide();
+    $("#fb-cortar").hide();
+    $("#fb-eliminar").hide();
+
+  } 
+  else{
+    $("#fb-copiar").show();
+    $("#fb-cortar").show();
+    $("#fb-eliminar").show();
+  }
+
+  if(copiado.length<1){
+    $("#fb-pegar").hide();
+  } 
+  else{
+    $("#fb-pegar").show();
+  }
+
+  
+}
+
+/**
+ * 
+ * @param {Object} objeto el objeto seleccionado
+ * @param {Cell} celda la celda sobre la que se actúa
+ */
+function sel(objeto, celda){
+
+  console.log(selected);
+  var pos = selected.indexOf(objeto);
+  console.log("pos:" + pos);
+  if (pos > -1){ //deselecciono si ya está
+    selected.splice(pos, 1);
+    celda.parentElement.classList.remove("selec"); //quito la clase de seleccionado
+  }
+  else{ //si no está lo selecciono
+    selected.push(objeto);
+    celda.parentElement.classList.add("selec");//pongo formato seleccionado
+  }
+
+checkContexto();
+  console.log(selected);
+  
+}
+
+// function seleccionar(objeto) {
+//   console.log(selected);
+//   var pos = selected.indexOf(objeto);
+//   console.log("pos:" + pos);
+//   if (pos > -1) return; //ya está seleccionado
+//   selected.push(objeto);
+//   console.log(selected);
+// }
+
+// function deseleccionar(objeto) {
+//   var pos = selected.indexOf(objeto);
+//   console.log("Encontrado en pos:" + pos);
+//   if (pos > -1) selected.splice(pos, 1);
+//   console.log(selected);
+
+// }
+
+function copiar() {
+  copiado = selected;
+  checkContexto();
+}
+
+function cortar() {
+  // copiado.push(objetoActual);
+  copiar();
+  eliminar();
+  // pj.inventario.navegar(nav).sacar(objetoActual);
+  // pj.save();
+  // cargarPersonaje(true);
+}
+
+function eliminar() {
+  selected.forEach(element => {
+    element.borrar();
+  });
+  // $("#fb-pegar").hide();
+  
+  // M.toast({html: selected.length +" eliminados"})
+  M.toast({html: `${selected.length} eliminado${selected.length>1?'s':'' }`})
+  selected = [];
+  checkContexto();
+
+}
+
+function pegar() {
+  copiado.forEach(element => {
+    nuevoArticulo(element);
+  });
+  // copiado = [];
+  selected = [];
+  checkContexto();
+
+
+}
+
+
+
+//#endregion
 
 
 
