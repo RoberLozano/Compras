@@ -41,7 +41,7 @@
       justify-content: space-between !important;
 
     }
-    
+
     .selec {
       background: linear-gradient(315deg, #b8d0e0 0%, #a6afb9 54%, #b8d0e0 80%);
     }
@@ -234,6 +234,27 @@
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
       <div class="modal-content" id="modal">
+        <!-- <h4>Pure JS Barcode Reader</h4>
+        <div>Barcode result: <span id="dbr"></span></div>
+        <div class="select">
+          <label for="videoSource">Video source: </label><select id="videoSource"></select>
+        </div>
+        <button id="go">Read Barcode</button>
+        <div>
+          <video muted autoplay id="video" playsinline="true"></video>
+          <canvas id="pcCanvas" width="640" height="480" style="display: none; float: bottom;"></canvas>
+          <canvas id="mobileCanvas" width="240" height="320" style="display: none; float: bottom;"></canvas>
+        </div> -->
+      </div>
+      <div class="modal-footer">
+        <button id="cancelar" class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
+        <button id="ok" class="btn modal-close waves-effect waves-light green">Aceptar</button>
+      </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modalcamara" class="modal">
+      <div class="modal-content" id="modal">
         <h4>Pure JS Barcode Reader</h4>
         <div>Barcode result: <span id="dbr"></span></div>
         <div class="select">
@@ -248,7 +269,7 @@
       </div>
       <div class="modal-footer">
         <button id="cancelar" class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
-        <button id="ok" class="btn modal-close waves-effect waves-light green">Aceptar</button>
+        <button id="okCamara" onclick="aceptarEAN()" class="btn modal-close waves-effect waves-light green">Aceptar</button>
       </div>
     </div>
 
@@ -299,10 +320,14 @@
       </a>
       <ul>
         <li><a class="btn-floating red" id="hablar" onclick="hablar()"><i class="material-icons">mic</i></a></li>
-        <li><a class="btn-floating blue" onclick="copiar()" id="fb-copiar" ><i class="material-icons">content_copy</i></a></li>
-        <li><a class="btn-floating green" onclick="pegar()" id="fb-pegar" ><i class="material-icons">content_paste</i></a></li>
-        <li><a class="btn-floating orange darken-1" onclick="cortar()" id="fb-cortar"><i class="material-icons">content_cut</i></a></li>
-        <li><a class="btn-floating red accent-4" onclick="eliminar()" id="fb-eliminar" ><i class="material-icons">delete_forever</i></a></li>
+        <li><a class="btn-floating blue" onclick="copiar()" id="fb-copiar"><i
+              class="material-icons">content_copy</i></a></li>
+        <li><a class="btn-floating green" onclick="pegar()" id="fb-pegar"><i
+              class="material-icons">content_paste</i></a></li>
+        <li><a class="btn-floating orange darken-1" onclick="cortar()" id="fb-cortar"><i
+              class="material-icons">content_cut</i></a></li>
+        <li><a class="btn-floating red accent-4" onclick="eliminar()" id="fb-eliminar"><i
+              class="material-icons">delete_forever</i></a></li>
       </ul>
     </div>
 

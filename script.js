@@ -314,21 +314,21 @@ function crearEventos(objeto, cell, key) {
     }
     else
 
-  if (key == "total") {
-    // console.log(objeto+ " a borrar");
-    cell.addEventListener('click', function () {
-      // objeto.borrar();
-      // cell.parentElement.classList.add("selec");
-      sel(objeto,cell); //selecciona o deselecciona si ya lo está
-    });
-  }
-  else { //si  no es ok
-    cell.addEventListener('click', function () {
-      // editar(objeto, "modal", visibles)
-      // editar(objeto, "modal") //por ahora editar todas, luego poner opcion en menú
-      $('#modal1').modal('open');
-    });
-  }
+      if (key == "total") {
+        // console.log(objeto+ " a borrar");
+        cell.addEventListener('click', function () {
+          // objeto.borrar();
+          // cell.parentElement.classList.add("selec");
+          sel(objeto, cell); //selecciona o deselecciona si ya lo está
+        });
+      }
+      else { //si  no es ok
+        cell.addEventListener('click', function () {
+          // editar(objeto, "modal", visibles)
+          editar(objeto, "modal") //por ahora editar todas, luego poner opcion en menú
+          // $('#modal1').modal('open');
+        });
+      }
 
 }
 
@@ -373,7 +373,11 @@ function guardarArticulo(articulo, lista) {
 }
 
 
-
+function aceptarEAN(){
+  console.log("EAN-->"+$("#dbr").val());
+  
+  $("#editEAN").val($("#dbr").val());
+}
 
 /**
  * 
@@ -386,6 +390,9 @@ function guardarArticulo(articulo, lista) {
  */
 function editar(objeto, editor, propiedades) {
   var editor = document.getElementById(editor);
+  const backup = editor.innerHTML;
+  console.log(backup);
+
   editor.innerHTML = ""; //clear editor
   if (propiedades)
     for (key of propiedades) {
@@ -403,6 +410,8 @@ function editar(objeto, editor, propiedades) {
   $("#editEAN").on("click", function () {
     console.log("click en ean");
 
+    var cam = M.Modal.getInstance(document.getElementById("modalcamara"));
+    cam.open();
   });
 
   $("#ok").on("click", function () {
@@ -509,26 +518,26 @@ var copiado = [];
 
 
 function checkContexto() {
-  if(selected.length<1){
+  if (selected.length < 1) {
     $("#fb-copiar").hide();
     $("#fb-cortar").hide();
     $("#fb-eliminar").hide();
 
-  } 
-  else{
+  }
+  else {
     $("#fb-copiar").show();
     $("#fb-cortar").show();
     $("#fb-eliminar").show();
   }
 
-  if(copiado.length<1){
+  if (copiado.length < 1) {
     $("#fb-pegar").hide();
-  } 
-  else{
+  }
+  else {
     $("#fb-pegar").show();
   }
 
-  
+
 }
 
 /**
@@ -536,23 +545,23 @@ function checkContexto() {
  * @param {Object} objeto el objeto seleccionado
  * @param {Cell} celda la celda sobre la que se actúa
  */
-function sel(objeto, celda){
+function sel(objeto, celda) {
 
   console.log(selected);
   var pos = selected.indexOf(objeto);
   console.log("pos:" + pos);
-  if (pos > -1){ //deselecciono si ya está
+  if (pos > -1) { //deselecciono si ya está
     selected.splice(pos, 1);
     celda.parentElement.classList.remove("selec"); //quito la clase de seleccionado
   }
-  else{ //si no está lo selecciono
+  else { //si no está lo selecciono
     selected.push(objeto);
     celda.parentElement.classList.add("selec");//pongo formato seleccionado
   }
 
-checkContexto();
+  checkContexto();
   console.log(selected);
-  
+
 }
 
 // function seleccionar(objeto) {
@@ -591,9 +600,9 @@ function eliminar() {
     element.borrar();
   });
   // $("#fb-pegar").hide();
-  
+
   // M.toast({html: selected.length +" eliminados"})
-  M.toast({html: `${selected.length} eliminado${selected.length>1?'s':'' }`})
+  M.toast({ html: `${selected.length} eliminado${selected.length > 1 ? 's' : ''}` })
   selected = [];
   checkContexto();
 
