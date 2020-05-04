@@ -379,7 +379,7 @@ function aceptarEAN(){
   console.log("EAN-->"+$("#dbr").html());
   console.log("EAN-->"+EAN);
   
-  $("#editEAN").val($("#dbr").val());
+  $("#editEAN").val(EAN);
 }
 
 /**
