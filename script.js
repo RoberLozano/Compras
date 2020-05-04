@@ -376,7 +376,8 @@ function guardarArticulo(articulo, lista) {
 function aceptarEAN(){
   console.log($("#dbr"));
   
-  console.log("EAN-->"+$("#dbr").val());
+  console.log("EAN-->"+$("#dbr").html());
+  console.log("EAN-->"+EAN);
   
   $("#editEAN").val($("#dbr").val());
 }
