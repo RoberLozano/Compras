@@ -80,7 +80,8 @@ recognition.onresult = function(event) {
 
   let a=new Articulo();
   a.dictado(last.transcript);
-  // console.log(a);
+
+  console.log(a);
 
   nuevoArticulo(a);
 

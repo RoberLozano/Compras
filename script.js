@@ -294,6 +294,16 @@ function darColumnas() {
 
 function crearEventos(objeto, cell, key) {
 
+  //FORMATOS
+  if (key == "nombre" && objeto.marca) {
+    cell.innerHTML +=
+      ` <span class="new badge" data-badge-caption="${objeto.marca}"> </span>`
+    //   `<div class="chip">
+    //   ${objeto.marca}
+    // </div>`
+
+  }
+
   if (key == "ok") {
     let cb = document.getElementById("cb" + objeto.id);
     cb.addEventListener('change', function () {
@@ -304,15 +314,6 @@ function crearEventos(objeto, cell, key) {
   }
   else //TODO change localStorage to op
     // if (localStorage.marcaSpan && key=="nombre" && objeto.marca) {
-    if (key == "nombre" && objeto.marca) {
-      cell.innerHTML +=
-        ` <span class="new badge" data-badge-caption="${objeto.marca}"> </span>`
-      //   `<div class="chip">
-      //   ${objeto.marca}
-      // </div>`
-
-    }
-    else
 
       if (key == "total") {
         // console.log(objeto+ " a borrar");
