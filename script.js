@@ -324,8 +324,8 @@ function crearEventos(objeto, cell, key) {
       }
       else { //si  no es ok
         cell.addEventListener('click', function () {
-          // editar(objeto, "modal", visibles)
-          editar(objeto, "modal") //por ahora editar todas, luego poner opcion en menú
+          editar(objeto, "modal", visibles)
+          // editar(objeto, "modal") //por ahora editar todas, luego poner opcion en menú
           // $('#modal1').modal('open');
         });
       }

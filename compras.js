@@ -319,6 +319,13 @@ class ArticuloLista extends Articulo {
 		borrarArticulo(this);
 
 	}
+/** Asigna el precio de la suma de las unidades, para que se divida entre estas
+ * 
+ * @param {number} pt precio total de todas las unidades
+ */
+	precioTotal(pt){
+		this.precio= pt/this.unidades;
+	}
 }
 
 
