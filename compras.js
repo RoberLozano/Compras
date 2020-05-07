@@ -49,7 +49,7 @@ const ctds = {
 	LITRO: {
 		simbolo: "Li",
 		valor: 1000,
-		palabras: "(litros|litro| ls|l)",
+		palabras: "(litros|litro| ls| l )",
 		tipo: TipoCantidad.VOLUMEN
 	},
 
