@@ -309,10 +309,15 @@ class ArticuloLista extends Articulo {
 		this.total = unidades * precio;
 		this.ok =ok;
 	}
-	// get total(){
-	// 	return this.precio*this.unidades;
 
-	// }
+
+	set total(t){
+
+	}
+	get total(){
+		return this.precio*this.unidades;
+
+	}
 
 	guardar(){
 		
