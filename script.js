@@ -233,7 +233,7 @@ function objetoTabla(object, tabla, visibles) {
       valor = "";
 
     if (key == "ok") {
-      valor = (valor == 'true') ? true : false;
+      valor = (valor == true) ? true : false;
 
       valor = `<label>
       <input type="checkbox" id="cb${id}"  ${valor ? "checked" : ""} />
@@ -308,6 +308,8 @@ function crearEventos(objeto, cell, key) {
     let cb = document.getElementById("cb" + objeto.id);
     cb.addEventListener('change', function () {
       objeto.ok = this.checked;
+      console.log(objeto.nombre+ " cheched="+this.checked);
+      
       //TODO: guardarlo inmediatamente?
       objeto.guardar()
     });
@@ -371,9 +373,7 @@ function guardarArticulo(articulo, lista) {
   let ruta = '/listas/' + $("#listas").val();
   console.log(articulo);
   console.log(`listas/${$("#listas").val()}  ${articulo.id}`);
-  
-  
-  
+
   var ref = database.ref(ruta).child(articulo.id)
   ref.set(articulo)
 }
@@ -400,7 +400,7 @@ function aceptarEAN(){
 function editar(objeto, editor, propiedades) {
   var editor = document.getElementById(editor);
   const backup = editor.innerHTML;
-  console.log(backup);
+  // console.log(backup);
 
   editor.innerHTML = ""; //clear editor
   if (propiedades)

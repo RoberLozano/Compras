@@ -309,14 +309,26 @@ class ArticuloLista extends Articulo {
 		this.total = unidades * precio;
 		this.ok =ok;
 	}
+	// get total(){
+	// 	return this.precio*this.unidades;
+
+	// }
 
 	guardar(){
+		
 		console.log(`Articulo ${this.nombre} guardado en ${this.lista}`);
-		guardarArticulo(this);
+		var ref = database.ref(this.lista).child(this.id)
+		ref.set(this)
+		console.log(this);
+		
+
+		// guardarArticulo(this);
 	}
 	borrar(){
 		console.log(`Articulo ${this.nombre} borrado de ${this.lista}`);
-		borrarArticulo(this);
+		// borrarArticulo(this);
+		var ref = database.ref(this.lista).child(this.id)
+		ref.remove()
 
 	}
 /** Asigna el precio de la suma de las unidades, para que se divida entre estas
