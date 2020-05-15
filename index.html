@@ -23,8 +23,8 @@
 
   <style>
     .dark-mode {
-      background-color: black;
-      color: white;
+      background-color: black !important;;
+      color: white !important;;
     }
 
     .container {
@@ -45,6 +45,13 @@
     .selec {
       background: linear-gradient(315deg, #b8d0e0 0%, #a6afb9 54%, #b8d0e0 80%);
     }
+
+    .table td, .table th {
+    padding: .1rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
 
     /* .td{
       font-family: "Times New Roman", "Lucida Grande", Arial;
@@ -116,11 +123,13 @@
       </div>
     </li>
     <li>
-      <select id="listas" class="bootstrap-select" onchange="cargarLista()" style="font: 1.2em sans-serif;"></select>
-      <button class="btn">+</button>
+      <select id="listas" class="bootstrap-select" onchange="cargarLista()" data-live-search="true"  data-style="btn-primary"></select>
+      <button class="btn" onclick="nuevaLista()">+</button>
       <!-- <button onclick="cargarLista()">Cargar Lista</button> -->
     </li>
-    <li><a href="#!">Second Link</a></li>
+    <!-- <li><input type="text" class="datepicker"></li>
+    <li> <input type="text" class="timepicker"></li> -->
+    <li><a class="waves-effect" onclick="nuevaLista()">Nueva Lista<i class="material-icons">add_shopping_cart</i></a></li>
     <li>
       <div class="divider"></div>
     </li>
@@ -137,7 +146,7 @@
         Editar solo mostrados
         <span class="switch">
           <label>
-            <input type="checkbox"></input>
+            <input id="cbMostrar" type="checkbox" checked></input>
             <span class="lever"></span>
           </label>
         </span>
@@ -182,6 +191,15 @@
 
 
     <div>
+<!-- 
+      <select class="selectpicker" id="columnas" multiple data-live-search="true" data-width="fit" multiple
+        title="Seleccione columnas a mostrar">
+        <option selected label="ud">unidades</option>
+        <option selected>nombre</option>
+        <option>cantidad</option>
+        <option selected>precio</option>
+        <option selected>total</option>
+      </select> -->
 
       <select class="selectpicker" id="columnas" multiple data-live-search="true" data-width="fit" multiple
         title="Seleccione columnas a mostrar">
@@ -254,7 +272,7 @@
 
     <!-- Modal Structure -->
     <div id="modalcamara" class="modal">
-      <div class="modal-content" id="modal">
+      <div class="modal-content" id="modalcamara-ct">
         <div>Barcode result: <span id="dbr"></span></div>
         <div class="select">
           <label for="videoSource">Video source: </label><select id="videoSource"></select>
@@ -312,6 +330,45 @@
 
     </div>
 
+    <div id="descuento" class="modal">
+      <div class="modal-content" id="descuento-ct">
+        <h4>Descuento</h4>
+        <p class="range-field">
+          <label for="rg-descuento">Porcentaje descuento</label>
+          <input type="range" id="rg-descuento" onchange="$('#porcentaje').val(this.value)" min="0" max="100" /> 
+          <input type="number" id="porcentaje" name="porcentaje" onchange="$('#rg-descuento').val(this.value)" list="percentList">
+        </p>
+          <datalist id="percentList">
+            <option value=10>  
+            <option value=20>  
+            <option value=25>  
+            <option value=50>
+            <option value=70>
+            <option value=75>
+          </datalist>
+
+        
+
+        <select class="selectpicker" id="sl-descuento" data-live-search="true" data-width="fit"
+        title="Seleccione el descuento">
+         <option value="ud" selected>unidad</option> <!-- TODO: mirar nombre  -->
+          <option value="2x1">2x1</option>
+          <option value="3x1">3x1</option>
+          <option value="3x2">3x2</option>
+          <option value="70% 2ª ud">70% 2ª unidad</option>
+        </select>
+
+        <div class="modal-footer">
+          <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
+          <button id="quitarDescuento" class="btn modal-close waves-effect waves-light blue darken-4">Quitar descuento</button>
+          <button id="descuentoOk" class="btn modal-close waves-effect waves-light green">Aplicar</button>
+        </div>
+      </div>
+
+
+    </div>
+
+
     <!-- MATERIALIZE -->
     <div class="fixed-action-btn">
       <a class="btn-floating btn-large red">
@@ -320,6 +377,7 @@
       <ul>
         <li><a class="btn-floating red" id="hablar" onclick="hablar()"><i class="material-icons">mic</i></a></li>
         <li><a class="btn-floating yellow darken-2" id="editar" onclick="editar(selected[0], 'modal', visibles)"><i class="material-icons">mode_edit</i></a></li>
+        <li><a class="btn-floating blue darken-3" style="color: white;" onclick="descuento()" id="fb-descuento"><b>%</b></a></li>
         <li><a class="btn-floating blue" onclick="copiar()" id="fb-copiar"><i
               class="material-icons">content_copy</i></a></li>
         <li><a class="btn-floating green" onclick="pegar()" id="fb-pegar"><i
@@ -343,9 +401,28 @@
 
         $('.sidenav').sidenav();
         // $('select').formSelect();
+        // $('selectpicker').selectpicker();
         $('.fixed-action-btn').floatingActionButton();
         $('.modal').modal();
-        // $('.datepicker').datepicker();
+
+        //que salga el popup al cambiar el valor
+        var elems  = document.querySelectorAll("input[type=range]");
+        M.Range.init(elems);
+        
+        $('.datepicker').datepicker({ 
+          container: 'body',
+            firstDay: true, 
+            format: 'yyyy-mm-dd',
+            i18n: {
+                months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
+                weekdays: ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+                weekdaysShort: ["Dom","Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                weekdaysAbbrev: ["D","L", "M", "X", "J", "V", "S"]
+            }
+        });
+
+
         // $('.timepicker').timepicker();
       });
     </script>

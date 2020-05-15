@@ -1,6 +1,6 @@
 {
   "lock": false,
-  "active": "73d316965609fc4cf60385337cd65c01d48f9642",
+  "active": "",
   "sets": {
     "default": {
       "source": "default",
@@ -9,24 +9,29 @@
         "73d316965609fc4cf60385337cd65c01d48f9642": {
           "name": "barrras",
           "data": [
-            "c:\\GitHub\\Compras\\camera.html",
-            "c:\\GitHub\\Compras\\README.md",
-            "c:\\GitHub\\Compras\\.vscode\\launch.json",
-            "c:\\GitHub\\Compras\\\\script.js",
-            "c:\\GitHub\\Compras\\script.js",
             "c:\\GitHub\\Compras\\compras.js",
-            "c:\\GitHub\\Compras\\barras.js",
-            "c:\\GitHub\\Compras\\voz.js",
             "c:\\GitHub\\Compras\\index.html",
-            "c:\\GitHub\\Compras\\barcode\\index.html",
-            "c:\\GitHub\\Compras\\barcode\\z\\index.html",
-            "c:\\GitHub\\Compras\\barcode\\z\\video.js",
-            "c:\\GitHub\\Compras\\.vscode\\video.js",
-            "c:\\GitHub\\Compras\\barcode\\z\\zxing.js",
-            "c:\\GitHub\\Compras\\zxing.js",
             "c:\\GitHub\\Compras\\video.js",
-            "c:\\Program Files\\Microsoft VS Code\\resources\\app\\extensions\\node_modules\\typescript\\lib\\lib.dom.d.ts",
-            "c:\\Program Files\\Microsoft VS Code\\resources\\app\\extensions\\node_modules\\typescript\\lib\\lib.es5.d.ts"
+            "c:\\GitHub\\Compras\\script.js",
+            "c:\\GitHub\\Compras\\voz.js"
+          ]
+        },
+        "b8374f8d6a9b671e3435e91018f09ad830c59c8d": {
+          "name": "descuento",
+          "data": [
+            "c:\\GitHub\\Compras\\compras.js"
+          ]
+        },
+        "43e4fdb907222d667549c25c6950ae0906c211b0": {
+          "name": "clases",
+          "data": [
+            "c:\\GitHub\\Compras\\compras.js"
+          ]
+        },
+        "cb839052042a4b689a67c0a97c10067b4f4cadc1": {
+          "name": "voz",
+          "data": [
+            "c:\\GitHub\\Compras\\voz.js"
           ]
         }
       }

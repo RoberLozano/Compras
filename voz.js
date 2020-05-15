@@ -70,8 +70,10 @@ recognition.onresult = function(event) {
   console.log(`${last.transcript}  (${last.confidence}) [${time}]`);
   
 
- if((time-lastTime)<100) //si es el eco del anterior salimos (menos de 70 ms)
- return;
+ if((time-lastTime)<100){//si es el eco del anterior salimos (menos de 70 ms)
+  console.log("repetido");
+   return;
+  } 
 
   if(last.confidence<0.5) console.log(event.results[event.results.length-1]);
   else hablado.innerHTML +=last.transcript+ " [" +time+ "] <br>"

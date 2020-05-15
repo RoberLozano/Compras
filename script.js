@@ -24,6 +24,7 @@ var fbActual;
 
 //para deshacer
 var lastArticulo;
+var lista;
 //SELECTS
 
 // el select guay
@@ -41,10 +42,13 @@ fbListasCollection.on('value', function (listas) {
   listas.forEach(function (firebaseListaReference) {
     //this gets the actual data (JSON) for the Lista.
     var lista = firebaseListaReference.key;
-    console.log(lista); //check your console to see it!
+    // console.log(lista); //check your console to see it!
     // addLista(lista);
     addElement2Select(lista, "listas")
   });
+
+  // console.log($("#listas"));
+
 });
 
 var colAntes = ""
@@ -123,6 +127,9 @@ function dark() {
   element.classList.toggle("dark-mode");
   //  document.getElementById('tabla').classList.toggle("table-dark");
   document.getElementById('tabla').classList.toggle("dark-mode");
+  // $(".datepicker-calendar-container").toggleClass("dark-mode");
+  $(".input").toggleClass("dark-mode");
+
   // $("i").toggleClass("dark-mode");
 
 
@@ -135,7 +142,7 @@ function dark() {
 var objetoActual = "";
 
 function cargarLista() {
-  console.log($("#listas").val());
+  console.log("LISTA->" + $("#listas").val());
   var fbListaActual = database.ref('/listas/' + $("#listas").val());
   // fbListaActual.orderByChild("valor").on('value',function(listas){
   fbListaActual.on('value', function (listas) {
@@ -169,6 +176,8 @@ function cargarLista() {
   });
 
   $("#beta").html($("#listas").val())
+  lista = '/listas/' + $("#listas").val();
+  M.toast({ html: `${lista} seleccionada` })
   // $('#myTable').css('textTransform', 'capitalize');
 }
 
@@ -183,7 +192,7 @@ function tablaLista(lista) {
 
   clear();
   for (a of lista) {
-    console.log(a);
+    // console.log(a);
     objetoTabla(a, "myTable", visibles)
   };
 
@@ -234,10 +243,10 @@ function objetoTabla(object, tabla, visibles) {
 
     if (key == "ok") {
       valor = (valor == true) ? true : false;
-
+      cell.style = "width: 10px;table-layout: fixed";
       valor = `<label>
       <input type="checkbox" id="cb${id}"  ${valor ? "checked" : ""} />
-      <span></span>
+      <span style="padding:0;"></span>
     </label>`
       // variable is a boolean
       // valor = valor ? `<input type="checkbox" ${valor?"checked":""}  onchange = "AutoCalculateMandateOnChange(this) />` : `<label>
@@ -247,7 +256,7 @@ function objetoTabla(object, tabla, visibles) {
       // console.log(`VALOR: ${valor}`);
 
     }
-    cell.innerHTML = `<i data-toggle="tooltip"  id="${id}|${key}" title="${key}"> ${valor}</i>`
+    cell.innerHTML = `<i data-toggle="tooltip"  id="${id}|${key}" title="${key}">${valor}</i>`
     // cell.innerHTML = '<i data-toggle="tooltip"  id="' + id + "|" + key + "|" + valor + '" title=' + key + '>' + valor + '</i>';
     crearEventos(object, cell, key);
     i++;
@@ -308,8 +317,8 @@ function crearEventos(objeto, cell, key) {
     let cb = document.getElementById("cb" + objeto.id);
     cb.addEventListener('change', function () {
       objeto.ok = this.checked;
-      console.log(objeto.nombre+ " cheched="+this.checked);
-      
+      console.log(objeto.nombre + " cheched=" + this.checked);
+
       //TODO: guardarlo inmediatamente?
       objeto.guardar()
     });
@@ -317,25 +326,64 @@ function crearEventos(objeto, cell, key) {
   else //TODO change localStorage to op
     // if (localStorage.marcaSpan && key=="nombre" && objeto.marca) {
 
-      if (key == "total") {
-        // console.log(objeto+ " a borrar");
-        cell.addEventListener('click', function () {
-          // objeto.borrar();
-          // cell.parentElement.classList.add("selec");
-          sel(objeto, cell); //selecciona o deselecciona si ya lo está
-        });
-      }
-      else { //si  no es ok
-        cell.addEventListener('click', function () {
-          // editar(objeto, "modal", visibles)
-          editar(objeto, "modal") //por ahora editar todas, luego poner opcion en menú
-          // $('#modal1').modal('open');
-        });
-      }
+    if (key == "total") {
+      // console.log(objeto+ " a borrar");
+      cell.addEventListener('click', function () {
+        // objeto.borrar();
+        // cell.parentElement.classList.add("selec");
+        sel(objeto, cell); //selecciona o deselecciona si ya lo está
+        console.log(objeto);
+
+      });
+    }
+    else { //si  no es ok
+      cell.addEventListener('click', function () {
+        if ($("#cbMostrar").prop("checked")) //si es la opciond el menú
+          editar(objeto, "modal", visibles)
+        else
+          editar(objeto, "modal")
+        // $('#modal1').modal('open');
+      });
+    }
 
 }
 
 
+function nuevaLista(nombreLista) {
+
+  console.log("nuevalista");
+
+  let d = `
+  <h3> Nueva Lista </h3>
+  <div class="input-field col s12">
+        <input id="nombreLista" type="text" class="validate" placeholder="Nueva Lista">
+        <label class="active" for="nombreLista">Nombre</label>
+      </div>`
+
+  $("#modal").html(d);
+
+  var instance = M.Modal.getInstance(document.getElementById("modal1"));
+  instance.open();
+  $("#ok").one("click", function () {
+    nombreLista = $("#nombreLista").val();
+
+    let repe = false;
+    $("#listas option").each(function () {
+      if (nombreLista === $(this).text()) {
+        console.log("IGUALES"); repe = true; return;
+      }
+    });
+    if (repe) { alert("Nombre de lista en uso"); return }
+
+    let ruta = '/listas/' + nombreLista + "/";
+    var ref = database.ref(ruta);
+    ref.set(false);//false porque hay que pasar un argumento
+    console.log("NUEVA LISTA " + nombreLista);
+
+  });
+
+
+}
 
 /**
 * Saves a new articulo to the Firebase DB.
@@ -379,14 +427,19 @@ function guardarArticulo(articulo, lista) {
 }
 
 
-function aceptarEAN(){
+function aceptarEAN() {
   console.log($("#dbr"));
-  
-  console.log("EAN-->"+$("#dbr").html());
-  console.log("EAN-->"+EAN);
-  
+
+  console.log("EAN-->" + $("#dbr").html());
+  console.log("EAN-->" + EAN);
+
   $("#editEAN").val(EAN);
 }
+
+/**
+ * El nombre de las propiedades que salen en el edit
+ */
+var edits = []
 
 /**
  * 
@@ -401,17 +454,26 @@ function editar(objeto, editor, propiedades) {
   var editor = document.getElementById(editor);
   const backup = editor.innerHTML;
   // console.log(backup);
-
+  edits = [];
   editor.innerHTML = ""; //clear editor
   if (propiedades)
     for (key of propiedades) {
-      editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
-        `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
+      // editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
+      //   `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
+
+      //experimental
+      editor.innerHTML = editor.innerHTML + `<div class="input-field col s12">
+        <input id="edit${key}" type="${isNumber(objeto[key]) ? "number" : "text"}" class="validate" value="${objeto[key]}">
+        <label class="active" for="edit${key}">${key}</label>
+      </div>`
+
+      edits.push(key);
     }
   else
     for (key in objeto) {
       editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
         `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
+      edits.push(key);
     }
 
   // editor.innerHTML = editor.innerHTML + '<button onclick="editarObjeto(objeto)">Guardar</button>'
@@ -423,15 +485,60 @@ function editar(objeto, editor, propiedades) {
     cam.open();
   });
 
+
+  $("#ok").off();
+
   $("#ok").on("click", function () {
-    editarObjeto(objeto)
+    editarObjeto(objeto, propiedades) //propiedades da igual
+    actListaArticulo(objeto) //actualizar la propiedad lista del articulo a la lista cargada
     objeto.guardar();
+    console.log("GUARDAR " + objeto.nombre);
+
   });
 
+  actPrecios(objeto);
   var instance = M.Modal.getInstance(document.getElementById("modal1"));
   instance.open();
 
 }
+/**Para comprobar que la propiedad lista del articulo es la misma en al que esta cargado
+ */
+function actListaArticulo(a) {
+  //El valor de listas se va a veces
+  // let lista="/listas/"+$("#listas").val()
+  if ($("#listas").val())
+    if (a.lista != lista)
+      a.lista = lista
+
+}
+
+
+function actPrecios(o) {
+  let objeto = new ArticuloLista();
+  objeto.setAll(o);
+
+  $("#editunidades").change(function () {
+    objeto.unidades = $(this).val();
+    $("#edittotal").val(objeto.total)
+  });
+
+  $("#edittotal").change(function () {
+    console.log("actualizo precios de " + objeto.nombre);
+
+    objeto.total = $(this).val();
+    $("#editprecio").val(objeto.precio);
+  });
+
+  $("#editprecio").change(function () {
+    console.log("actualizo precios de " + objeto.nombre);
+
+    objeto.precio = $(this).val();
+    $("#edittotal").val(objeto.total)
+  });
+}
+
+
+
 
 /** Guarda los cambios de edición que se hacen en la ventana modal en el artículo
  * 
@@ -441,10 +548,26 @@ function editar(objeto, editor, propiedades) {
  * @see {@link editar}
  */
 function editarObjeto(objeto, propiedades) {
-  for (key in objeto) {
+  // if(propiedades) console.log(propiedades);
+  // if (propiedades)
+  //   for (key of propiedades) {
+  //     var valor = $('#edit' + key).val();
+  //     if (isNumber(valor)) objeto[key] = +valor;
+  //     else objeto[key] = valor;
+  //   }
+  // else
+  console.log(Object.getOwnPropertyNames(objeto));
+  // console.log(Object.getOwnPropertyDescriptors(objeto));
+
+  for (key of edits) { //para que guarde solo lo que sale en el editor
     var valor = $('#edit' + key).val();
+    if (valor == undefined) continue; //si no tiene valor definido no se modifica
+
     if (isNumber(valor)) objeto[key] = +valor;
     else objeto[key] = valor;
+
+    console.log(`${key} ${valor}`);
+
   }
 }
 
@@ -497,20 +620,15 @@ function clear() {
  */
 function addElement2Select(element, select) {
   var x = document.getElementById(select);
-  var option = document.createElement("option");
-  option.text = element;
-  x.add(option);
+  // console.log(x);
+
+  x.innerHTML += `<option value="${element}">${element}</option> `
+  // var option = document.createElement("option");
+  // option.text = element;
+  // x.add(option);
+
 }
 
-function writeLista(userId, name, valor) {
-  // var name = $('#campoNombre').val();
-  // fbListasCollection.child(name).set({
-  //   nombre: name, //another way you could write is $('#myForm [name="fullname"]').
-  //   tipo: $('#tipo').val(),
-  //   valor: $('#campoValor').val(), //another way you could write is $('#myForm [name="fullname"]').
-
-  // });
-}
 
 //BUSCAR
 $("#buscar").on("keyup", function () {
@@ -525,18 +643,51 @@ $("#buscar").on("keyup", function () {
 var selected = [];
 var copiado = [];
 
+function descuento() {
+  //TODO: DESCUENTO
+  $('#descuento').modal('open');
+  $('#rg-descuento').change(function () {
+    console.log(this.value);
+  });
+
+  $('#quitarDescuento').one("click", function () {
+    selected.forEach(element => {
+      element.quitarDescuento();
+      element.guardar();
+    });
+  });
+
+  $('#descuentoOk').one("click", function () {
+    nombreLista = $("#nombreLista").val();
+    let d = $("#sl-descuento").val();
+    // console.log(d);
+    selected.forEach(element => {
+      let des;
+      if (d === "ud") { des = new Descuento(+$('#rg-descuento').val(), 1); }
+      else des = Descuento.oferta(d);
+      element.descuento = des;
+      // console.log(des);
+      console.log(`${element.nombre} => ${element.total}`);
+      element.guardar();
+    });
+  });
+
+}
+
 
 function checkContexto() {
-  if (selected.length < 1) {
+  if (selected.length < 1) { //si no hay seleccionados
     $("#fb-copiar").hide();
     $("#fb-cortar").hide();
     $("#fb-eliminar").hide();
+    // $("#fb-descuento").hide();
 
   }
   else {
     $("#fb-copiar").show();
     $("#fb-cortar").show();
     $("#fb-eliminar").show();
+    // $("#fb-descuento").show();
   }
 
   if (copiado.length < 1) {
@@ -627,6 +778,8 @@ function pegar() {
 
 
 }
+
+
 
 
 

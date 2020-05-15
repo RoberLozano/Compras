@@ -55,8 +55,8 @@ const ctds = {
 
 	UNIDADES: {
 		simbolo: "UD",
-		valor:  1,
-		palabras:"(unidades|unidad|uds)",
+		valor: 1,
+		palabras: "(unidades|unidad|uds)",
 		tipo: TipoCantidad.UNIDADES
 	},
 };
@@ -87,18 +87,18 @@ class Articulo {
 	 * @param {string} ctd escanea un string buscando el valor de cantidad
 	 * @todo también aceptaria precios y unidades
 	 */
-	setCantidad(ctd,tipoConcreto){
-		if (isNumber(ctd)) this.cantidad=ctd;
-		else this.buscarCantidades(ctd,tipoConcreto);//otra ñapa
+	setCantidad(ctd, tipoConcreto) {
+		if (isNumber(ctd)) this.cantidad = ctd;
+		else this.buscarCantidades(ctd, tipoConcreto);//otra ñapa
 
 		console.log(this);
-		
+
 
 	}
 
 	//TODO-: ver si hago algo con esto
 	// litros da fallo si va seguido del numero
-	buscarCantidades(r,tipoConcreto){
+	buscarCantidades(r, tipoConcreto) {
 		for (let c in ctds) {
 
 			var simbolo = ctds[c]["simbolo"]
@@ -109,28 +109,28 @@ class Articulo {
 			// var re = new RegExp(palabras,'i');
 			// let s = r.replace(re, simbolo);
 
-			let todo=palabras.replace(" ","","g")//me salto los espacios
+			let todo = palabras.replace(" ", "", "g")//me salto los espacios
 
 			// console.log(s);
-			
+
 			// let s=r.replace(/(kilogramos|kilos|kilogramo|kilo|kg)/gi, "KG");
-			var n = new RegExp("(\\d+[,\\d+]*)\\s*" + todo,"i")
+			var n = new RegExp("(\\d+[,\\d+]*)\\s*" + todo, "i")
 			let encontrado = r.match(n);
 
 			if (encontrado) {
 				console.log(encontrado);
 				let numero = encontrado[1].replace(',', '.');
-				r=r.replace(encontrado[0],""); //borramos lo que ya hemos hecho
+				r = r.replace(encontrado[0], ""); //borramos lo que ya hemos hecho
 				console.log(numero);
 				var cifra = parseFloat(numero) * valor;
 				// console.log(r);
-				
+
 				console.log(cifra + tipo);
-				if(tipoConcreto) if (tipoConcreto.lastIndexOf(tipo)<0) return;
+				if (tipoConcreto) if (tipoConcreto.lastIndexOf(tipo) < 0) return;
 
 				switch (tipo) {//TODO: mirar si debo sumar cantidades del mismo tipo
 					case TipoCantidad.MASA:
-					case TipoCantidad.VOLUMEN: this.cantidad=cifra;
+					case TipoCantidad.VOLUMEN: this.cantidad = cifra;
 						break;
 					case TipoCantidad.PRECIO: this.precio = cifra;
 						break;
@@ -170,19 +170,19 @@ class Articulo {
 		//devuelvo EAN o false si no tiene
 		return this.EAN ? this.EAN : false
 	}
-/**
- * Devuelve las propiedades establecidas
- * @param {boolean} array si se devuelve como un array o como un numero
- * @returns {number|string[]} el numero de propiedades establecidas o el array con los nombres
- */
-	propiedades(array=false){
-		let count=0;
+	/**
+	 * Devuelve las propiedades establecidas
+	 * @param {boolean} array si se devuelve como un array o como un numero
+	 * @returns {number|string[]} el numero de propiedades establecidas o el array con los nombres
+	 */
+	propiedades(array = false) {
+		let count = 0;
 		for (let key in this) {
-			console.log(key+":"+this[key]);	
-			if(this[key]) count++;
+			console.log(key + ":" + this[key]);
+			if (this[key]) count++;
 		}
 		console.log(count);
-		
+
 		return count;
 	}
 
@@ -196,7 +196,7 @@ class Articulo {
 		//probar sin minusculas a ver
 		// var r = dictado.toLowerCase().trim();
 		var r = dictado
-		r=r+" " //para el caso de que la magnitud (l) esté sin espacio al final
+		r = r + " " //para el caso de que la magnitud (l) esté sin espacio al final
 
 		//TODO: tratar lo de los números como texto
 		r = r.replace(" una ", " 1 ");
@@ -227,11 +227,11 @@ class Articulo {
 			// console.log(ctds[c]["valor"]);
 			// console.log(ctds[c]["palabras"]);
 
-			var re = new RegExp(palabras,'i');
+			var re = new RegExp(palabras, 'i');
 			let s = r.replace(re, simbolo);
 
 			// console.log(s);
-			
+
 			// let s=r.replace(/(kilogramos|kilos|kilogramo|kilo|kg)/gi, "KG");
 			var n = new RegExp("(\\d+[,\\d+]*)\\s*" + simbolo)
 			let encontrado = s.match(n);
@@ -239,16 +239,16 @@ class Articulo {
 			if (encontrado) {
 				// console.log(encontrado);
 				let numero = encontrado[1].replace(',', '.');
-				r=s.replace(encontrado[0],""); //borramos lo que ya hemos hecho
+				r = s.replace(encontrado[0], ""); //borramos lo que ya hemos hecho
 				// console.log(numero);
 				var cifra = parseFloat(numero) * valor;
 				// console.log(r);
-				
+
 				console.log(cifra + tipo);
 
 				switch (tipo) {//TODO: mirar si debo sumar cantidades del mismo tipo
 					case TipoCantidad.MASA:
-					case TipoCantidad.VOLUMEN: this.cantidad=cifra;
+					case TipoCantidad.VOLUMEN: this.cantidad = cifra;
 						break;
 					case TipoCantidad.PRECIO: this.precio = cifra;
 						break;
@@ -275,76 +275,158 @@ class Articulo {
 		// var re = new RegExp("marca ");
 
 		let s = r.replace(" marca ", " MARCA ");
-		var n = new RegExp("MARCA\\s(.*)" )
+		var n = new RegExp("MARCA\\s(.*)")
 		let encontrado = s.match(n);
 		if (encontrado) {
 			console.log(encontrado);
 
-			r=s.replace(encontrado[0],""); //borramos lo que ya hemos hecho
-			this.marca=encontrado[1].trim();
+			r = s.replace(encontrado[0], ""); //borramos lo que ya hemos hecho
+			this.marca = encontrado[1].trim();
 			// console.log(numero);
 			// console.log(r);
-			
+
 			console.log(cifra + tipo);
 		}
 
 		// console.log(s);
-		
+
 		// let s=r.replace(/(kilogramos|kilos|kilogramo|kilo|kg)/gi, "KG");
 
 
-		 if(!this.nombre) this.nombre= r.trim(); //estaría en minúsculas
+		if (!this.nombre) this.nombre = r.trim(); //estaría en minúsculas
 
 	}
 }
 
 
 class ArticuloLista extends Articulo {
-	constructor(nombre, cantidad, marca, EAN = 0, precio, unidades, id, lista, usuario = "",ok=false) {
+	constructor(nombre, cantidad, marca, EAN = 0, precio, unidades, id, lista, usuario = "", ok = false) {
 		super(nombre, cantidad, marca, EAN);
 		this.unidades = unidades
 		this.precio = precio ? precio : 0; //por si es null o undefined
-		this.id=id;
+		this.id = id;
 		this.lista = lista;
 		this.total = unidades * precio;
-		this.ok =ok;
+		this.ok = ok;
+	}
+
+	/**
+	 * Divide el total entre el número de unidades y pone ese precio
+	 */
+	set total(t) {
+		let pu = +t / this.unidades
+		// console.log(pu);
+		if (!isNaN(pu)) this.precio = pu;
+	}
+
+	get total() {
+
+		if (this.descuento) { //si hay descuento
+			let precioInicial = this.precio * this.unidades;
+			let descuento = Math.trunc(this.unidades / this.descuento.unidades) * (this.descuento.descuento / 100) * this.precio
+			console.log(this.unidades / this.descuento.unidades + "x" + this.descuento.descuento / 100 + " desc:" + descuento);
+
+			return precioInicial - descuento;
+		}
+		return this.precio * this.unidades;
+	}
+
+	setDescuento(descuento, unidades) {
+		this.descuento = new Descuento(descuento, unidades);
+	}
+
+	quitarDescuento() {
+		delete this.descuento;
 	}
 
 
-	set total(t){
+	guardar() {
 
-	}
-	get total(){
-		return this.precio*this.unidades;
-
-	}
-
-	guardar(){
-		
-		console.log(`Articulo ${this.nombre} guardado en ${this.lista}`);
+		console.log(`Articulo ${this.nombre} guardado en ${this.lista}  ${this.id} `);
 		var ref = database.ref(this.lista).child(this.id)
 		ref.set(this)
 		console.log(this);
-		
+
 
 		// guardarArticulo(this);
 	}
-	borrar(){
+	borrar() {
 		console.log(`Articulo ${this.nombre} borrado de ${this.lista}`);
 		// borrarArticulo(this);
 		var ref = database.ref(this.lista).child(this.id)
 		ref.remove()
 
 	}
-/** Asigna el precio de la suma de las unidades, para que se divida entre estas
- * 
- * @param {number} pt precio total de todas las unidades
- */
-	precioTotal(pt){
-		this.precio= pt/this.unidades;
+	/** Asigna el precio de la suma de las unidades, para que se divida entre estas
+	 * 
+	 * @param {number} pt precio total de todas las unidades
+	 */
+	precioTotal(pt) {
+		this.precio = pt / this.unidades;
 	}
 }
 
+//Hacer el truco para que lo pille como property
 
+// Object.defineProperty(ArticuloLista, 'total', {
+// 	get() {
+// 		return this.precio*this.unidades;
+// 	},
+
+// 	set(t) {
+// 		let pu=+t/this.unidades
+// 			console.log(pu);
+// 		if(!isNaN(pu)) this.precio=pu;
+// 	}
+//   });
+
+class Descuento {
+	/**
+	 * 
+	 * @param {number} descuento el % de descuento
+	 * @param {number} unidades cada cuantas unidades se hace el descuento 
+	 * 							ej: (2) en la segunda unidad ese descuento
+	 */
+	constructor(descuento, unidades = 1) {
+		this.descuento = descuento
+		this.unidades = unidades
+	}
+
+	/** Devuelve un descuento 3x2
+	 */
+	static d3x2() { return new Descuento(100, 3) }
+
+	/** Devuelve un descuento 2x1
+	 */
+	static d2x1() { return new Descuento(100, 2) }
+
+	static oferta(o) {
+		switch (o) {
+			case "2x1":  return new Descuento(100, 2)
+				break;
+			case "3x2":  return new Descuento(100, 3)
+				break;
+			case "3x1": return new Descuento(200, 3)
+				break;
+			case "70% 2ª ud": return new Descuento(70, 2)
+				break;
+			default:
+				break;
+		}
+	}
+
+
+}
+
+/**
+ * Entidad para la gestión del historial de compras de usuario
+ */
+class Compra {
+	constructor(user, lista, fecha) {
+		this.user = user
+		this.lista = lista
+		this.fecha = fecha
+	}
+}
 
 
