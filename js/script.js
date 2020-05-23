@@ -612,6 +612,13 @@ function editar(objeto, editor, propiedades) {
           a.openFood(aEAN);
           console.log(a);
           toast(a.nombre+":"+a.marca)
+
+          for (key in a) {
+           if(a[key]) $(`#edit${key}`).val(a[key]);
+
+          }
+
+
         }
         //actualizar los campos si se han encontrado
         
