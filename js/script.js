@@ -611,11 +611,10 @@ function editar(objeto, editor, propiedades) {
           a=new Articulo();
           a.openFood(aEAN);
           console.log(a);
-          toast(a.nombre+":"+a.marca)
-
+          toast(a.nombre+":"+a.marca +" "+a.cantidad)
+          //actualizo el editor
           for (key in a) {
            if(a[key]) $(`#edit${key}`).val(a[key]);
-
           }
 
 
