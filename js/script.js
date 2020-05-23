@@ -598,8 +598,8 @@ function editar(objeto, editor, propiedades) {
 
   $("#ir").on("click", function () {
     //que abra open food en nueva pestaña
-    // var win = window.open('https://es.openfoodfacts.org/producto/' + objeto.EAN, '_blank');
-    // win.focus();
+    var win = window.open('https://es.openfoodfacts.org/producto/' + objeto.EAN, '_blank');
+    win.focus();
 
 
     var xmlhttp = new XMLHttpRequest();
