@@ -598,7 +598,7 @@ function editar(objeto, editor, propiedades) {
 
   $("#ir").on("click", function () {
     //que abra open food en nueva pestaña
-    var win = window.open('https://es.openfoodfacts.org/producto/' + $("#editEAN").val, '_blank');
+    var win = window.open('https://es.openfoodfacts.org/producto/' + $("#editEAN").val(), '_blank');
     win.focus();
 
 
@@ -619,8 +619,8 @@ function editar(objeto, editor, propiedades) {
       }
     };
 
-    xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/"+$("#editEAN").val+".json", true);
-    console.log("https://world.openfoodfacts.org/api/v0/product"+$("#editEAN").val+".json");
+    xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/"+$("#editEAN").val()+".json", true);
+    console.log("https://world.openfoodfacts.org/api/v0/product"+$("#editEAN").val()+".json");
     xmlhttp.send();
   });
 
