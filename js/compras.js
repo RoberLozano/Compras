@@ -62,8 +62,6 @@ const ctds = {
 };
 
 
-
-
 /**
  * El articulo básico
  */
@@ -296,6 +294,36 @@ class Articulo {
 		if (!this.nombre) this.nombre = r.trim(); //estaría en minúsculas
 
 	}
+	/** Edita el artículo con los valores de open food facts  https://world.openfoodfacts.org/
+	 * @param {Object} o el objeto de respuesta de open food
+	 */
+	openFood(aEAN) {
+		if (aEAN.code) this.EAN = aEAN.code;
+		if (aEAN.product.product_name_es || aEAN.product.product_name)
+			this.nombre = aEAN.product.product_name_es || aEAN.product.product_name
+		if (aEAN.product.brands) this.marca = aEAN.product.brands
+		if (aEAN.product.quantity) this.cantidad = aEAN.product.quantity
+	}
+
+	/** Devuelve el Articulo que corresponde con ese EAN
+	 * 	o false si no existe
+	 * 
+	 * @param {number} ean El numero EAN a comprobar
+	 * @returns {Articulo|boolean} El articulo con ese EAn o false si no existe (DEVUELVE Promise)
+	 */
+	static porEAN(ean) {
+		return firebase.database().ref('/articulos/EAN/' + ean).once('value').then(function (snapshot) {
+			if (!snapshot.val()) {
+				console.log("no existe");
+				return false;
+			}
+			let a = new Articulo();
+			a.setAll(snapshot.val())
+			console.log(a);
+			// objetoTabla(a, "myTable", visibles)
+			return a;
+		});
+	}
 }
 
 
@@ -341,15 +369,13 @@ class ArticuloLista extends Articulo {
 
 
 	guardar() {
-
 		console.log(`Articulo ${this.nombre} guardado en ${this.lista}  ${this.id} `);
 		var ref = database.ref(this.lista).child(this.id)
 		ref.set(this)
 		console.log(this);
-
-
 		// guardarArticulo(this);
 	}
+
 	borrar() {
 		console.log(`Articulo ${this.nombre} borrado de ${this.lista}`);
 		// borrarArticulo(this);
@@ -357,9 +383,29 @@ class ArticuloLista extends Articulo {
 		ref.remove()
 
 	}
+	/**Guardamos el articulo en 'articulos/EAN/[EAN]' 
+	 */
+	guardarEAN() {
+		if (!this.EAN) return;
+
+		//Si ponemos este objeto metemos demasiada info
+		// console.log(`Articulo ${this.nombre} guardado con EAN ${this.EAN}`);
+		// var ref = database.ref("/articulos/EAN/").child(this.EAN)
+		// ref.set(this)
+		// console.log(this);
+
+		let a = new Articulo(this.nombre, this.cantidad, this.marca, this.EAN)
+		console.log(`Articulo ${this.nombre} guardado con EAN ${this.EAN}`);
+		var ref = database.ref("/articulos/EAN/").child(this.EAN)
+		ref.set(a)
+		console.log(a);
+
+	}
+
 	/** Asigna el precio de la suma de las unidades, para que se divida entre estas
 	 * 
 	 * @param {number} pt precio total de todas las unidades
+	 * @deprecated total debería hacer mejor función
 	 */
 	precioTotal(pt) {
 		this.precio = pt / this.unidades;
@@ -402,9 +448,9 @@ class Descuento {
 
 	static oferta(o) {
 		switch (o) {
-			case "2x1":  return new Descuento(100, 2)
+			case "2x1": return new Descuento(100, 2)
 				break;
-			case "3x2":  return new Descuento(100, 3)
+			case "3x2": return new Descuento(100, 3)
 				break;
 			case "3x1": return new Descuento(200, 3)
 				break;
@@ -427,6 +473,107 @@ class Compra {
 		this.lista = lista
 		this.fecha = fecha
 	}
+
 }
 
+class ListaCompra {
+	constructor(nombre, articulos, usuario) {
+		this.nombre = nombre
+		this.articulos = articulos
+		this.usuario = usuario
+	}
 
+	/** Da el precio de TODOS los articulos de la lista*/
+	presupuesto() {
+		let p = 0;
+		this.articulos.forEach(a => {
+			console.log(a.nombre);
+
+			p += a.total;
+		});
+
+		console.log("PRESUPUESTO:" + p);
+		return p / 100; //lo doy en €
+	}
+
+	/** Da el precio de TODOS los articulos marcados de la lista*/
+	marcados() {
+		let p = 0;
+		this.articulos.forEach(a => {
+			//no contaría los "true", creo
+			if ((a.ok == true) ? true : false) { console.log(a.nombre + ":" + a.total); p += a.total; }
+		});
+
+		console.log("MARCADOS:" + p);
+		return p / 100;
+	}
+
+	/** Devuelve el numero de elemntos marcados
+	 * 
+	 */
+	numMarcados() {
+		let p = 0;
+		this.articulos.forEach(a => {
+			//no contaría los "true", creo
+			if ((a.ok == true) ? true : false) { console.log(a.nombre + ":" + a.total); p++; }
+		});
+		return p;
+	}
+
+	numTotal() {
+		return this.articulos.length
+	}
+
+
+}
+
+//TODO: ver si lo hado así o fecha normal y me dejo de mierdas
+
+class Fecha {
+	// constructor(base) {
+	// 	this.base = base
+	// 	var d = +date;
+	// 	d = parseInt(d / 1000) //me suda la polla los ms y ahorramos datos
+	// 	var e = (+d).toString(base);
+
+	// }
+	static string2date(string, base = 16) {
+		return new Date(parseInt(string, base));
+	}
+
+	static date2string(date, base = 16) {
+		return (+date).toString(base)
+	}
+
+	static number2date(number) {
+		return new Date(number);
+	}
+
+	/**Para ordenar por más reciente
+	 * @param {Date} date fecha a codificar
+	 * @param {Date} max La fecha máxima a la que restar
+	 * @param {number} base La base por defecto 16 (hexadecimal)
+	 */
+	static inverseDate2String(date, max, base = 16) {
+
+		return ((+max) - (+date)).toString(base);
+
+	}
+
+}
+
+// let base = 32;
+// var d = new Date();
+// // d = parseInt(d / 1000) //me suda la polla los ms y ahorramos datos
+// var e = (+d).toString(base);
+
+// let año3000= new Date("3000-01-01")
+// console.log(año3000.toISOString());
+// console.log(+año3000);
+// console.log((+año3000).toString(base));
+
+
+// console.log(Fecha.date2string(d));
+// console.log(e);
+// console.log(Fecha.string2date(e, base));
+// console.log();

@@ -1,6 +1,6 @@
 {
   "lock": false,
-  "active": "",
+  "active": "73d316965609fc4cf60385337cd65c01d48f9642",
   "sets": {
     "default": {
       "source": "default",
@@ -13,7 +13,10 @@
             "c:\\GitHub\\Compras\\index.html",
             "c:\\GitHub\\Compras\\video.js",
             "c:\\GitHub\\Compras\\script.js",
-            "c:\\GitHub\\Compras\\voz.js"
+            "c:\\GitHub\\Compras\\voz.js",
+            "c:\\GitHub\\Compras\\js\\script.js",
+            "c:\\GitHub\\Compras\\js\\x.json",
+            "c:\\GitHub\\Compras\\js\\compras.js"
           ]
         },
         "b8374f8d6a9b671e3435e91018f09ad830c59c8d": {

@@ -22,10 +22,23 @@ var database = firebase.database();
 var fbListasCollection = database.ref('/listas/');
 var fbActual;
 
+
 //para deshacer
 var lastArticulo;
+
+/** la lista de articulos */
+var articulos = [];
+
+/** nombre de lista */
 var lista;
+
+/** nombre del usuario  */
+var user;
+
+
+
 //SELECTS
+
 
 // el select guay
 $('selectpicker').selectpicker();
@@ -41,11 +54,24 @@ fbListasCollection.on('value', function (listas) {
   //this is saying foreach Lista do the following function...
   listas.forEach(function (firebaseListaReference) {
     //this gets the actual data (JSON) for the Lista.
-    var lista = firebaseListaReference.key;
+    var _lista = firebaseListaReference.key;
     // console.log(lista); //check your console to see it!
     // addLista(lista);
-    addElement2Select(lista, "listas")
+    addElement2Select(_lista, "listas")
   });
+
+
+  let listaGuardada = localStorage.getItem("ultimaLista");
+  if (listaGuardada) {
+
+    lista = listaGuardada;
+    document.getElementById("listas").value = lista;
+    console.log($("#listas").val());
+
+    console.log(lista);
+    // cargarLista();
+    cargarLista(listaGuardada);
+  }
 
   // console.log($("#listas"));
 
@@ -141,15 +167,20 @@ function dark() {
 
 var objetoActual = "";
 
-function cargarLista() {
+function cargarLista(l) {
   console.log("LISTA->" + $("#listas").val());
-  var fbListaActual = database.ref('/listas/' + $("#listas").val());
+  var fbListaActual
+  if (l) { fbListaActual = database.ref('/listas/' + l); }
+  else {
+    fbListaActual = database.ref('/listas/' + $("#listas").val());
+    localStorage.setItem("ultimaLista", $("#listas").val())
+  }
   // fbListaActual.orderByChild("valor").on('value',function(listas){
   fbListaActual.on('value', function (listas) {
 
     // let visibles = ["nombre", "unidades", "precio", "total"]
     visibles = $("#columnas").val();
-    var articulos = [];
+    articulos = [];
 
     listas.forEach(function (firebaseListaReference) {
       //this gets the actual data (JSON) for the order.
@@ -167,9 +198,22 @@ function cargarLista() {
 
     //poner el header
     createHeader();
+
+    lista = '/listas/' + $("#listas").val();
+
+    var listaCompra = new ListaCompra(lista, articulos, user);
+
+    listaCompra.marcados();
+    listaCompra.presupuesto();
+
+
+
     // poblar la tabla
-    tablaLista(articulos);
-    console.log(articulos);
+    tablaLista(listaCompra.articulos);
+
+    // TODO: Un formato decente, pongo cosas en el footer
+    $("#footer").html(`  ${listaCompra.numMarcados()}/${listaCompra.numTotal()} marcados,  ${listaCompra.marcados()}/${listaCompra.presupuesto()} €`)
+    console.log(listaCompra.articulos);
 
 
     // $('#header').css('textTransform', 'capitalize');
@@ -177,21 +221,21 @@ function cargarLista() {
 
   $("#beta").html($("#listas").val())
   lista = '/listas/' + $("#listas").val();
-  M.toast({ html: `${lista} seleccionada` })
+  // M.toast({ html: `${lista} seleccionada` })
   // $('#myTable').css('textTransform', 'capitalize');
 }
 
 var lastLista;
-function tablaLista(lista) {
-  if (lista) lastLista = lista
-  else lista = lastLista
+function tablaLista(l) {
+  // if (lista) lastLista = lista
+  // else lista = lastLista
 
   var visibles = $("#columnas").val();
 
   // visibles.push(v);
 
   clear();
-  for (a of lista) {
+  for (a of articulos) {
     // console.log(a);
     objetoTabla(a, "myTable", visibles)
   };
@@ -268,8 +312,6 @@ function abrirOpciones() {
   //TODO:
 }
 
-function guardarOpciones() { }
-
 function guardarUsuario(usuario, email) {
 
   usuario = $("#usuario").val();
@@ -277,8 +319,10 @@ function guardarUsuario(usuario, email) {
 
   // if(!!usuario) console.log("usuario",usuario);
   // if(!!email)   console.log("email",email);
-  if (!!usuario) localStorage.setItem("usuario", usuario)
+  if (!!usuario) { localStorage.setItem("usuario", usuario); user = usuario }
   if (!!email) localStorage.setItem("email", email)
+
+  cargarOpciones(); //para que refresca el sidenav
 }
 
 
@@ -313,6 +357,18 @@ function crearEventos(objeto, cell, key) {
 
   }
 
+  if (key == "nombre" && objeto.usuario && objeto.usuario != user) {
+    console.log(objeto.usuario + "!=" + user);
+
+    cell.innerHTML +=
+      ` <span class="new badge red" data-badge-caption="${objeto.usuario}"> </span>`
+    //   `<div class="chip">
+    //   ${objeto.marca}
+    // </div>`
+
+  }
+
+
   if (key == "ok") {
     let cb = document.getElementById("cb" + objeto.id);
     cb.addEventListener('change', function () {
@@ -336,9 +392,9 @@ function crearEventos(objeto, cell, key) {
 
       });
     }
-    else { //si  no es ok
+    else {
       cell.addEventListener('click', function () {
-        if ($("#cbMostrar").prop("checked")) //si es la opciond el menú
+        if ($("#cbMostrar").prop("checked")) //si es la opcion del menú
           editar(objeto, "modal", visibles)
         else
           editar(objeto, "modal")
@@ -402,11 +458,16 @@ function nuevoArticulo(articulo, lista) {
 
   var newPostRef = database.ref(ruta).push();
 
-  articulo = articulo.listar(ruta, newPostRef.key, "Rober", articulo.unidades, articulo.precio);
+  articulo = articulo.listar(ruta, newPostRef.key, localStorage.usuario || "Rober", articulo.unidades, articulo.precio);
   // articulo.id=newPostRef.key;
   newPostRef.set(articulo)
   lastArticulo = articulo
 
+}
+
+function borrarLista(lista) {
+  //TODO
+  alert("Función por implementar");
 }
 
 function borrarArticulo(a = lastArticulo, lista) {
@@ -461,8 +522,30 @@ function editar(objeto, editor, propiedades) {
       // editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
       //   `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
 
-      //experimental
-      editor.innerHTML = editor.innerHTML + `<div class="input-field col s12">
+      if (key === "EAN") {
+        editor.innerHTML = editor.innerHTML +
+
+            `<div class="input-field col s12">
+            <input id="edit${key}" type="${isNumber(objeto[key]) ? "number" : "text"}" class="validate" value="${objeto[key]}">
+            <label class="active" for="edit${key}">${key}</label>
+          </div>`
+
+    //       `<div class="row">
+    //   <div class="input-field col s6">
+    //     <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+    //     <label for="first_name">First Name</label>
+    //   </div>
+    //   <div class="input-field col s6">
+    //     <input id="last_name" type="text" class="validate">
+    //     <label for="last_name">Last Name</label>
+    //   </div>
+    // </div>`
+
+      }
+      else
+
+        //experimental
+        editor.innerHTML = editor.innerHTML + `<div class="input-field col s12">
         <input id="edit${key}" type="${isNumber(objeto[key]) ? "number" : "text"}" class="validate" value="${objeto[key]}">
         <label class="active" for="edit${key}">${key}</label>
       </div>`
@@ -471,19 +554,72 @@ function editar(objeto, editor, propiedades) {
     }
   else
     for (key in objeto) {
-      editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
-        `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
+
+      if (key === "EAN") {
+        editor.innerHTML = editor.innerHTML +
+
+          //   `<div class="input-field col s12">
+          //   <input id="edit${key}" type="${isNumber(objeto[key]) ? "number" : "text"}" class="validate" value="${objeto[key]}">
+          //   <label class="active" for="edit${key}">${key}</label>
+          // </div>`
+
+
+          // ' <b>' + key.toUpperCase() + '</b>' +"<button>SCAN</button>"+
+          //   `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
+
+          `<div class="row">
+      <div class="col s12">
+      <button id="scan">SCAN</button><button id="ir">IR</button>
+        <div class="input-field inline">
+          <input id="edit${key}" type="${isNumber(objeto[key]) ? "number" : "text"}" class="validate" value="${objeto[key]}">
+          <label class="active" for="edit${key}">${key}</label>
+          
+        </div>
+      </div>  
+    </div>`
+
+      }
+      else
+        editor.innerHTML = editor.innerHTML + ' <b>' + key.toUpperCase() + '</b>' +
+          `<input data-toggle="tooltip"  id="edit${key}" value='${objeto[key]}' title="${key}" >`
       edits.push(key);
     }
 
   // editor.innerHTML = editor.innerHTML + '<button onclick="editarObjeto(objeto)">Guardar</button>'
 
-  $("#editEAN").on("click", function () {
-    console.log("click en ean");
+  $("#scan").on("click", function () {
+    console.log("click en scan");
 
     var cam = M.Modal.getInstance(document.getElementById("modalcamara"));
     cam.open();
+
+    document.getElementById('go').click();
   });
+
+  $("#ir").on("click", function () {
+    //que abra open food en nueva pestaña
+    // var win = window.open('https://es.openfoodfacts.org/producto/' + objeto.EAN, '_blank');
+    // win.focus();
+
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        aEAN = JSON.parse(this.responseText);
+        console.log(aEAN);
+        
+        a=new Articulo();
+        a.openFood(aEAN);
+        console.log(a);
+        
+      }
+    };
+    xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/"+objeto.EAN+".json", true);
+    console.log("https://world.openfoodfacts.org/api/v0/product"+objeto.EAN+".json");
+    xmlhttp.send();
+  });
+
+
 
 
   $("#ok").off();
@@ -501,12 +637,15 @@ function editar(objeto, editor, propiedades) {
   instance.open();
 
 }
+
+var aEAN;
+
 /**Para comprobar que la propiedad lista del articulo es la misma en al que esta cargado
  */
 function actListaArticulo(a) {
   //El valor de listas se va a veces
   // let lista="/listas/"+$("#listas").val()
-  if ($("#listas").val())
+  if (lista)
     if (a.lista != lista)
       a.lista = lista
 
@@ -566,7 +705,12 @@ function editarObjeto(objeto, propiedades) {
     if (isNumber(valor)) objeto[key] = +valor;
     else objeto[key] = valor;
 
-    console.log(`${key} ${valor}`);
+    if (key === "EAN") {
+      console.log("ME METO EN EAN");
+
+      objeto.guardarEAN(); //si es del tipo EAN, guardamos el articulo en 'articulos/EAN/[EAN]' 
+    }
+    // console.log(`${key} ${valor}`);
 
   }
 }
@@ -681,6 +825,8 @@ function checkContexto() {
     $("#fb-cortar").hide();
     $("#fb-eliminar").hide();
     // $("#fb-descuento").hide();
+    $("#deseleccionarTodo").hide();
+
 
   }
   else {
@@ -688,6 +834,7 @@ function checkContexto() {
     $("#fb-cortar").show();
     $("#fb-eliminar").show();
     // $("#fb-descuento").show();
+    $("#deseleccionarTodo").show();
   }
 
   if (copiado.length < 1) {
@@ -699,6 +846,48 @@ function checkContexto() {
 
 
 }
+
+function invertirSeleccion() {
+  $("#myTable").children('tr').each(function (i) {
+
+    var pos = selected.indexOf(articulos[i]);
+    if (pos > -1) { //deselecciono si ya está
+      selected.splice(pos, 1);
+      this.classList.remove("selec"); //quito la clase de seleccionado
+    }
+    else { //si no está lo selecciono
+      selected.push(articulos[i]);
+      this.classList.add("selec");//pongo formato seleccionado
+    }
+
+
+  });
+  checkContexto();
+
+}
+
+
+function deseleccionarTodo() {
+  console.log(articulos);
+  selected = [];
+  $("#myTable").children('tr').each(function (i) {
+    this.classList.remove("selec");
+  });
+  checkContexto();
+}
+
+function seleccionarTodo() {
+  console.log(articulos);
+  selected = articulos;
+  $("#myTable").children('tr').each(function (i) {
+    this.classList.add("selec");
+  });
+  checkContexto();
+
+  M.toast({ html: `${selected.length} seleccionado${selected.length > 1 ? 's' : ''}` })
+
+}
+
 
 /**
  * 
@@ -779,13 +968,65 @@ function pegar() {
 
 }
 
-
-
-
-
 //#endregion
 
+// function opciones(contenedor) {
+//   contenedor = "contenedor"
+//   var op = new Opciones(
+//     new Opcion("usuario", "text", "Rober"),
+//     new Opcion("email", "email", "mail@mail.es"),
+//     new Opcion("fecha", "date", "0777-07-07"),
+//     new Opcion("hora", "time", "07:07"),
+//     new Opcion("dark", "checkbox", "false")
+//   )
+//   op.html(contenedor);
 
+//   // let m = M.Modal.getInstance(document.getElementById("opciones"));
+//   // m.open();
+// }
+
+/** Guarda las opciones en local
+ */
+function guardarOpciones() {
+  localStorage.setItem("cbMostrar", $("#cbMostrar").prop("checked"));
+}
+
+/** Carga las opciones guardadas */
+function cargarOpciones() {
+  if (localStorage["cbMostrar"])
+    $("#cbMostrar").prop("checked", localStorage["cbMostrar"] === "true")
+
+  if (localStorage["usuario"]) {
+
+    $("#span-usuario").text(localStorage["usuario"])
+    $("#usuario").val(localStorage["usuario"])
+    user = localStorage["usuario"];
+  }
+
+  if (localStorage["email"]) {
+    $("#span-email").text(localStorage["email"])
+    $("#email").val(localStorage["email"])
+  }
+
+
+
+}
+
+
+//cargo las opciones
+cargarOpciones();
+
+// let listaGuardada = localStorage.getItem("ultimaLista");
+// if(listaGuardada){
+
+//   lista=listaGuardada;
+//   document.getElementById("listas").value = lista;
+//   console.log($("#listas").val());
+
+//   console.log(lista);
+//   // cargarLista();
+//   cargarLista(listaGuardada);
+// } 
 
 // $(document).ready( function () {
 // $('#tabla').DataTable();

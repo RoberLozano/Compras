@@ -23,8 +23,10 @@
 
   <style>
     .dark-mode {
-      background-color: black !important;;
-      color: white !important;;
+      background-color: black !important;
+      ;
+      color: white !important;
+      ;
     }
 
     .container {
@@ -46,10 +48,21 @@
       background: linear-gradient(315deg, #b8d0e0 0%, #a6afb9 54%, #b8d0e0 80%);
     }
 
-    .table td, .table th {
-    padding: .1rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
+    .table td,
+    .table th {
+      padding: .1rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+
+    #footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background:black;
+   color: white;
 }
 
 
@@ -77,8 +90,8 @@
 
   <!-- charts -->
   <script src=https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js></script>
-  <script src="compras.js"></script>
-  <script src="voz.js"></script>
+  <script src="js/compras.js"></script>
+  <script src="js/voz.js"></script>
 
 </head>
 
@@ -118,18 +131,22 @@
           <img src="images/cared.jpg">
         </div>
         <a><img class="circle" src="images/Niwelbel.jpg"></a>
-        <a class="modal-trigger" href="#user"><span class="white-text name">Rober Lozano</span></a>
-        <a class="modal-trigger" href="#user"><span class="white-text email">email@mail.com</span></a>
+        <a class="modal-trigger" href="#user"><span class="white-text name" id="span-usuario">Rober Lozano</span></a>
+        <a class="modal-trigger" href="#user"><span class="white-text email" id="span-email">email@mail.com</span></a>
       </div>
     </li>
     <li>
-      <select id="listas" class="bootstrap-select" onchange="cargarLista()" data-live-search="true"  data-style="btn-primary"></select>
+      <select id="listas" class="bootstrap-select" onchange="cargarLista()" data-live-search="true"
+        data-style="btn-primary"></select>
       <button class="btn" onclick="nuevaLista()">+</button>
       <!-- <button onclick="cargarLista()">Cargar Lista</button> -->
     </li>
     <!-- <li><input type="text" class="datepicker"></li>
     <li> <input type="text" class="timepicker"></li> -->
-    <li><a class="waves-effect" onclick="nuevaLista()">Nueva Lista<i class="material-icons">add_shopping_cart</i></a></li>
+    <li><a class="waves-effect" onclick="nuevaLista()">Nueva Lista<i class="material-icons">add_shopping_cart</i></a>
+    </li>
+    <li><a class="waves-effect" onclick="borrarLista()">Borrar Lista<i
+          class="material-icons">remove_shopping_cart</i></a></li>
     <li>
       <div class="divider"></div>
     </li>
@@ -142,21 +159,23 @@
           </label>
         </span>
       </a></li>
+    <li><a class="waves-effect" id="seleccionarTodo" onclick="seleccionarTodo()">Seleccionar Todo</a></li>
+    <li id="deseleccionarTodo"><a class="waves-effect" onclick="deseleccionarTodo()">Deseleccionar Todo</a></li>
+    <li><a class="waves-effect" id="invertirSeleccion" onclick="invertirSeleccion()">Invertir Seleccion</a></li>
+    <li><a class="subheader">Opciones</a></li>
+    <!-- <li><a onclick="dark()">Modo oscuro <i class="material-icons">brightness_medium</i></a></li> -->
+    <li><a class="waves-effect" onclick="dark()">Modo oscuro <i class="material-icons">brightness_medium</i></a></li>
     <li><a>
         Editar solo mostrados
         <span class="switch">
           <label>
-            <input id="cbMostrar" type="checkbox" checked></input>
+            <input id="cbMostrar" type="checkbox" onchange="guardarOpciones()" checked></input>
             <span class="lever"></span>
           </label>
         </span>
       </a></li>
-
-    <li><a class="subheader">Opciones</a></li>
-    <!-- <li><a onclick="dark()">Modo oscuro <i class="material-icons">brightness_medium</i></a></li> -->
-    <li><a class="waves-effect" onclick="dark()">Modo oscuro <i class="material-icons">brightness_medium</i></a></li>
     <li><a class="waves-effect" href="https://github.com/RoberLozano/Compras/">Github</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    <li><a class="waves-effect" onclick="opciones()">Configurar Opciones</a></li>
   </ul>
 
   <!-- <a data-target="slide-out" class="sidenav-trigger "><i class="material-icons">menu</i></a> -->
@@ -191,7 +210,7 @@
 
 
     <div>
-<!-- 
+      <!-- 
       <select class="selectpicker" id="columnas" multiple data-live-search="true" data-width="fit" multiple
         title="Seleccione columnas a mostrar">
         <option selected label="ud">unidades</option>
@@ -232,7 +251,6 @@
     </div>
     <button onclick="borrarArticulo()">Deshacer</button>
     <div id="hablado"></div>
-
 
     <!-- //MATERIALIZE -->
     <!-- <div class="row">
@@ -286,7 +304,8 @@
       </div>
       <div class="modal-footer">
         <button id="cancelar" class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
-        <button id="okCamara" onclick="aceptarEAN()" class="btn modal-close waves-effect waves-light green">Aceptar</button>
+        <button id="okCamara" onclick="aceptarEAN()"
+          class="btn modal-close waves-effect waves-light green">Aceptar</button>
       </div>
     </div>
 
@@ -294,7 +313,7 @@
       <div class="modal-content" id="modalid-ct">
         <h4>Usuario</h4>
         <div class="input-field col s6">
-          <input id="usuario" type="text" class="validate" val=`${localStorage.usuario}`>
+          <input id="usuario" type="text" class="validate">
           <label for="usuario">Usuario</label>
         </div>
         <div class="input-field col s1">
@@ -319,113 +338,121 @@
           <div class="input-field col s1">
             <input id="email" type="email" class="validate">
             <label for="email">Email</label>
-          </div>
-      </div> -->
-        <div class="modal-footer">
-          <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
-          <button id="opOk" class="btn modal-close waves-effect waves-light green">Aceptar</button>
-        </div>
+          </div>-->
       </div>
-
-
+      <div class="modal-footer">
+        <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
+        <button id="opOk" class="btn modal-close waves-effect waves-light green">Aceptar</button>
+      </div>
     </div>
 
-    <div id="descuento" class="modal">
-      <div class="modal-content" id="descuento-ct">
-        <h4>Descuento</h4>
-        <p class="range-field">
-          <label for="rg-descuento">Porcentaje descuento</label>
-          <input type="range" id="rg-descuento" onchange="$('#porcentaje').val(this.value)" min="0" max="100" /> 
-          <input type="number" id="porcentaje" name="porcentaje" onchange="$('#rg-descuento').val(this.value)" list="percentList">
-        </p>
-          <datalist id="percentList">
-            <option value=10>  
-            <option value=20>  
-            <option value=25>  
-            <option value=50>
-            <option value=70>
-            <option value=75>
-          </datalist>
 
-        
+  </div>
 
-        <select class="selectpicker" id="sl-descuento" data-live-search="true" data-width="fit"
+  <div id="descuento" class="modal">
+    <div class="modal-content" id="descuento-ct">
+      <h4>Descuento</h4>
+      <p class="range-field">
+        <label for="rg-descuento">Porcentaje descuento</label>
+        <input type="range" id="rg-descuento" onchange="$('#porcentaje').val(this.value)" min="0" max="100" />
+        <input type="number" id="porcentaje" name="porcentaje" onchange="$('#rg-descuento').val(this.value)"
+          list="percentList">
+      </p>
+      <datalist id="percentList">
+        <option value=10>
+        <option value=20>
+        <option value=25>
+        <option value=50>
+        <option value=70>
+        <option value=75>
+      </datalist>
+
+
+
+      <select class="selectpicker" id="sl-descuento" data-live-search="true" data-width="fit"
         title="Seleccione el descuento">
-         <option value="ud" selected>unidad</option> <!-- TODO: mirar nombre  -->
-          <option value="2x1">2x1</option>
-          <option value="3x1">3x1</option>
-          <option value="3x2">3x2</option>
-          <option value="70% 2ª ud">70% 2ª unidad</option>
-        </select>
+        <option value="ud" selected>unidad</option> <!-- TODO: mirar nombre  -->
+        <option value="2x1">2x1</option>
+        <option value="3x1">3x1</option>
+        <option value="3x2">3x2</option>
+        <option value="70% 2ª ud">70% 2ª unidad</option>
+      </select>
 
-        <div class="modal-footer">
-          <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
-          <button id="quitarDescuento" class="btn modal-close waves-effect waves-light blue darken-4">Quitar descuento</button>
-          <button id="descuentoOk" class="btn modal-close waves-effect waves-light green">Aplicar</button>
-        </div>
+      <div class="modal-footer">
+        <button class="btn modal-close waves-effect waves-light red darken-4">Descartar</button>
+        <button id="quitarDescuento" class="btn modal-close waves-effect waves-light blue darken-4">Quitar
+          descuento</button>
+        <button id="descuentoOk" class="btn modal-close waves-effect waves-light green">Aplicar</button>
       </div>
-
-
     </div>
 
 
-    <!-- MATERIALIZE -->
-    <div class="fixed-action-btn">
-      <a class="btn-floating btn-large red">
-        <i class="large material-icons">mode_edit</i>
-      </a>
-      <ul>
-        <li><a class="btn-floating red" id="hablar" onclick="hablar()"><i class="material-icons">mic</i></a></li>
-        <li><a class="btn-floating yellow darken-2" id="editar" onclick="editar(selected[0], 'modal', visibles)"><i class="material-icons">mode_edit</i></a></li>
-        <li><a class="btn-floating blue darken-3" style="color: white;" onclick="descuento()" id="fb-descuento"><b>%</b></a></li>
-        <li><a class="btn-floating blue" onclick="copiar()" id="fb-copiar"><i
-              class="material-icons">content_copy</i></a></li>
-        <li><a class="btn-floating green" onclick="pegar()" id="fb-pegar"><i
-              class="material-icons">content_paste</i></a></li>
-        <li><a class="btn-floating orange " onclick="cortar()" id="fb-cortar"><i
-              class="material-icons">content_cut</i></a></li>
-        <li><a class="btn-floating red accent-4" onclick="eliminar()" id="fb-eliminar"><i
-              class="material-icons">delete_forever</i></a></li>
-      </ul>
-    </div>
+  </div>
+
+
+  <!-- MATERIALIZE -->
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red" id="hablar" onclick="hablar()"><i class="material-icons">mic</i></a></li>
+      <li><a class="btn-floating yellow darken-2" id="editar" onclick="editar(selected[0], 'modal', visibles)"><i
+            class="material-icons">mode_edit</i></a></li>
+      <li><a class="btn-floating blue darken-3" style="color: white;" onclick="descuento()"
+          id="fb-descuento"><b>%</b></a></li>
+      <li><a class="btn-floating blue" onclick="copiar()" id="fb-copiar"><i class="material-icons">content_copy</i></a>
+      </li>
+      <li><a class="btn-floating green" onclick="pegar()" id="fb-pegar"><i class="material-icons">content_paste</i></a>
+      </li>
+      <li><a class="btn-floating orange " onclick="cortar()" id="fb-cortar"><i
+            class="material-icons">content_cut</i></a></li>
+      <li><a class="btn-floating red accent-4" onclick="eliminar()" id="fb-eliminar"><i
+            class="material-icons">delete_forever</i></a></li>
+    </ul>
+  </div>
 
 
 
-    <script src="script.js"></script>
-    <script async src="zxing.js"></script>
-    <script src="video.js"></script>
-    <script>
-      // M.AutoInit();
-      $(document).ready(function () {
-        //options
+  <script src="js/script.js"></script>
+  <script async src="js/zxing.js"></script>
+  <script src="js/video.js"></script>
+  <!-- <script src="js/opciones.js"></script> -->
+  <script>
+    // M.AutoInit();
+    $(document).ready(function () {
+      //options
 
-        $('.sidenav').sidenav();
-        // $('select').formSelect();
-        // $('selectpicker').selectpicker();
-        $('.fixed-action-btn').floatingActionButton();
-        $('.modal').modal();
+      $('.sidenav').sidenav();
+      // $('select').formSelect();
+      // $('selectpicker').selectpicker();
+      $('.fixed-action-btn').floatingActionButton();
+      $('.modal').modal();
 
-        //que salga el popup al cambiar el valor
-        var elems  = document.querySelectorAll("input[type=range]");
-        M.Range.init(elems);
-        
-        $('.datepicker').datepicker({ 
-          container: 'body',
-            firstDay: true, 
-            format: 'yyyy-mm-dd',
-            i18n: {
-                months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-                monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
-                weekdays: ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-                weekdaysShort: ["Dom","Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-                weekdaysAbbrev: ["D","L", "M", "X", "J", "V", "S"]
-            }
-        });
+      //que salga el popup al cambiar el valor
+      var elems = document.querySelectorAll("input[type=range]");
+      M.Range.init(elems);
 
-
-        // $('.timepicker').timepicker();
+      $('.datepicker').datepicker({
+        container: 'body',
+        firstDay: true,
+        format: 'yyyy-mm-dd',
+        i18n: {
+          months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+          monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
+          weekdays: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+          weekdaysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+          weekdaysAbbrev: ["D", "L", "M", "X", "J", "V", "S"]
+        }
       });
-    </script>
+
+      //cargo las opciones guardadas
+
+      // $('.timepicker').timepicker();
+    });
+  </script>
+
+<div id="footer"></div>
 </body>
 
 </html>
