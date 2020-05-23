@@ -35,6 +35,7 @@ var decodeCallback = function (ptr, len, resultIndex, resultCount) {
   console.log(String.fromCharCode.apply(null, result));
   barcode_result.textContent = String.fromCharCode.apply(null, result);
   EAN=barcode_result.textContent;
+  toast(EAN);
   buttonGo.disabled = false;
   if (isPC) {
     canvas.style.display = 'block';

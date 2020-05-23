@@ -1,1 +1,619 @@
-{"status_verbose":"product found","product":{"allergens_tags":[],"emb_codes":"","last_modified_t":1586521564,"nutrition_data_prepared_per":"100g","allergens_from_user":"(en) ","nutrition_data":"on","ingredients_from_palm_oil_tags":[],"data_quality_bugs_tags":[],"additives_debug_tags":[],"nutrition_score_beverage":0,"images":{"3":{"uploaded_t":1586293337,"sizes":{"100":{"h":99,"w":100},"full":{"w":1216,"h":1200},"400":{"h":395,"w":400}},"uploader":"kiliweb"},"nutrition_es":{"normalize":null,"rev":"35","imgid":"4","angle":0,"x2":"-1","x1":"-1","geometry":"0x0--1--1","y1":"-1","sizes":{"100":{"w":75,"h":100},"full":{"h":1200,"w":901},"200":{"w":150,"h":200},"400":{"h":400,"w":300}},"y2":"-1","white_magic":null},"2":{"sizes":{"100":{"h":75,"w":100},"full":{"h":1200,"w":1600},"400":{"w":400,"h":300}},"uploaded_t":"1522953449","uploader":"kiliweb"},"1":{"sizes":{"400":{"h":400,"w":300},"full":{"h":1200,"w":901},"100":{"h":100,"w":75}},"uploaded_t":"1522953424","uploader":"kiliweb"},"front_es":{"sizes":{"100":{"w":100,"h":75},"full":{"h":901,"w":1200},"200":{"h":150,"w":200},"400":{"w":400,"h":300}},"white_magic":"false","y2":"0","x1":"0","geometry":"0x0-0-0","y1":"0","x2":"0","normalize":"false","rev":"27","imgid":"1","angle":"270"},"ingredients_es":{"sizes":{"full":{"h":1200,"w":1600},"400":{"h":300,"w":400},"200":{"h":150,"w":200},"100":{"h":75,"w":100}},"y2":null,"white_magic":null,"x1":null,"y1":null,"geometry":"0x0-0-0","x2":null,"rev":"25","normalize":null,"imgid":"2","angle":null},"4":{"uploaded_t":1586521564,"sizes":{"400":{"w":300,"h":400},"full":{"w":901,"h":1200},"100":{"h":100,"w":75}},"uploader":"kiliweb"}},"data_quality_tags":["en:ingredients-percent-analysis-ok"],"pnns_groups_1":"Composite foods","lc":"es","nutriments":{"carbohydrates":35.5,"sugars_unit":"g","fat_100g":7.8,"sodium_value":0.6,"saturated-fat_value":2.5,"energy_100g":1059,"saturated-fat_unit":"g","carbohydrates_100g":35.5,"carbohydrates_unit":"g","salt_100g":1.5,"fat_value":7.8,"energy":1059,"energy-kcal_unit":"kcal","fat_unit":"g","energy-kcal_value":253,"sugars":2.3,"salt_unit":"g","saturated-fat_100g":2.5,"proteins_value":10.1,"nutrition-score-fr":11,"sodium_100g":0.6,"salt":1.5,"sugars_100g":2.3,"fat":7.8,"carbohydrates_value":35.5,"energy-kcal_100g":1059,"energy_unit":"kcal","saturated-fat":2.5,"proteins":10.1,"proteins_unit":"g","energy_value":253,"sugars_value":2.3,"proteins_100g":10.1,"energy-kcal":1059,"salt_value":1.5,"sodium_unit":"g","nutrition-score-fr_100g":11,"sodium":0.6},"traces_from_user":"(en) ","generic_name_fr":"","languages":{"en:spanish":4},"packaging_tags":["plastico"],"image_nutrition_thumb_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.100.jpg","purchase_places_tags":[],"languages_tags":["en:spanish","en:1"],"compared_to_category":"en:pizzas-pies-and-quiches","last_image_dates_tags":["2020-04-10","2020-04","2020"],"labels_lc":"en","informers_tags":["yuka.ZEw4bE1yWStxZjBybjhVYXJ6L3UvdTFrN1lLS0FVN3VFZkl3SUE9PQ","kiliweb","cyn","teolemon","date-limite-app","hungergames"],"nucleotides_prev_tags":[],"nova_group_tags":["not-applicable"],"ingredients_ids_debug":[],"additives_tags":[],"packaging":"Plástico","generic_name_es":"","unique_scans_n":9,"cities_tags":[],"manufacturing_places_tags":[],"additives_old_tags":[],"ingredients_text_with_allergens_es":"","ingredients_tags":[],"debug_param_sorted_langs":["es"],"selected_images":{"nutrition":{"thumb":{"es":"https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.100.jpg"},"small":{"es":"https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.200.jpg"},"display":{"es":"https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.400.jpg"}},"ingredients":{"display":{"es":"https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.400.jpg"},"small":{"es":"https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.200.jpg"},"thumb":{"es":"https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.100.jpg"}},"front":{"small":{"es":"https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.200.jpg"},"thumb":{"es":"https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.100.jpg"},"display":{"es":"https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.400.jpg"}}},"photographers_tags":["kiliweb"],"no_nutrition_data":"","correctors_tags":["openfoodfacts-contributors","teolemon","autorotate-bot","musarana","hungergames","tacite-mass-editor","yuka.VjVnTkNLVVJ1dmhVZ2NNM3hERGIvb3d1K3NTS2MwV0Zjc1E3SUE9PQ","yuka.Vm85Yk5LQUh1ZGttbE1RVDhpcmZvOHB5eklLNFIwYUxBYlFYSWc9PQ","kiliweb"],"states":"en:to-be-completed, en:nutrition-facts-completed, en:ingredients-to-be-completed, en:expiration-date-to-be-completed, en:packaging-code-to-be-completed, en:characteristics-to-be-completed, en:categories-completed, en:brands-completed, en:packaging-completed, en:quantity-to-be-completed, en:product-name-completed, en:photos-validated, en:photos-uploaded","lang":"es","nutrition_data_per":"100g","minerals_tags":[],"origins":"","nutrition_data_prepared":"","nutrition_grades_tags":["d"],"product_name_fr":"","ingredients":[],"ingredients_text":"","sortkey":201586521564,"product_name":"Calzone de pollo a la barbacoa","nutrient_levels":{"sugars":"low","fat":"moderate","saturated-fat":"moderate","salt":"moderate"},"allergens_from_ingredients":"","traces_tags":[],"_id":"8480000635211","vitamins_prev_tags":[],"last_editor":"kiliweb","nutriscore_grade":"d","interface_version_created":"20150316.jqm2","expiration_date":"","ingredients_that_may_be_from_palm_oil_tags":[],"allergens_hierarchy":[],"brands_tags":["hacendado"],"editors_tags":["openfoodfacts-contributors","tacite-mass-editor","musarana","yuka.ZEw4bE1yWStxZjBybjhVYXJ6L3UvdTFrN1lLS0FVN3VFZkl3SUE9PQ","hungergames","cyn","kiliweb","teolemon","yuka.VjVnTkNLVVJ1dmhVZ2NNM3hERGIvb3d1K3NTS2MwV0Zjc1E3SUE9PQ","autorotate-bot","yuka.Vm85Yk5LQUh1ZGttbE1RVDhpcmZvOHB5eklLNFIwYUxBYlFYSWc9PQ","date-limite-app"],"manufacturing_places":"","categories":"Meals,Pizzas pies and quiches","image_front_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.400.jpg","pnns_groups_2":"Pizza pies and quiche","emb_codes_orig":"","additives_prev_original_tags":[],"image_ingredients_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.400.jpg","last_image_t":1586521564,"entry_dates_tags":["2018-04-05","2018-04","2018"],"update_key":"ingredients20200511","popularity_tags":["top-100000-scans-2019","at-least-5-scans-2019","top-90-percent-scans-2019","top-95-percent-scans-2019","top-10000-es-scans-2019","top-50000-es-scans-2019","top-100000-es-scans-2019","top-country-es-scans-2019","at-least-5-es-scans-2019","top-5000-ad-scans-2019","top-10000-ad-scans-2019","top-50000-ad-scans-2019","top-100000-ad-scans-2019","top-5000-ro-scans-2019","top-10000-ro-scans-2019","top-50000-ro-scans-2019","top-100000-ro-scans-2019"],"emb_codes_tags":[],"stores_tags":["mercadona"],"data_quality_errors_tags":[],"unknown_nutrients_tags":[],"data_quality_info_tags":["en:ingredients-percent-analysis-ok"],"image_ingredients_small_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.200.jpg","nucleotides_tags":[],"languages_codes":{"es":4},"ingredients_debug":[],"max_imgid":"4","image_front_thumb_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.100.jpg","labels_tags":[],"image_ingredients_thumb_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.100.jpg","ingredients_text_es":"","image_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.400.jpg","allergens_lc":"en","countries_tags":["en:spain"],"quantity":"","pnns_groups_1_tags":["composite-foods","known"],"ingredients_text_debug":"","generic_name":"","product_name_es":"Calzone de pollo a la barbacoa","origins_tags":[],"minerals_prev_tags":[],"ingredients_percent_analysis":1,"traces_hierarchy":[],"image_nutrition_small_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.200.jpg","image_nutrition_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.400.jpg","states_hierarchy":["en:to-be-completed","en:nutrition-facts-completed","en:ingredients-to-be-completed","en:expiration-date-to-be-completed","en:packaging-code-to-be-completed","en:characteristics-to-be-completed","en:categories-completed","en:brands-completed","en:packaging-completed","en:quantity-to-be-completed","en:product-name-completed","en:photos-validated","en:photos-uploaded"],"creator":"kiliweb","categories_hierarchy":["en:meals","en:pizzas-pies-and-quiches"],"nutriscore_score":11,"nutrient_levels_tags":["en:fat-in-moderate-quantity","en:saturated-fat-in-moderate-quantity","en:sugars-in-low-quantity","en:salt-in-moderate-quantity"],"ingredients_text_fr":"","amino_acids_prev_tags":[],"interface_version_modified":"20150316.jqm2","categories_tags":["en:meals","en:pizzas-pies-and-quiches"],"labels_hierarchy":[],"ciqual_food_name_tags":["unknown"],"image_small_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.200.jpg","created_t":1522953422,"ingredients_original_tags":[],"data_sources_tags":["app-yuka","apps"],"languages_hierarchy":["en:spanish"],"nutriscore_data":{"saturated_fat_ratio":32.0512820512821,"sugars_points":0,"is_fat":0,"sugars_value":2.3,"saturated_fat_points":2,"is_water":0,"sodium":600,"energy_points":3,"fiber":0,"score":11,"saturated_fat_ratio_value":32.1,"proteins":10.1,"energy_value":1059,"fiber_points":0,"sodium_points":6,"saturated_fat_ratio_points":4,"positive_points":0,"is_cheese":0,"energy":1059,"sodium_value":600,"proteins_points":5,"is_beverage":0,"fruits_vegetables_nuts_colza_walnut_olive_oils":0,"proteins_value":10.1,"fruits_vegetables_nuts_colza_walnut_olive_oils_points":0,"fiber_value":0,"fruits_vegetables_nuts_colza_walnut_olive_oils_value":0,"negative_points":11,"saturated_fat":2.5,"saturated_fat_value":2.5,"sugars":2.3,"grade":"d"},"nova_group_debug":"no nova group when the product does not have ingredients","labels":"","_keywords":["la","pollo","pizza","hacendado","de","pie","and","barbacoa","calzone","quiche","meal"],"countries_lc":"en","amino_acids_tags":[],"image_thumb_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.100.jpg","ingredients_text_with_allergens_fr":"","purchase_places":"","nutrition_score_warning_no_fruits_vegetables_nuts":1,"ingredients_text_with_allergens":"","allergens":"","checkers_tags":[],"misc_tags":["en:nutrition-no-fiber","en:nutrition-no-fruits-vegetables-nuts","en:nutrition-no-fiber-or-fruits-vegetables-nuts","en:nutriscore-computed"],"last_modified_by":"kiliweb","completeness":0.6,"stores":"Mercadona","nutrition_score_warning_no_fiber":1,"other_nutritional_substances_tags":[],"complete":0,"code":"8480000635211","ingredients_hierarchy":[],"scans_n":12,"nutrition_grade_fr":"d","category_properties":{},"categories_lc":"en","codes_tags":["code-13","8480000635xxx","848000063xxxx","84800006xxxxx","8480000xxxxxx","848000xxxxxxx","84800xxxxxxxx","8480xxxxxxxxx","848xxxxxxxxxx","84xxxxxxxxxxx","8xxxxxxxxxxxx"],"rev":35,"additives_original_tags":[],"traces":"","data_sources":"App - yuka, Apps","data_quality_warnings_tags":[],"traces_lc":"en","link":"","image_front_small_url":"https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.200.jpg","pnns_groups_2_tags":["pizza-pies-and-quiche","known"],"brands":"Hacendado","nutrition_grades":"d","states_tags":["en:to-be-completed","en:nutrition-facts-completed","en:ingredients-to-be-completed","en:expiration-date-to-be-completed","en:packaging-code-to-be-completed","en:characteristics-to-be-completed","en:categories-completed","en:brands-completed","en:packaging-completed","en:quantity-to-be-completed","en:product-name-completed","en:photos-validated","en:photos-uploaded"],"last_edit_dates_tags":["2020-04-10","2020-04","2020"],"countries_hierarchy":["en:spain"],"vitamins_tags":[],"traces_from_ingredients":"","countries":"en:Spain","id":"8480000635211"},"code":"8480000635211","status":1}
+{
+    "status_verbose": "product found",
+    "product": {
+        "allergens_tags": [],
+        "emb_codes": "",
+        "last_modified_t": 1586521564,
+        "nutrition_data_prepared_per": "100g",
+        "allergens_from_user": "(en) ",
+        "nutrition_data": "on",
+        "ingredients_from_palm_oil_tags": [],
+        "data_quality_bugs_tags": [],
+        "additives_debug_tags": [],
+        "nutrition_score_beverage": 0,
+        "images": {
+            "3": {
+                "uploaded_t": 1586293337,
+                "sizes": {
+                    "100": {
+                        "h": 99,
+                        "w": 100
+                    },
+                    "full": {
+                        "w": 1216,
+                        "h": 1200
+                    },
+                    "400": {
+                        "h": 395,
+                        "w": 400
+                    }
+                },
+                "uploader": "kiliweb"
+            },
+            "nutrition_es": {
+                "normalize": null,
+                "rev": "35",
+                "imgid": "4",
+                "angle": 0,
+                "x2": "-1",
+                "x1": "-1",
+                "geometry": "0x0--1--1",
+                "y1": "-1",
+                "sizes": {
+                    "100": {
+                        "w": 75,
+                        "h": 100
+                    },
+                    "full": {
+                        "h": 1200,
+                        "w": 901
+                    },
+                    "200": {
+                        "w": 150,
+                        "h": 200
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 300
+                    }
+                },
+                "y2": "-1",
+                "white_magic": null
+            },
+            "2": {
+                "sizes": {
+                    "100": {
+                        "h": 75,
+                        "w": 100
+                    },
+                    "full": {
+                        "h": 1200,
+                        "w": 1600
+                    },
+                    "400": {
+                        "w": 400,
+                        "h": 300
+                    }
+                },
+                "uploaded_t": "1522953449",
+                "uploader": "kiliweb"
+            },
+            "1": {
+                "sizes": {
+                    "400": {
+                        "h": 400,
+                        "w": 300
+                    },
+                    "full": {
+                        "h": 1200,
+                        "w": 901
+                    },
+                    "100": {
+                        "h": 100,
+                        "w": 75
+                    }
+                },
+                "uploaded_t": "1522953424",
+                "uploader": "kiliweb"
+            },
+            "front_es": {
+                "sizes": {
+                    "100": {
+                        "w": 100,
+                        "h": 75
+                    },
+                    "full": {
+                        "h": 901,
+                        "w": 1200
+                    },
+                    "200": {
+                        "h": 150,
+                        "w": 200
+                    },
+                    "400": {
+                        "w": 400,
+                        "h": 300
+                    }
+                },
+                "white_magic": "false",
+                "y2": "0",
+                "x1": "0",
+                "geometry": "0x0-0-0",
+                "y1": "0",
+                "x2": "0",
+                "normalize": "false",
+                "rev": "27",
+                "imgid": "1",
+                "angle": "270"
+            },
+            "ingredients_es": {
+                "sizes": {
+                    "full": {
+                        "h": 1200,
+                        "w": 1600
+                    },
+                    "400": {
+                        "h": 300,
+                        "w": 400
+                    },
+                    "200": {
+                        "h": 150,
+                        "w": 200
+                    },
+                    "100": {
+                        "h": 75,
+                        "w": 100
+                    }
+                },
+                "y2": null,
+                "white_magic": null,
+                "x1": null,
+                "y1": null,
+                "geometry": "0x0-0-0",
+                "x2": null,
+                "rev": "25",
+                "normalize": null,
+                "imgid": "2",
+                "angle": null
+            },
+            "4": {
+                "uploaded_t": 1586521564,
+                "sizes": {
+                    "400": {
+                        "w": 300,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 901,
+                        "h": 1200
+                    },
+                    "100": {
+                        "h": 100,
+                        "w": 75
+                    }
+                },
+                "uploader": "kiliweb"
+            }
+        },
+        "data_quality_tags": [
+            "en:ingredients-percent-analysis-ok"
+        ],
+        "pnns_groups_1": "Composite foods",
+        "lc": "es",
+        "nutriments": {
+            "carbohydrates": 35.5,
+            "sugars_unit": "g",
+            "fat_100g": 7.8,
+            "sodium_value": 0.6,
+            "saturated-fat_value": 2.5,
+            "energy_100g": 1059,
+            "saturated-fat_unit": "g",
+            "carbohydrates_100g": 35.5,
+            "carbohydrates_unit": "g",
+            "salt_100g": 1.5,
+            "fat_value": 7.8,
+            "energy": 1059,
+            "energy-kcal_unit": "kcal",
+            "fat_unit": "g",
+            "energy-kcal_value": 253,
+            "sugars": 2.3,
+            "salt_unit": "g",
+            "saturated-fat_100g": 2.5,
+            "proteins_value": 10.1,
+            "nutrition-score-fr": 11,
+            "sodium_100g": 0.6,
+            "salt": 1.5,
+            "sugars_100g": 2.3,
+            "fat": 7.8,
+            "carbohydrates_value": 35.5,
+            "energy-kcal_100g": 1059,
+            "energy_unit": "kcal",
+            "saturated-fat": 2.5,
+            "proteins": 10.1,
+            "proteins_unit": "g",
+            "energy_value": 253,
+            "sugars_value": 2.3,
+            "proteins_100g": 10.1,
+            "energy-kcal": 1059,
+            "salt_value": 1.5,
+            "sodium_unit": "g",
+            "nutrition-score-fr_100g": 11,
+            "sodium": 0.6
+        },
+        "traces_from_user": "(en) ",
+        "generic_name_fr": "",
+        "languages": {
+            "en:spanish": 4
+        },
+        "packaging_tags": [
+            "plastico"
+        ],
+        "image_nutrition_thumb_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.100.jpg",
+        "purchase_places_tags": [],
+        "languages_tags": [
+            "en:spanish",
+            "en:1"
+        ],
+        "compared_to_category": "en:pizzas-pies-and-quiches",
+        "last_image_dates_tags": [
+            "2020-04-10",
+            "2020-04",
+            "2020"
+        ],
+        "labels_lc": "en",
+        "informers_tags": [
+            "yuka.ZEw4bE1yWStxZjBybjhVYXJ6L3UvdTFrN1lLS0FVN3VFZkl3SUE9PQ",
+            "kiliweb",
+            "cyn",
+            "teolemon",
+            "date-limite-app",
+            "hungergames"
+        ],
+        "nucleotides_prev_tags": [],
+        "nova_group_tags": [
+            "not-applicable"
+        ],
+        "ingredients_ids_debug": [],
+        "additives_tags": [],
+        "packaging": "Plástico",
+        "generic_name_es": "",
+        "unique_scans_n": 9,
+        "cities_tags": [],
+        "manufacturing_places_tags": [],
+        "additives_old_tags": [],
+        "ingredients_text_with_allergens_es": "",
+        "ingredients_tags": [],
+        "debug_param_sorted_langs": [
+            "es"
+        ],
+        "selected_images": {
+            "nutrition": {
+                "thumb": {
+                    "es": "https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.100.jpg"
+                },
+                "small": {
+                    "es": "https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.200.jpg"
+                },
+                "display": {
+                    "es": "https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.400.jpg"
+                }
+            },
+            "ingredients": {
+                "display": {
+                    "es": "https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.400.jpg"
+                },
+                "small": {
+                    "es": "https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.200.jpg"
+                },
+                "thumb": {
+                    "es": "https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.100.jpg"
+                }
+            },
+            "front": {
+                "small": {
+                    "es": "https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.200.jpg"
+                },
+                "thumb": {
+                    "es": "https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.100.jpg"
+                },
+                "display": {
+                    "es": "https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.400.jpg"
+                }
+            }
+        },
+        "photographers_tags": [
+            "kiliweb"
+        ],
+        "no_nutrition_data": "",
+        "correctors_tags": [
+            "openfoodfacts-contributors",
+            "teolemon",
+            "autorotate-bot",
+            "musarana",
+            "hungergames",
+            "tacite-mass-editor",
+            "yuka.VjVnTkNLVVJ1dmhVZ2NNM3hERGIvb3d1K3NTS2MwV0Zjc1E3SUE9PQ",
+            "yuka.Vm85Yk5LQUh1ZGttbE1RVDhpcmZvOHB5eklLNFIwYUxBYlFYSWc9PQ",
+            "kiliweb"
+        ],
+        "states": "en:to-be-completed, en:nutrition-facts-completed, en:ingredients-to-be-completed, en:expiration-date-to-be-completed, en:packaging-code-to-be-completed, en:characteristics-to-be-completed, en:categories-completed, en:brands-completed, en:packaging-completed, en:quantity-to-be-completed, en:product-name-completed, en:photos-validated, en:photos-uploaded",
+        "lang": "es",
+        "nutrition_data_per": "100g",
+        "minerals_tags": [],
+        "origins": "",
+        "nutrition_data_prepared": "",
+        "nutrition_grades_tags": [
+            "d"
+        ],
+        "product_name_fr": "",
+        "ingredients": [],
+        "ingredients_text": "",
+        "sortkey": 201586521564,
+        "product_name": "Calzone de pollo a la barbacoa",
+        "nutrient_levels": {
+            "sugars": "low",
+            "fat": "moderate",
+            "saturated-fat": "moderate",
+            "salt": "moderate"
+        },
+        "allergens_from_ingredients": "",
+        "traces_tags": [],
+        "_id": "8480000635211",
+        "vitamins_prev_tags": [],
+        "last_editor": "kiliweb",
+        "nutriscore_grade": "d",
+        "interface_version_created": "20150316.jqm2",
+        "expiration_date": "",
+        "ingredients_that_may_be_from_palm_oil_tags": [],
+        "allergens_hierarchy": [],
+        "brands_tags": [
+            "hacendado"
+        ],
+        "editors_tags": [
+            "openfoodfacts-contributors",
+            "tacite-mass-editor",
+            "musarana",
+            "yuka.ZEw4bE1yWStxZjBybjhVYXJ6L3UvdTFrN1lLS0FVN3VFZkl3SUE9PQ",
+            "hungergames",
+            "cyn",
+            "kiliweb",
+            "teolemon",
+            "yuka.VjVnTkNLVVJ1dmhVZ2NNM3hERGIvb3d1K3NTS2MwV0Zjc1E3SUE9PQ",
+            "autorotate-bot",
+            "yuka.Vm85Yk5LQUh1ZGttbE1RVDhpcmZvOHB5eklLNFIwYUxBYlFYSWc9PQ",
+            "date-limite-app"
+        ],
+        "manufacturing_places": "",
+        "categories": "Meals,Pizzas pies and quiches",
+        "image_front_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.400.jpg",
+        "pnns_groups_2": "Pizza pies and quiche",
+        "emb_codes_orig": "",
+        "additives_prev_original_tags": [],
+        "image_ingredients_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.400.jpg",
+        "last_image_t": 1586521564,
+        "entry_dates_tags": [
+            "2018-04-05",
+            "2018-04",
+            "2018"
+        ],
+        "update_key": "ingredients20200511",
+        "popularity_tags": [
+            "top-100000-scans-2019",
+            "at-least-5-scans-2019",
+            "top-90-percent-scans-2019",
+            "top-95-percent-scans-2019",
+            "top-10000-es-scans-2019",
+            "top-50000-es-scans-2019",
+            "top-100000-es-scans-2019",
+            "top-country-es-scans-2019",
+            "at-least-5-es-scans-2019",
+            "top-5000-ad-scans-2019",
+            "top-10000-ad-scans-2019",
+            "top-50000-ad-scans-2019",
+            "top-100000-ad-scans-2019",
+            "top-5000-ro-scans-2019",
+            "top-10000-ro-scans-2019",
+            "top-50000-ro-scans-2019",
+            "top-100000-ro-scans-2019"
+        ],
+        "emb_codes_tags": [],
+        "stores_tags": [
+            "mercadona"
+        ],
+        "data_quality_errors_tags": [],
+        "unknown_nutrients_tags": [],
+        "data_quality_info_tags": [
+            "en:ingredients-percent-analysis-ok"
+        ],
+        "image_ingredients_small_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.200.jpg",
+        "nucleotides_tags": [],
+        "languages_codes": {
+            "es": 4
+        },
+        "ingredients_debug": [],
+        "max_imgid": "4",
+        "image_front_thumb_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.100.jpg",
+        "labels_tags": [],
+        "image_ingredients_thumb_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/ingredients_es.25.100.jpg",
+        "ingredients_text_es": "",
+        "image_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.400.jpg",
+        "allergens_lc": "en",
+        "countries_tags": [
+            "en:spain"
+        ],
+        "quantity": "",
+        "pnns_groups_1_tags": [
+            "composite-foods",
+            "known"
+        ],
+        "ingredients_text_debug": "",
+        "generic_name": "",
+        "product_name_es": "Calzone de pollo a la barbacoa",
+        "origins_tags": [],
+        "minerals_prev_tags": [],
+        "ingredients_percent_analysis": 1,
+        "traces_hierarchy": [],
+        "image_nutrition_small_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.200.jpg",
+        "image_nutrition_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/nutrition_es.35.400.jpg",
+        "states_hierarchy": [
+            "en:to-be-completed",
+            "en:nutrition-facts-completed",
+            "en:ingredients-to-be-completed",
+            "en:expiration-date-to-be-completed",
+            "en:packaging-code-to-be-completed",
+            "en:characteristics-to-be-completed",
+            "en:categories-completed",
+            "en:brands-completed",
+            "en:packaging-completed",
+            "en:quantity-to-be-completed",
+            "en:product-name-completed",
+            "en:photos-validated",
+            "en:photos-uploaded"
+        ],
+        "creator": "kiliweb",
+        "categories_hierarchy": [
+            "en:meals",
+            "en:pizzas-pies-and-quiches"
+        ],
+        "nutriscore_score": 11,
+        "nutrient_levels_tags": [
+            "en:fat-in-moderate-quantity",
+            "en:saturated-fat-in-moderate-quantity",
+            "en:sugars-in-low-quantity",
+            "en:salt-in-moderate-quantity"
+        ],
+        "ingredients_text_fr": "",
+        "amino_acids_prev_tags": [],
+        "interface_version_modified": "20150316.jqm2",
+        "categories_tags": [
+            "en:meals",
+            "en:pizzas-pies-and-quiches"
+        ],
+        "labels_hierarchy": [],
+        "ciqual_food_name_tags": [
+            "unknown"
+        ],
+        "image_small_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.200.jpg",
+        "created_t": 1522953422,
+        "ingredients_original_tags": [],
+        "data_sources_tags": [
+            "app-yuka",
+            "apps"
+        ],
+        "languages_hierarchy": [
+            "en:spanish"
+        ],
+        "nutriscore_data": {
+            "saturated_fat_ratio": 32.0512820512821,
+            "sugars_points": 0,
+            "is_fat": 0,
+            "sugars_value": 2.3,
+            "saturated_fat_points": 2,
+            "is_water": 0,
+            "sodium": 600,
+            "energy_points": 3,
+            "fiber": 0,
+            "score": 11,
+            "saturated_fat_ratio_value": 32.1,
+            "proteins": 10.1,
+            "energy_value": 1059,
+            "fiber_points": 0,
+            "sodium_points": 6,
+            "saturated_fat_ratio_points": 4,
+            "positive_points": 0,
+            "is_cheese": 0,
+            "energy": 1059,
+            "sodium_value": 600,
+            "proteins_points": 5,
+            "is_beverage": 0,
+            "fruits_vegetables_nuts_colza_walnut_olive_oils": 0,
+            "proteins_value": 10.1,
+            "fruits_vegetables_nuts_colza_walnut_olive_oils_points": 0,
+            "fiber_value": 0,
+            "fruits_vegetables_nuts_colza_walnut_olive_oils_value": 0,
+            "negative_points": 11,
+            "saturated_fat": 2.5,
+            "saturated_fat_value": 2.5,
+            "sugars": 2.3,
+            "grade": "d"
+        },
+        "nova_group_debug": "no nova group when the product does not have ingredients",
+        "labels": "",
+        "_keywords": [
+            "la",
+            "pollo",
+            "pizza",
+            "hacendado",
+            "de",
+            "pie",
+            "and",
+            "barbacoa",
+            "calzone",
+            "quiche",
+            "meal"
+        ],
+        "countries_lc": "en",
+        "amino_acids_tags": [],
+        "image_thumb_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.100.jpg",
+        "ingredients_text_with_allergens_fr": "",
+        "purchase_places": "",
+        "nutrition_score_warning_no_fruits_vegetables_nuts": 1,
+        "ingredients_text_with_allergens": "",
+        "allergens": "",
+        "checkers_tags": [],
+        "misc_tags": [
+            "en:nutrition-no-fiber",
+            "en:nutrition-no-fruits-vegetables-nuts",
+            "en:nutrition-no-fiber-or-fruits-vegetables-nuts",
+            "en:nutriscore-computed"
+        ],
+        "last_modified_by": "kiliweb",
+        "completeness": 0.6,
+        "stores": "Mercadona",
+        "nutrition_score_warning_no_fiber": 1,
+        "other_nutritional_substances_tags": [],
+        "complete": 0,
+        "code": "8480000635211",
+        "ingredients_hierarchy": [],
+        "scans_n": 12,
+        "nutrition_grade_fr": "d",
+        "category_properties": {},
+        "categories_lc": "en",
+        "codes_tags": [
+            "code-13",
+            "8480000635xxx",
+            "848000063xxxx",
+            "84800006xxxxx",
+            "8480000xxxxxx",
+            "848000xxxxxxx",
+            "84800xxxxxxxx",
+            "8480xxxxxxxxx",
+            "848xxxxxxxxxx",
+            "84xxxxxxxxxxx",
+            "8xxxxxxxxxxxx"
+        ],
+        "rev": 35,
+        "additives_original_tags": [],
+        "traces": "",
+        "data_sources": "App - yuka, Apps",
+        "data_quality_warnings_tags": [],
+        "traces_lc": "en",
+        "link": "",
+        "image_front_small_url": "https://static.openfoodfacts.org/images/products/848/000/063/5211/front_es.27.200.jpg",
+        "pnns_groups_2_tags": [
+            "pizza-pies-and-quiche",
+            "known"
+        ],
+        "brands": "Hacendado",
+        "nutrition_grades": "d",
+        "states_tags": [
+            "en:to-be-completed",
+            "en:nutrition-facts-completed",
+            "en:ingredients-to-be-completed",
+            "en:expiration-date-to-be-completed",
+            "en:packaging-code-to-be-completed",
+            "en:characteristics-to-be-completed",
+            "en:categories-completed",
+            "en:brands-completed",
+            "en:packaging-completed",
+            "en:quantity-to-be-completed",
+            "en:product-name-completed",
+            "en:photos-validated",
+            "en:photos-uploaded"
+        ],
+        "last_edit_dates_tags": [
+            "2020-04-10",
+            "2020-04",
+            "2020"
+        ],
+        "countries_hierarchy": [
+            "en:spain"
+        ],
+        "vitamins_tags": [],
+        "traces_from_ingredients": "",
+        "countries": "en:Spain",
+        "id": "8480000635211"
+    },
+    "code": "8480000635211",
+    "status": 1
+}

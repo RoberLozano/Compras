@@ -598,7 +598,7 @@ function editar(objeto, editor, propiedades) {
 
   $("#ir").on("click", function () {
     //que abra open food en nueva pestaña
-    var win = window.open('https://es.openfoodfacts.org/producto/' + objeto.EAN, '_blank');
+    var win = window.open('https://es.openfoodfacts.org/producto/' + $("#editEAN").val, '_blank');
     win.focus();
 
 
@@ -607,17 +607,20 @@ function editar(objeto, editor, propiedades) {
       if (this.readyState == 4 && this.status == 200) {
         aEAN = JSON.parse(this.responseText);
         console.log(aEAN);
+        if (aEAN.status){ //si lo encuentra
+          a=new Articulo();
+          a.openFood(aEAN);
+          console.log(a);
+          toast(a.nombre+":"+a.marca)
+        }
+        //actualizar los campos si se han encontrado
         
-        a=new Articulo();
-        a.openFood(aEAN);
-        console.log(a);
-
-        toast(a.nombre+":"+a.marca)
         
       }
     };
-    xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/"+objeto.EAN+".json", true);
-    console.log("https://world.openfoodfacts.org/api/v0/product"+objeto.EAN+".json");
+
+    xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/"+$("#editEAN").val+".json", true);
+    console.log("https://world.openfoodfacts.org/api/v0/product"+$("#editEAN").val+".json");
     xmlhttp.send();
   });
 
@@ -1020,7 +1023,7 @@ function cargarOpciones() {
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML= "0.0138"
+document.getElementById('version').innerHTML= "0.0139"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
