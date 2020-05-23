@@ -1015,6 +1015,7 @@ function cargarOpciones() {
 
 //cargo las opciones
 cargarOpciones();
+document.getElementById('version').innerHTML= "0.0137"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
