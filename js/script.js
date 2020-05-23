@@ -611,6 +611,8 @@ function editar(objeto, editor, propiedades) {
         a=new Articulo();
         a.openFood(aEAN);
         console.log(a);
+
+        toast(a.nombre+":"+a.marca)
         
       }
     };
@@ -888,6 +890,9 @@ function seleccionarTodo() {
 
 }
 
+function toast(s) {
+  M.toast({ html: s })
+}
 
 /**
  * 
