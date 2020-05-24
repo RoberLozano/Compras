@@ -1,6 +1,6 @@
 {
   "lock": false,
-  "active": "",
+  "active": "73d316965609fc4cf60385337cd65c01d48f9642",
   "sets": {
     "default": {
       "source": "default",
@@ -12,7 +12,11 @@
             "c:\\GitHub\\Compras\\js\\compras.js",
             "c:\\GitHub\\Compras\\index.html",
             "c:\\GitHub\\Compras\\js\\script.js",
-            "c:\\GitHub\\Compras\\js\\x.json"
+            "c:\\GitHub\\Compras\\js\\x.json",
+            "c:\\GitHub\\Compras\\barcode-solid.svg",
+            "c:\\GitHub\\Compras\\images\\barcode-solid.svg",
+            "c:\\Program Files\\Microsoft VS Code\\resources\\app\\extensions\\node_modules\\typescript\\lib\\lib.dom.d.ts",
+            "c:\\GitHub\\Compras\\js\\video.js"
           ]
         },
         "b8374f8d6a9b671e3435e91018f09ad830c59c8d": {

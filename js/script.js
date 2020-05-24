@@ -525,21 +525,21 @@ function editar(objeto, editor, propiedades) {
       if (key === "EAN") {
         editor.innerHTML = editor.innerHTML +
 
-            `<div class="input-field col s12">
+          `<div class="input-field col s12">
             <input id="edit${key}" type="${isNumber(objeto[key]) ? "number" : "text"}" class="validate" value="${objeto[key]}">
             <label class="active" for="edit${key}">${key}</label>
           </div>`
 
-    //       `<div class="row">
-    //   <div class="input-field col s6">
-    //     <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-    //     <label for="first_name">First Name</label>
-    //   </div>
-    //   <div class="input-field col s6">
-    //     <input id="last_name" type="text" class="validate">
-    //     <label for="last_name">Last Name</label>
-    //   </div>
-    // </div>`
+        //       `<div class="row">
+        //   <div class="input-field col s6">
+        //     <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+        //     <label for="first_name">First Name</label>
+        //   </div>
+        //   <div class="input-field col s6">
+        //     <input id="last_name" type="text" class="validate">
+        //     <label for="last_name">Last Name</label>
+        //   </div>
+        // </div>`
 
       }
       else
@@ -607,26 +607,26 @@ function editar(objeto, editor, propiedades) {
       if (this.readyState == 4 && this.status == 200) {
         aEAN = JSON.parse(this.responseText);
         console.log(aEAN);
-        if (aEAN.status){ //si lo encuentra
-          a=new Articulo();
+        if (aEAN.status) { //si lo encuentra
+          a = new Articulo();
           a.openFood(aEAN);
           console.log(a);
-          toast(a.nombre+":"+a.marca +" "+a.cantidad)
+          toast(a.nombre + ":" + a.marca + " " + a.cantidad)
           //actualizo el editor
           for (key in a) {
-           if(a[key]) $(`#edit${key}`).val(a[key]);
+            if (a[key]) $(`#edit${key}`).val(a[key]);
           }
 
 
         }
         //actualizar los campos si se han encontrado
-        
-        
+
+
       }
     };
 
-    xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/"+$("#editEAN").val()+".json", true);
-    console.log("https://world.openfoodfacts.org/api/v0/product"+$("#editEAN").val()+".json");
+    xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/" + $("#editEAN").val() + ".json", true);
+    console.log("https://world.openfoodfacts.org/api/v0/product" + $("#editEAN").val() + ".json");
     xmlhttp.send();
   });
 
@@ -863,13 +863,13 @@ function invertirSeleccion() {
 
     var pos = selected.indexOf(articulos[i]);
     if (pos > -1) { //deselecciono si ya está
-      console.log("Deselecciono"+i+ "  "+articulos[i].nombre);
-      
+      console.log("Deselecciono" + i + "  " + articulos[i].nombre);
+
       selected.splice(pos, 1);
       this.classList.remove("selec"); //quito la clase de seleccionado
     }
     else { //si no está lo selecciono
-      console.log("Selecciono"+i+ "  "+articulos[i].nombre);
+      console.log("Selecciono" + i + "  " + articulos[i].nombre);
       selected.push(articulos[i]);
       this.classList.add("selec");//pongo formato seleccionado
     }
@@ -895,7 +895,7 @@ function seleccionarTodo() {
   // PETA copiar de uno en uno
   // selected = articulos;
   selected = [...articulos];
-  
+
   $("#myTable").children('tr').each(function (i) {
     this.classList.add("selec");
   });
@@ -1028,14 +1028,40 @@ function cargarOpciones() {
     $("#email").val(localStorage["email"])
   }
 
+}
+/**
+ * 
+ * @param {string} ean El código EAN
+ * @returns el Articulo con los campos encontrados o false
+ */
+function buscarEAN(ean) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var resultado = JSON.parse(this.responseText);
+      console.log(resultado);
+      if (resultado.status) { //si lo encuentra
+        var a = new Articulo();
+        a.openFood(resultado);
+        console.log(a);
+        toast(a.nombre + ":" + a.marca + " " + a.cantidad)
+        return a
+      }
+      else
+        return false;
+    }
+  };
 
+  xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/" + ean + ".json", true);
+  console.log("https://world.openfoodfacts.org/api/v0/product" + ean + ".json");
+  xmlhttp.send();
 
 }
 
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML= "0.014"
+document.getElementById('version').innerHTML = "0.0141"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){

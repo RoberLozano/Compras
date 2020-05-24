@@ -6,6 +6,7 @@ var mobileCtx = mobileCanvas.getContext('2d');
 var videoSelect = document.querySelector('select#videoSource');
 var videoOption = document.getElementById('videoOption');
 var buttonGo = document.getElementById('go');
+var buttonAdd= document.getElementById('add');
 var barcode_result = document.getElementById('dbr');
 
 var EAN;
@@ -104,6 +105,13 @@ buttonGo.onclick = function () {
   isPaused = false;
   scanBarcode();
   buttonGo.disabled = true;
+};
+
+buttonAdd.onclick = function () {
+if(EAN){
+  let a=buscarEAN(EAN);
+  if(a) nuevoArticulo(a);
+}
 };
 
 // scan barcode

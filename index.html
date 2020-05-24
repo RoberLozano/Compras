@@ -147,9 +147,11 @@
     </li>
     <li><a class="waves-effect" onclick="borrarLista()">Borrar Lista<i
           class="material-icons">remove_shopping_cart</i></a></li>
+          
     <li>
       <div class="divider"></div>
     </li>
+    <li><a class="waves-effect" id="codBarras" onclick="">Escanear<i><img src="images/barcode-solid.svg" height="24" width="24"/></i></a></li>
     <li><a>
         Label
         <span class="switch">
@@ -264,7 +266,7 @@
           </div>
         </form>
       </div> -->
-
+   
     <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
 
     <!-- Modal Structure -->
@@ -295,7 +297,7 @@
         <div class="select">
           <label for="videoSource">Video source: </label><select id="videoSource"></select>
         </div>
-        <button id="go">Read Barcode</button>
+        <button id="go">Read Barcode</button><button id="add">Add Barcode</button>
         <div>
           <video muted autoplay id="video" playsinline="true"></video>
           <canvas id="pcCanvas" width="640" height="480" style="display: none; float: bottom;"></canvas>
