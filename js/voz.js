@@ -70,7 +70,7 @@ recognition.onresult = function(event) {
   console.log(`${last.transcript}  (${last.confidence}) [${time}]`);
   
 
- if((time-lastTime)<100){//si es el eco del anterior salimos (menos de 70 ms)
+ if((time-lastTime)<713){//si es el eco del anterior salimos (vamos con 300 ms)
   console.log("repetido");
    return;
   } 

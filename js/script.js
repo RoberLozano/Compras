@@ -863,10 +863,13 @@ function invertirSeleccion() {
 
     var pos = selected.indexOf(articulos[i]);
     if (pos > -1) { //deselecciono si ya está
+      console.log("Deselecciono"+i+ "  "+articulos[i].nombre);
+      
       selected.splice(pos, 1);
       this.classList.remove("selec"); //quito la clase de seleccionado
     }
     else { //si no está lo selecciono
+      console.log("Selecciono"+i+ "  "+articulos[i].nombre);
       selected.push(articulos[i]);
       this.classList.add("selec");//pongo formato seleccionado
     }
@@ -889,7 +892,10 @@ function deseleccionarTodo() {
 
 function seleccionarTodo() {
   console.log(articulos);
-  selected = articulos;
+  // PETA copiar de uno en uno
+  // selected = articulos;
+  selected = [...articulos];
+  
   $("#myTable").children('tr').each(function (i) {
     this.classList.add("selec");
   });
