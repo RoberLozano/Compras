@@ -1062,7 +1062,7 @@ function buscarEAN(ean) {
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0141"
+document.getElementById('version').innerHTML = "0.0142"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
