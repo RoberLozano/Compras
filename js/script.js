@@ -1066,7 +1066,7 @@ function buscarEAN(ean) {
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0146"
+document.getElementById('version').innerHTML = "0.0147"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
