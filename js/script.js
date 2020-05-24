@@ -462,6 +462,7 @@ function nuevoArticulo(articulo, lista) {
   // articulo.id=newPostRef.key;
   newPostRef.set(articulo)
   lastArticulo = articulo
+  toast(`Articulo ${articulo.nombre}`)
 
 }
 
@@ -1044,7 +1045,7 @@ function buscarEAN(ean) {
         var a = new Articulo();
         a.openFood(resultado);
         console.log(a);
-        toast(a.nombre + ":" + a.marca + " " + a.cantidad)
+        // toast(a.nombre + ":" + a.marca + " " + a.cantidad)
         return a
       }
       else
