@@ -459,8 +459,12 @@ function nuevoArticulo(articulo, lista) {
   var newPostRef = database.ref(ruta).push();
 
   articulo = articulo.listar(ruta, newPostRef.key, localStorage.usuario || "Rober", articulo.unidades||1, articulo.precio||0);
+  console.log("lo ha listado");
+  
   // articulo.id=newPostRef.key;
   newPostRef.set(articulo)
+  console.log(articulo);
+  
   lastArticulo = articulo
   toast(`Articulo ${articulo.nombre}`)
 
@@ -1062,7 +1066,7 @@ function buscarEAN(ean) {
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0143"
+document.getElementById('version').innerHTML = "0.0144"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
