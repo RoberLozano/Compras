@@ -1047,8 +1047,8 @@ function buscarEAN(ean) {
       console.log(resultado);
       if (resultado.status) { //si lo encuentra
         let a = new Articulo();
-        nuevoArticulo(a);
         a.openFood(resultado);
+        nuevoArticulo(a);
         console.log(a);
         // toast(a.nombre + ":" + a.marca + " " + a.cantidad)
         return a
@@ -1067,7 +1067,7 @@ function buscarEAN(ean) {
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0145"
+document.getElementById('version').innerHTML = "0.0146"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
