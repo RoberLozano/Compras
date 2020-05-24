@@ -1037,7 +1037,6 @@ function cargarOpciones() {
 /**
  * 
  * @param {string} ean El código EAN
- * @returns el Articulo con los campos encontrados o false
  */
 function buscarEAN(ean) {
   var xmlhttp = new XMLHttpRequest();
