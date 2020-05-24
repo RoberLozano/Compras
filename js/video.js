@@ -109,10 +109,7 @@ buttonGo.onclick = function () {
 
 buttonAdd.onclick = function () {
 if(EAN){
-  let a=buscarEAN(EAN);
-  console.log(a);
-  
-  if(a) nuevoArticulo(a);
+  buscarEAN(EAN);
 }
 };
 
