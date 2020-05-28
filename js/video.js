@@ -175,7 +175,7 @@ function scanBarcode() {
   }else
   if(autoAddEAN){
 
-    setTimeout(scanBarcode, 1377); //escaneamos con más tiempo
+    setTimeout(scanBarcode, 2777); //escaneamos con más tiempo
   }
 }
 // https://github.com/samdutton/simpl/tree/gh-pages/getusermedia/sources 
