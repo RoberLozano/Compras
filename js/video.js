@@ -43,7 +43,6 @@ var decodeCallback = function (ptr, len, resultIndex, resultCount) {
     buttonGo.click(); //que busque otro
 
   }
-  else
   buttonGo.disabled = false;
   if (isPC) {
     canvas.style.display = 'block';
@@ -109,6 +108,8 @@ buttonGo.onclick = function () {
     mobileCanvas.style.display = 'none';
   }
 
+  console.log("boton go");
+  
   isPaused = false;
   scanBarcode();
   buttonGo.disabled = true;
