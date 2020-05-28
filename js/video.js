@@ -40,7 +40,7 @@ var decodeCallback = function (ptr, len, resultIndex, resultCount) {
   toast(EAN);
   if(autoAddEAN && EAN){//si hay codigo y que se añada automatico
     buscarEAN(EAN);
-    buttonGo.click(); //que busque otro
+    // buttonGo.click(); //que busque otro
 
   }
   buttonGo.disabled = false;
@@ -172,11 +172,11 @@ function scanBarcode() {
   console.log("error code", err);
   if (err == -2) {
     setTimeout(scanBarcode, 30);
-  }else
-  if(autoAddEAN){
-
-    setTimeout(scanBarcode, 2777); //escaneamos con más tiempo
   }
+  // else
+  // if(autoAddEAN){
+  //   setTimeout(scanBarcode, 2777); //escaneamos con más tiempo
+  // }
 }
 // https://github.com/samdutton/simpl/tree/gh-pages/getusermedia/sources 
 var videoSelect = document.querySelector('select#videoSource');
