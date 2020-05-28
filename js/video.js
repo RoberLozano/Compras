@@ -172,6 +172,10 @@ function scanBarcode() {
   console.log("error code", err);
   if (err == -2) {
     setTimeout(scanBarcode, 30);
+  }else
+  if(autoAddEAN){
+
+    setTimeout(scanBarcode, 1377); //escaneamos con más tiempo
   }
 }
 // https://github.com/samdutton/simpl/tree/gh-pages/getusermedia/sources 
