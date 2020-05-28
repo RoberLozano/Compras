@@ -1078,7 +1078,7 @@ function escanearNuevos(){
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0147"
+document.getElementById('version').innerHTML = "0.0148"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
