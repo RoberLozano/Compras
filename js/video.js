@@ -170,7 +170,7 @@ function scanBarcode() {
   var err = ZXing._decode_any(decodePtr);
   console.timeEnd('decode barcode');
   console.log("error code", err);
-  if (err == -2 || autoAddEAN) {
+  if (err == -2) {
     setTimeout(scanBarcode, 30);
   }
 }
