@@ -10,6 +10,7 @@ var buttonAdd= document.getElementById('add');
 var barcode_result = document.getElementById('dbr');
 
 var EAN;
+var autoAddEAN=false;
 
 var isPaused = false;
 var videoWidth = 640,
@@ -37,6 +38,12 @@ var decodeCallback = function (ptr, len, resultIndex, resultCount) {
   barcode_result.textContent = String.fromCharCode.apply(null, result);
   EAN=barcode_result.textContent;
   toast(EAN);
+  if(autoAddEAN && EAN){//si hay codigo y que se añada automatico
+    buscarEAN(EAN);
+    buttonGo.click(); //que busque otro
+
+  }
+  else
   buttonGo.disabled = false;
   if (isPC) {
     canvas.style.display = 'block';

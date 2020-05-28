@@ -1068,6 +1068,7 @@ function buscarEAN(ean) {
 function escanearNuevos(){
   var cam = M.Modal.getInstance(document.getElementById("modalcamara"));
   cam.open();
+  autoAddEAN=true; //que todo el que encuentre lo añada
 
   document.getElementById('add').hidden=false;
   document.getElementById('add').disabled=false;
@@ -1078,7 +1079,7 @@ function escanearNuevos(){
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0149"
+document.getElementById('version').innerHTML = "0.015"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
