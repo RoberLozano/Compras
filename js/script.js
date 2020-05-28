@@ -599,6 +599,8 @@ function editar(objeto, editor, propiedades) {
     cam.open();
 
     document.getElementById('go').click();
+    document.getElementById('add').hidden=true;
+
   });
 
   $("#ir").on("click", function () {
@@ -1060,6 +1062,16 @@ function buscarEAN(ean) {
   xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/" + ean + ".json", true);
   console.log("https://world.openfoodfacts.org/api/v0/product" + ean + ".json");
   xmlhttp.send();
+
+}
+
+function escanearNuevos(){
+  var cam = M.Modal.getInstance(document.getElementById("modalcamara"));
+  cam.open();
+
+  document.getElementById('add').hidden=false;
+  document.getElementById('add').disabled=false;
+  document.getElementById('go').click();
 
 }
 
