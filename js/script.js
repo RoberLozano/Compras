@@ -601,7 +601,7 @@ function editar(objeto, editor, propiedades) {
     document.getElementById('go').click();
     seguir=true;
     //??
-    getStream(); //por si se ha cerrado antes
+    // getStream(); //por si se ha cerrado antes
     document.getElementById('add').hidden=true;
 
   });
