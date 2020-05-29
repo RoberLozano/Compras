@@ -119,11 +119,14 @@ buttonGo.onclick = function () {
   buttonGo.disabled = true;
 };
 
+//ahora es salir
 buttonAdd.onclick = function () {
   //cierra
   closeStream();
   autoAddEAN=false;
   seguir=false;
+  document.querySelector('cancelar').click();
+
 
 // if(EAN){
 //   buscarEAN(EAN);

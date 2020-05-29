@@ -1072,6 +1072,7 @@ function escanearNuevos(){
   var cam = M.Modal.getInstance(document.getElementById("modalcamara"));
   cam.open();
   autoAddEAN=true; //que todo el que encuentre lo añada
+  seguir=true; //pos si lo habiamos parado
 
   document.getElementById('add').hidden=false;
   document.getElementById('add').disabled=false;
@@ -1082,7 +1083,7 @@ function escanearNuevos(){
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0134"
+document.getElementById('version').innerHTML = "0.0135"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
