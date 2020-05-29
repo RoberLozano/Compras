@@ -125,7 +125,7 @@ buttonAdd.onclick = function () {
   closeStream();
   autoAddEAN=false;
   seguir=false;
-  document.querySelector('cancelar').click();
+  document.getElementById('cancelar').click();
 
 
 // if(EAN){
