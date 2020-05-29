@@ -599,6 +599,9 @@ function editar(objeto, editor, propiedades) {
     cam.open();
 
     document.getElementById('go').click();
+    seguir=true;
+    //??
+    getStream(); //por si se ha cerrado antes
     document.getElementById('add').hidden=true;
 
   });
@@ -1083,7 +1086,7 @@ function escanearNuevos(){
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0135"
+document.getElementById('version').innerHTML = "0.0136"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
