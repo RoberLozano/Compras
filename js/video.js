@@ -120,7 +120,7 @@ buttonGo.onclick = function () {
 
 buttonAdd.onclick = function () {
   //cierra
-  getStream();
+  closeStream();
   // autoAddEAN=false;
 
 // if(EAN){
@@ -224,6 +224,16 @@ function getStream() {
 
   navigator.mediaDevices.getUserMedia(constraints).
     then(gotStream).catch(handleError);
+}
+
+function closeStream(){
+  if (window.stream) {
+    console.log("Cierro el stream");
+    
+    window.stream.getTracks().forEach(function(track) {
+      track.stop();
+    });
+  }
 }
 
 function gotStream(stream) {
