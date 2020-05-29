@@ -1051,10 +1051,11 @@ function buscarEAN(ean) {
         a.openFood(resultado);
         nuevoArticulo(a);
         console.log(a);
-        // toast(a.nombre + ":" + a.marca + " " + a.cantidad)
+        // toast(a.nombre + ":" + a.marca + " " + a.cantidad
         return a
       }
       else
+    
         return false;
     }
   };
@@ -1081,7 +1082,7 @@ function escanearNuevos(){
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0131"
+document.getElementById('version').innerHTML = "0.0132"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){

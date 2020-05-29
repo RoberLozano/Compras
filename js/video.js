@@ -119,9 +119,13 @@ buttonGo.onclick = function () {
 };
 
 buttonAdd.onclick = function () {
-if(EAN){
-  buscarEAN(EAN);
-}
+  //cierra
+  getStream();
+  // autoAddEAN=false;
+
+// if(EAN){
+//   buscarEAN(EAN);
+// }
 };
 
 // scan barcode
