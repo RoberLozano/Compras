@@ -11,6 +11,7 @@ var barcode_result = document.getElementById('dbr');
 
 var EAN;
 var autoAddEAN=false;
+var seguir=true;
 
 var isPaused = false;
 var videoWidth = 640,
@@ -121,7 +122,8 @@ buttonGo.onclick = function () {
 buttonAdd.onclick = function () {
   //cierra
   closeStream();
-  // autoAddEAN=false;
+  autoAddEAN=false;
+  seguir=false;
 
 // if(EAN){
 //   buscarEAN(EAN);
@@ -177,11 +179,11 @@ function scanBarcode() {
   var err = ZXing._decode_any(decodePtr);
   console.timeEnd('decode barcode');
   console.log("error code", err);
-  if (err == -2) {
+  if (err == -2 && seguir) {
     setTimeout(scanBarcode, 100); //variamos el tiempo de vuelva a buscar
   }
   else
-  if(autoAddEAN){
+  if(autoAddEAN && seguir){
     setTimeout(scanBarcode, 2777); //escaneamos con más tiempo
   }
 }
