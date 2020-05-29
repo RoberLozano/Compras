@@ -35,6 +35,9 @@ tick();
 var decodeCallback = function (ptr, len, resultIndex, resultCount) {
   var result = new Uint8Array(ZXing.HEAPU8.buffer, ptr, len);
   console.log(String.fromCharCode.apply(null, result));
+  console.log(resultIndex);
+  console.log(resultCount);
+  
   barcode_result.textContent = String.fromCharCode.apply(null, result);
   EAN=barcode_result.textContent;
   toast(EAN);
@@ -171,7 +174,7 @@ function scanBarcode() {
   console.timeEnd('decode barcode');
   console.log("error code", err);
   if (err == -2) {
-    setTimeout(scanBarcode, 30);
+    setTimeout(scanBarcode, 100); //variamos el tiempo de vuelva a buscar
   }
   // else
   // if(autoAddEAN){

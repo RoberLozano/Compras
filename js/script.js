@@ -1079,7 +1079,7 @@ function escanearNuevos(){
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.013"
+document.getElementById('version').innerHTML = "0.0131"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
