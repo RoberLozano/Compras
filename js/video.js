@@ -122,7 +122,7 @@ buttonGo.onclick = function () {
 //ahora es salir
 buttonAdd.onclick = function () {
   //cierra
-  closeStream();
+  // closeStream();
   autoAddEAN=false;
   seguir=false;
 
