@@ -1064,7 +1064,9 @@ function buscarEAN(ean) {
   xmlhttp.send();
 
 }
-
+/**
+ * Un escaneo continuado de distintos articulos WIP
+ */
 function escanearNuevos(){
   var cam = M.Modal.getInstance(document.getElementById("modalcamara"));
   cam.open();

@@ -35,8 +35,8 @@ tick();
 var decodeCallback = function (ptr, len, resultIndex, resultCount) {
   var result = new Uint8Array(ZXing.HEAPU8.buffer, ptr, len);
   console.log(String.fromCharCode.apply(null, result));
-  console.log(resultIndex);
-  console.log(resultCount);
+  console.log("result index:"+resultIndex);
+  console.log("result count:"+resultCount);
   
   barcode_result.textContent = String.fromCharCode.apply(null, result);
   EAN=barcode_result.textContent;
@@ -176,10 +176,10 @@ function scanBarcode() {
   if (err == -2) {
     setTimeout(scanBarcode, 100); //variamos el tiempo de vuelva a buscar
   }
-  // else
-  // if(autoAddEAN){
-  //   setTimeout(scanBarcode, 2777); //escaneamos con más tiempo
-  // }
+  else
+  if(autoAddEAN){
+    setTimeout(scanBarcode, 2777); //escaneamos con más tiempo
+  }
 }
 // https://github.com/samdutton/simpl/tree/gh-pages/getusermedia/sources 
 var videoSelect = document.querySelector('select#videoSource');
