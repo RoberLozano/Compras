@@ -14,12 +14,17 @@ var speechRecognitionList = new SpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1);
 recognition.grammars = speechRecognitionList;
 
+
+
 //true para que escuche todo el tiempo
 recognition.continuous = true;
 recognition.lang = 'es-ES';
 recognition.interimResults = false;
 recognition.maxAlternatives = 3;
 
+/**separar los articulos por y
+ */
+var y=false;
 var boton;
 var hablado;
 
@@ -28,8 +33,12 @@ var hablado;
 //   console.log('Ready to receive a color command.');
 // }
 
-
-function hablar() {
+/**
+ * 
+ * @param {boolean} varios Si los articulos están separados por y
+ */
+function hablar(varios=false) {
+  if(varios) y=true
   boton= document.getElementById("hablar");
   hablado= document.getElementById("hablado");
   if(boton.style.color=="green") //ya esta escuchando y se para
@@ -38,6 +47,7 @@ function hablar() {
     return;
   }
   console.log('Botón de hablar pulsado');
+
   recognition.start();
   console.log('Preparado para escuchar');
 
@@ -79,13 +89,27 @@ recognition.onresult = function(event) {
   else hablado.innerHTML +=last.transcript+ " [" +time+ "] <br>"
   lastTime=time;
 
+if(y){
+  
+  let listaArticulos= last.transcript.split(" y ");
+  listaArticulos.forEach(ar => {
+    let a=new Articulo();
+    a.dictado(ar);
+    console.log(a);
+    nuevoArticulo(a);
+    
+  });
 
-  let a=new Articulo();
+}
+else{
+    let a=new Articulo();
   a.dictado(last.transcript);
 
   console.log(a);
 
   nuevoArticulo(a);
+}
+
 
 
   

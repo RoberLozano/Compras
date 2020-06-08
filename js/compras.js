@@ -472,6 +472,21 @@ class Compra {
 		this.user = user
 		this.lista = lista
 		this.fecha = fecha
+
+		let p = 0;
+		this.lista.forEach(a => {
+			p += a.total;
+		});
+
+		this.gastado= p / 100; //lo doy en €
+	}
+
+	guardar(){
+		console.log(` ${this.lista.length} articulos guardados en historial de ${this.user} el  ${this.fecha}`);
+		var ref = database.ref(`/usuarios/${this.user}/historial/`).child(this.fecha)
+		ref.set(a)
+		ref.set(this)
+		console.log(this);
 	}
 
 }
@@ -498,6 +513,8 @@ class ListaCompra {
 
 	/** Da el precio de TODOS los articulos marcados de la lista*/
 	marcados() {
+		// console.log("MARCADOS array:");
+		// console.log(this.compra());
 		let p = 0;
 		this.articulos.forEach(a => {
 			//no contaría los "true", creo
@@ -508,7 +525,7 @@ class ListaCompra {
 		return p / 100;
 	}
 
-	/** Devuelve el numero de elemntos marcados
+	/** Devuelve el numero de elementos marcados
 	 * 
 	 */
 	numMarcados() {
@@ -522,6 +539,14 @@ class ListaCompra {
 
 	numTotal() {
 		return this.articulos.length
+	}
+
+/**
+ * Devuelve un objeto Compra con los articulos marcados y fecha actual
+ */
+	compra(){
+		let marcados = articulos.filter((a) => (a.ok == true) );
+		return new Compra(this.usuario,marcados, Date.now().toISOString());
 	}
 
 

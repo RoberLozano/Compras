@@ -212,7 +212,10 @@ function cargarLista(l) {
     tablaLista(listaCompra.articulos);
 
     // TODO: Un formato decente, pongo cosas en el footer
-    $("#footer").html(`  ${listaCompra.numMarcados()}/${listaCompra.numTotal()} marcados,  ${listaCompra.marcados()}/${listaCompra.presupuesto()} €`)
+    $("#footer").html(`  ${listaCompra.numMarcados()}/${listaCompra.numTotal()} marcados,
+      ${listaCompra.marcados()}/${listaCompra.presupuesto()} €
+      <button class="btn modal-close waves-effect waves-light red darken-4 right"  onclick="comprar()">Comprar</button>
+      `)
     console.log(listaCompra.articulos);
 
 
@@ -492,6 +495,30 @@ function guardarArticulo(articulo, lista) {
   ref.set(articulo)
 }
 
+/**
+ * Guarda objeto Compra con los articulos marcados y fecha actual
+ */
+function comprar() {
+
+    let marcados = articulos.filter((a) => (a.ok == true) );
+    let fecha= new Date();
+
+    console.log(dateToISOLikeButLocal(fecha));
+    
+    let compra= new Compra(user,marcados, dateToISOLikeButLocal(fecha));
+    compra.guardar();
+	
+}
+
+
+function dateToISOLikeButLocal(date) {
+  const offsetMs = date.getTimezoneOffset() * 60 * 1000;
+  const msLocal =  date.getTime() - offsetMs;
+  const dateLocal = new Date(msLocal);
+  const iso = dateLocal.toISOString();
+  const isoLocal = iso.slice(0, 19);
+  return isoLocal;
+}
 
 function aceptarEAN() {
   console.log($("#dbr"));
@@ -1086,7 +1113,7 @@ function escanearNuevos(){
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0136"
+document.getElementById('version').innerHTML = "0.0137"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){
