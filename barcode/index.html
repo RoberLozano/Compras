@@ -17,7 +17,7 @@
 
     <script>
 
-        console.log(" version 1");
+        console.log("version 2");
 
         var resultados = new Map();
         var lastCode;
@@ -108,11 +108,11 @@
                     if (
                         libro.volumeInfo.title &&
                         libro.volumeInfo.authors) {
-                            document.querySelector('#resultado').innerText =
-                        libro.volumeInfo.title+"\n"
-                        libro.volumeInfo.authors+"\n"
-                        libro.volumeInfo.pageCount+"\n"
-                        libro.volumeInfo.publishedDate;
+                            document.querySelector('#resultado').innerText =`
+                        ${libro.volumeInfo.title}
+                        ${libro.volumeInfo.authors}
+                        ${libro.volumeInfo.pageCount}
+                        ${libro.volumeInfo.publishedDate}`
 
                     }
 
