@@ -18,7 +18,7 @@
     <script>
 
         console.log(" version 1");
-        
+
         var resultados = new Map();
         var lastCode;
         var libro;
@@ -56,13 +56,15 @@
         Quagga.onDetected(function (data) {
             var code = data.codeResult.code + "";
             if (code.length == 13) {
+                if (code == lastCode) return; //si es el mismo nada
+
                 let cs = code.slice(-1);
                 let ean = code.slice(0, 12);
                 if (cs == (ean13_checksum(ean) + "")) {
-
-                    lastCode=code;
+                    lastCode = code;
                     buscar(code);
                     document.querySelector('#resultado').innerText = lastCode
+
 
                     // if (resultados.get(code) == undefined) {
                     //     resultados.set(code, 0)
@@ -93,17 +95,29 @@
          */
         function buscar(isbn) {
             var bookSearchString = "https://www.googleapis.com/books/v1/volumes?" +
-						"q=isbn:"+isbn
+                "q=isbn:" + isbn
 
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     console.log(this.responseText);
-                    var json=JSON.parse(this.responseText);
+                    var json = JSON.parse(this.responseText);
                     console.log(json.items[0]);
-                    libro=json.items[0];
+                    libro = json.items[0];
                     document.querySelector('#resultado').innerText = lastCode
- 
+                    if (
+                        libro.volumeInfo.title &&
+                        libro.volumeInfo.authors) {
+                            document.querySelector('#resultado').innerText =
+                        libro.volumeInfo.title+"\n"
+                        libro.volumeInfo.authors+"\n"
+                        libro.volumeInfo.pageCount+"\n"
+                        libro.volumeInfo.publishedDate;
+
+                    }
+
+
+
                 }
             };
 
