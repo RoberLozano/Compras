@@ -63,7 +63,7 @@
                 if (cs == (ean13_checksum(ean) + "")) {
                     lastCode = code;
                     buscar(code);
-                    document.querySelector('#resultado').innerText = lastCode
+                    // document.querySelector('#resultado').innerText = lastCode
 
 
                     // if (resultados.get(code) == undefined) {
@@ -108,10 +108,10 @@
                     if (
                         libro.volumeInfo.title &&
                         libro.volumeInfo.authors) {
-                            document.querySelector('#resultado').innerText =`
-                        ${libro.volumeInfo.title}
+                            document.querySelector('#resultado').innerText =
+                        `${libro.volumeInfo.title}
                         ${libro.volumeInfo.authors}
-                        ${libro.volumeInfo.pageCount}
+                        ${libro.volumeInfo.pageCount} páginas
                         ${libro.volumeInfo.publishedDate}`
 
                     }
