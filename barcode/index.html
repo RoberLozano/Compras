@@ -17,7 +17,7 @@
 
     <script>
 
-        console.log("version 2");
+        console.log("version 3");
 
         var resultados = new Map();
         var lastCode;
@@ -56,7 +56,7 @@
         Quagga.onDetected(function (data) {
             var code = data.codeResult.code + "";
             if (code.length == 13) {
-                if (code == lastCode) return; //si es el mismo nada
+                if (code === lastCode) return; //si es el mismo nada
 
                 let cs = code.slice(-1);
                 let ean = code.slice(0, 12);
@@ -100,20 +100,18 @@
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
                     var json = JSON.parse(this.responseText);
-                    console.log(json.items[0]);
+                    // console.log(json.items[0]);
                     libro = json.items[0];
-                    document.querySelector('#resultado').innerText = lastCode
-                    if (
-                        libro.volumeInfo.title &&
+                    console.log(libro.volumeInfo);
+                    
+                    if (libro.volumeInfo.title &&
                         libro.volumeInfo.authors) {
                             document.querySelector('#resultado').innerText =
                         `${libro.volumeInfo.title}
                         ${libro.volumeInfo.authors}
                         ${libro.volumeInfo.pageCount} páginas
                         ${libro.volumeInfo.publishedDate}`
-
                     }
 
 
