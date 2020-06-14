@@ -18,6 +18,7 @@
     <script>
 
         var resultados = new Map();
+        var lastCode;
         // resultados[Symbol.iterator] = function* () {
         //     yield* [...this.entries()].sort((a, b) => a[1] - b[1]);
         // }
@@ -56,19 +57,23 @@
                 let ean = code.slice(0, 12);
                 if (cs == (ean13_checksum(ean) + "")) {
 
-                    if (resultados.get(code) == undefined) {
-                        resultados.set(code, 0)
-                    }
-                    else {
-                        resultados.set(code, +resultados.get(code) + 1)
-                    }
+                    lastCode=code;
+                    buscar(code);
+                    document.querySelector('#resultado').innerText = lastCode
 
-                    var mapSort = new Map([...resultados.entries()].sort((a, b) => b[1] - a[1]));
+                    // if (resultados.get(code) == undefined) {
+                    //     resultados.set(code, 0)
+                    // }
+                    // else {
+                    //     resultados.set(code, +resultados.get(code) + 1)
+                    // }
 
-                    document.querySelector('#resultado').innerText = `${code} (${data.codeResult.startInfo.error.toFixed(3)}) : ${resultados.get(code)}  `
-                    // document.querySelector('#resultado').innerText += mapSort;
-                    console.log(mapSort);
-                    
+                    // var mapSort = new Map([...resultados.entries()].sort((a, b) => b[1] - a[1]));
+
+                    // document.querySelector('#resultado').innerText = `${code} (${data.codeResult.startInfo.error.toFixed(3)}) : ${resultados.get(code)}  `
+                    // // document.querySelector('#resultado').innerText += mapSort;
+                    // console.log(mapSort);
+
 
                 }
                 else {
@@ -78,6 +83,28 @@
 
 
         });
+
+
+        /**
+         * @param {string} isbn El código ISBN
+         */
+        function buscar(isbn) {
+            var bookSearchString = "https://www.googleapis.com/books/v1/volumes?" +
+						"q=isbn:"+isbn
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    log(this.responseText);
+ 
+                }
+            };
+
+            xmlhttp.open("GET", bookSearchString, true);
+            // console.log("https://world.openfoodfacts.org/api/v0/product" + ean + ".json");
+            xmlhttp.send();
+
+        }
 
         // Cálculo del dígito de control EAN
         function ean13_checksum(message) {
