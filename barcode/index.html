@@ -17,8 +17,11 @@
 
     <script>
 
+        console.log(" version 1");
+        
         var resultados = new Map();
         var lastCode;
+        var libro;
         // resultados[Symbol.iterator] = function* () {
         //     yield* [...this.entries()].sort((a, b) => a[1] - b[1]);
         // }
@@ -98,6 +101,7 @@
                     console.log(this.responseText);
                     var json=JSON.parse(this.responseText);
                     console.log(json.items[0]);
+                    libro=json.items[0];
                     document.querySelector('#resultado').innerText = lastCode
  
                 }
