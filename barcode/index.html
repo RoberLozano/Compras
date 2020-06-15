@@ -11,13 +11,28 @@
 <body>
 
     <div id="resultado"></div>
+    <input type="number" id="isbn" name="isbn"><br>
     <div id="camera"></div>
 
     <script src="quagga.min.js"></script>
 
     <script>
 
-        console.log("version 3");
+        function isbn(n) {
+            var number=n.match(/\d+/g).map(Number)[0];
+            console.log(number);
+            
+            buscar(n.match(/\d+/g).map(Number));
+            document.getElementById("isbn").value=number;
+            
+        }
+
+
+        navigator.clipboard.readText().then(clipText =>
+            isbn(clipText));
+
+
+        console.log("version 4");
 
         var resultados = new Map();
         var lastCode;
@@ -104,11 +119,11 @@
                     // console.log(json.items[0]);
                     libro = json.items[0];
                     console.log(libro.volumeInfo);
-                    
+
                     if (libro.volumeInfo.title &&
                         libro.volumeInfo.authors) {
-                            document.querySelector('#resultado').innerText =
-                        `${libro.volumeInfo.title}
+                        document.querySelector('#resultado').innerText =
+                            `${libro.volumeInfo.title}
                         ${libro.volumeInfo.authors}
                         ${libro.volumeInfo.pageCount} páginas
                         ${libro.volumeInfo.publishedDate}`
