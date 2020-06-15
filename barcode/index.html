@@ -19,7 +19,7 @@
     <script>
 
         function isbn(n) {
-            var number=n.match(/\d+/g).map(Number)[0];
+            var number=n.match(/\d+/g).map(Number);
             console.log(number);
             
             buscar(n.match(/\d+/g).map(Number));
