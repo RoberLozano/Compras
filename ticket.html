@@ -23,13 +23,24 @@
     <script>
         var listaHabilidades=[];
         var cont=0;
-        var tipo="Agilidad";
         //inicializo el nombre a pj
-        let nombre = document.getElementById("nombre");
-        console.log("version 3");
+        // let nombre = document.getElementById("nombre");
+        console.log("version 4");
         
 
         function limpiar(){
+        }
+
+        function leer(texto) {
+            var n = new RegExp("(\\d+[,\\d+]*)\\s*" + simbolo)
+            let encontrado = texto.match(n);
+            if (encontrado) console.log(encontrado);
+
+            var n = new RegExp("(\\d+s)\\s\\w" + simbolo)
+            let encontrado = texto.match(n);
+            if (encontrado) console.log(encontrado);
+            
+            
         }
 
         function scan(params) {
@@ -39,43 +50,10 @@
             var texto= datos.value;
 
             console.log(texto);
-
-            // var lineas = texto.split("\n");
-            // lineas.forEach(linea => {
-            //     try {
-            //         porLinea(linea,"\t")
-            //     } catch (e) {
-            //     console.log("error en linea: "+linea);
-            //     }
-            // });
-            // console.log(listaHabilidades);
-
-
+            leer(texto);
 
         }
 
-        function porLinea(linea, separador=";"){
-            if(linea.startsWith(separador)||linea.startsWith("_")) return; // si la linea no tiene nombre se vuelve o si empieza en ___
-            var h = linea.split(separador, 3); //nombre,xp,valor
-            let nombre=h[0]
-            console.log("|"+nombre+"|");
-            if(nombre.toUpperCase().startsWith("HABILIDADES DE ")){       //si empieza por "HABILIDADES DE " sin que importen las mayúsculas
-                nombre=nombre.replace(/habilidades de /gi, "");// guardo solo el tipo de habilidad sin que importen las mayúsculas
-                tipo=capitalice(nombre);                    // 1 en mayusculas
-            }
-            else{
-                // var habilidad = new Habilidad(h[0], tipo, parseInt(h[2]));
-                // if(h[1]==="") h[1]=0;
-                // habilidad.xp=parseInt(h[1]);
-                // // listaHabilidades.push(habilidad);
-                // if(habilidad.valor==0 && !document.getElementById("incluir0").checked) return;
-                // pj.setHabilidad(habilidad);
-                // habilidad.save();
-                ++cont;
-            }
-
-
-        }
 
         
 function capitalice(string) 
