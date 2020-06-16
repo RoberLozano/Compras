@@ -26,24 +26,26 @@
         var tipo="Agilidad";
         //inicializo el nombre a pj
         let nombre = document.getElementById("nombre");
-        console.log("version 1");
+        console.log("version 2");
         
 
         function limpiar(){
         }
 
         function scan(params) {
-            cont=0;
-            var datos = document.getElementById("datos");
-            var texto= datos.value;
-            var lineas = texto.split("\n");
-            lineas.forEach(linea => {
-                try {
-                    porLinea(linea,"\t")
-                } catch (e) {
-                console.log("error en linea: "+linea);
-                }
-            });
+            console.log(nombre.innerText);
+            
+            // cont=0;
+            // var datos = document.getElementById("datos");
+            // var texto= datos.value;
+            // var lineas = texto.split("\n");
+            // lineas.forEach(linea => {
+            //     try {
+            //         porLinea(linea,"\t")
+            //     } catch (e) {
+            //     console.log("error en linea: "+linea);
+            //     }
+            // });
             // console.log(listaHabilidades);
 
 
