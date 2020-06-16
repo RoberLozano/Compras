@@ -32,12 +32,12 @@
         }
 
         function leer(texto) {
-            var n = new RegExp("(\\d+[,\\d+]*)\\s*" + simbolo)
+            var n = new RegExp("(\\d+[,\\d+]*)\\s",'gi')
             let encontrado = texto.match(n);
             if (encontrado) console.log(encontrado);
 
-            var n = new RegExp("(\\d+s)\\s\\w" + simbolo)
-            let encontrado = texto.match(n);
+            n = new RegExp("(\\d+s\\s\\w)",'gi')
+            encontrado = texto.match(n);
             if (encontrado) console.log(encontrado);
             
             
