@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset='utf-8'>
+
+<title>Importar Datos Ticket</title>
+
+<!-- <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+<script src='js/compras.js'></script>
+</head>
+<body>
+
+<h3>Importar Ticket</h3>
+<input type="text" class="text-light bg-dark h3 " id="nombre">
+<input type="checkbox" id="incluir0" value="1" checked>Añadir habilidades con 0<br>
+<p>Introduzca los datos en la caja de texto</p>
+    <textarea  id = "datos" name="text" rows =30 id="text"  style="width:96%;padding:2%;font:15px sans-serif;">
+    </textarea>
+    <button onclick="scan()">Scan</button>
+    <p id="resultado"></p>
+
+    <script>
+        var listaHabilidades=[];
+        var cont=0;
+        var tipo="Agilidad";
+        //inicializo el nombre a pj
+        let nombre = document.getElementById("nombre");
+        console.log("version 1");
+        
+
+        function limpiar(){
+        }
+
+        function scan(params) {
+            cont=0;
+            var datos = document.getElementById("datos");
+            var texto= datos.value;
+            var lineas = texto.split("\n");
+            lineas.forEach(linea => {
+                try {
+                    porLinea(linea,"\t")
+                } catch (e) {
+                console.log("error en linea: "+linea);
+                }
+            });
+            // console.log(listaHabilidades);
+
+
+
+        }
+
+        function porLinea(linea, separador=";"){
+            if(linea.startsWith(separador)||linea.startsWith("_")) return; // si la linea no tiene nombre se vuelve o si empieza en ___
+            var h = linea.split(separador, 3); //nombre,xp,valor
+            let nombre=h[0]
+            console.log("|"+nombre+"|");
+            if(nombre.toUpperCase().startsWith("HABILIDADES DE ")){       //si empieza por "HABILIDADES DE " sin que importen las mayúsculas
+                nombre=nombre.replace(/habilidades de /gi, "");// guardo solo el tipo de habilidad sin que importen las mayúsculas
+                tipo=capitalice(nombre);                    // 1 en mayusculas
+            }
+            else{
+                // var habilidad = new Habilidad(h[0], tipo, parseInt(h[2]));
+                // if(h[1]==="") h[1]=0;
+                // habilidad.xp=parseInt(h[1]);
+                // // listaHabilidades.push(habilidad);
+                // if(habilidad.valor==0 && !document.getElementById("incluir0").checked) return;
+                // pj.setHabilidad(habilidad);
+                // habilidad.save();
+                ++cont;
+            }
+
+
+        }
+
+        
+function capitalice(string) 
+{
+    return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
+}
+
+    </script>
+</body>
+</html> 

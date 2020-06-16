@@ -1,6 +1,6 @@
 {
   "lock": false,
-  "active": "f18e5a16fc94f5cdc3635c166611b28ab8379993",
+  "active": "346d34a0f0d96ddaf66e2099f5ecba91b7674a31",
   "sets": {
     "default": {
       "source": "default",
@@ -44,6 +44,12 @@
           "name": "Libros",
           "data": [
             "c:\\GitHub\\Compras\\barcode\\index.html"
+          ]
+        },
+        "346d34a0f0d96ddaf66e2099f5ecba91b7674a31": {
+          "name": "ticket",
+          "data": [
+            "c:\\GitHub\\Compras\\ticket.html"
           ]
         }
       }
