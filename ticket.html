@@ -1,53 +1,100 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-        <meta charset='utf-8'>
+    <meta charset='utf-8'>
 
-<title>Importar Datos Ticket</title>
+    <title>Importar Datos Ticket</title>
 
-<!-- <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-<!-- <script src='js/compras.js'></script> -->
+    <!-- <script src='js/compras.js'></script> -->
 </head>
+
 <body>
 
-<h3>Importar Ticket</h3>
-<input type="text" class="text-light bg-dark h3 " id="nombre">
-<input type="checkbox" id="incluir0" value="1" checked>Añadir habilidades con 0<br>
-<p>Introduzca los datos en la caja de texto</p>
-    <textarea  id = "datos" name="text" rows =30 id="text"  style="width:96%;padding:2%;font:15px sans-serif;">
+    <h3>Importar Ticket</h3>
+    <!-- <input type="text" class="text-light bg-dark h3 " id="nombre">
+    <input type="checkbox" id="incluir0" value="1" checked>Añadir habilidades con 0<br> -->
+    <p>Introduzca los datos en la caja de texto</p> <button onclick="scan()">Scan</button>
+    <textarea id="datos" name="text" rows=10 id="text" style="width:96%;padding:2%;font:15px sans-serif;">
     </textarea>
-    <button onclick="scan()">Scan</button>
+
     <p id="resultado"></p>
 
     <script>
-        var listaHabilidades=[];
-        var cont=0;
+        var listaHabilidades = [];
+        var cont = 0;
         //inicializo el nombre a pj
         // let nombre = document.getElementById("nombre");
         console.log("version 4");
-        
 
-        function limpiar(){
+
+        function limpiar() {
         }
 
         function leer(texto) {
-            var n = new RegExp("(\\d+[,\\d+]*)\\s",'gi')
-            let encontrado = texto.match(n);
-            if (encontrado) console.log(encontrado);
 
-            n = new RegExp("(\\d+s\\s\\w)",'gi')
-            encontrado = texto.match(n);
-            if (encontrado) console.log(encontrado);
-            
-            
+            var lineas = texto.split("\n");
+
+
+            let texto1 = " " + lineas[2];
+
+            // var n = new RegExp("(\\d+[,\\d+]*)\\s", 'gi')
+            // let encontrado = texto1.match(n);
+            // if (encontrado) console.log(encontrado);
+
+            // n = new RegExp("(\\d\\s[\\w\\s]+)", 'gi')
+
+            // // // alert(texto1.match(/\d{1,2}/gi)); // "1234"
+            // let encontrado = texto1.match(n);
+            // if (encontrado) console.log(encontrado);
+            let art = texto1.split(' 1 ');
+            art.shift(); //el primero no vale
+            // art.forEach((linea,i) => {
+            //     try {
+            //         console.log(i+linea + ":" + linea.length);
+            //     } catch (e) {
+            //         console.log("error en linea: " + linea);
+            //     }
+            // });
+            // console.log(art);
+
+            var p;
+
+            lineas.forEach((linea, i) => {
+                try {
+                    let precios = tienePrecios(linea);
+                    if (precios) p = precios;
+                } catch (e) {
+                    console.log("error en linea: " + i + e);
+                }
+            });
+
+            var resultado = document.getElementById("resultado");
+
+            if (p) art.forEach((linea, i) => {
+                resultado.innerHTML+=art[i] + "->" + p[i]+"<br>"
+                console.log(art[i] + "->" + p[i]);
+            });
+
+
+
+
+
+
+        }
+
+        function tienePrecios(linea) {
+            return linea.match(/\d+[,\.]\d{2}/g)
+
         }
 
         function scan(params) {
-            
-            cont=0;
+
+            cont = 0;
             var datos = document.getElementById("datos");
-            var texto= datos.value;
+            var texto = datos.value;
 
             console.log(texto);
             leer(texto);
@@ -55,12 +102,12 @@
         }
 
 
-        
-function capitalice(string) 
-{
-    return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
-}
+
+        function capitalice(string) {
+            return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
+        }
 
     </script>
 </body>
-</html> 
+
+</html>
