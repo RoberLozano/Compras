@@ -1,6 +1,6 @@
 {
   "lock": false,
-  "active": "346d34a0f0d96ddaf66e2099f5ecba91b7674a31",
+  "active": "43e4fdb907222d667549c25c6950ae0906c211b0",
   "sets": {
     "default": {
       "source": "default",
@@ -25,7 +25,11 @@
         "43e4fdb907222d667549c25c6950ae0906c211b0": {
           "name": "clases",
           "data": [
-            "c:\\GitHub\\Compras\\compras.js"
+            "c:\\GitHub\\Compras\\compras.js",
+            "c:\\GitHub\\Compras\\js\\compras.js",
+            "c:\\GitHub\\Compras\\index.html",
+            "c:\\GitHub\\Compras\\script.js",
+            "c:\\GitHub\\Compras\\js\\script.js"
           ]
         },
         "cb839052042a4b689a67c0a97c10067b4f4cadc1": {
@@ -50,7 +54,7 @@
           "name": "ticket",
           "data": [
             "c:\\GitHub\\Compras\\ticket.html",
-            "c:\\GitHub\\Compras\\js\\compras.js"
+            "c:\\GitHub\\Compras\\index.html"
           ]
         }
       }

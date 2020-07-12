@@ -5,25 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Ler Barcode </title>
+    <title> Libros </title>
 </head>
 
 <body>
 
     <div id="resultado"></div>
-    <input type="number" id="isbn" name="isbn"><br>
+    <input type="number" id="isbn" name="isbn" onchange="isbn(this.value)"><br>
     <div id="camera"></div>
 
     <script src="quagga.min.js"></script>
 
     <script>
 
+
+
         function isbn(n) {
             var number=(n.match(/\d+/g).map(Number)).join('');
             console.log(number);
             console.log(number.length);
+            // dejo sólo los números
 
-            
             buscar(number);
             document.getElementById("isbn").value=number;
             

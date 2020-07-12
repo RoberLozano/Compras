@@ -120,7 +120,7 @@ function quitarNumero(str) {
   return s;
 }
 function añadir() {
-  nuevoArticulo(new Articulo("nombre", "cantidad", "marca", "EAN=0"));
+  nuevoArticulo(new Articulo("nombre", "cantidad", "marca"));
 }
 
 function addData(chart, label, data) {
@@ -872,8 +872,11 @@ function checkContexto() {
     $("#fb-copiar").hide();
     $("#fb-cortar").hide();
     $("#fb-eliminar").hide();
+    $("#fb-editar").hide();
+    $("#fb-descuento").hide();
     // $("#fb-descuento").hide();
     $("#deseleccionarTodo").hide();
+    $("#fb-nuevo").show();
 
 
   }
@@ -881,8 +884,11 @@ function checkContexto() {
     $("#fb-copiar").show();
     $("#fb-cortar").show();
     $("#fb-eliminar").show();
-    // $("#fb-descuento").show();
+    $("#fb-editar").show();
+     $("#fb-descuento").show();
     $("#deseleccionarTodo").show();
+    $("#fb-nuevo").hide();
+
   }
 
   if (copiado.length < 1) {

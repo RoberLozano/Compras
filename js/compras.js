@@ -426,6 +426,15 @@ class ArticuloLista extends Articulo {
 // 	}
 //   });
 
+class Tienda {
+		constructor(nombre,direccion,grupo,localizacion) {
+			this.nombre = nombre
+			this.direccion = direccion
+			this.grupo = grupo
+			this.localizacion = localizacion
+	}
+}
+
 class Descuento {
 	/**
 	 * 
@@ -468,10 +477,11 @@ class Descuento {
  * Entidad para la gestión del historial de compras de usuario
  */
 class Compra {
-	constructor(user, lista, fecha) {
+	constructor(user, lista, fecha, tienda) {
 		this.user = user
 		this.lista = lista
 		this.fecha = fecha
+		this.tienda = tienda
 
 		let p = 0;
 		this.lista.forEach(a => {

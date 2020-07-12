@@ -223,6 +223,7 @@
         <option selected>total</option>
       </select> -->
 
+
       <select class="selectpicker" id="columnas" multiple data-live-search="true" data-width="fit" multiple
         title="Seleccione columnas a mostrar">
         <option selected label="ud">unidades</option>
@@ -399,8 +400,9 @@
       <i class="large material-icons">mode_edit</i>
     </a>
     <ul>
+      <li><a class="btn-floating green" id="fb-nuevo" onclick="añadir()"><i class="material-icons">add</i></a></li>
       <li><a class="btn-floating red" id="hablar" onclick="hablar()"><i class="material-icons">mic</i></a></li>
-      <li><a class="btn-floating yellow darken-2" id="editar" onclick="editar(selected[0], 'modal', visibles)"><i
+      <li><a class="btn-floating yellow darken-2" id="fb-editar" onclick="editar(selected[0], 'modal', visibles)"><i
             class="material-icons">mode_edit</i></a></li>
       <li><a class="btn-floating blue darken-3" style="color: white;" onclick="descuento()"
           id="fb-descuento"><b>%</b></a></li>

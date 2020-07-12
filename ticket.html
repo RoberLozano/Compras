@@ -49,15 +49,32 @@
             // // // alert(texto1.match(/\d{1,2}/gi)); // "1234"
             // let encontrado = texto1.match(n);
             // if (encontrado) console.log(encontrado);
+
+            // texto1=texto1.replace('.',' ');
+            // console.log(texto1.match(/(\d{1,2}\s\w{11,13})/gi));
+            // console.log(texto1.match(/(\s\d{1,2}\s[\w\s\.-]{11,14})/gi));
+            // console.log(texto1.match(/(\s\d{1,2}\s[\w\s\.]+)/gi));
+
             let art = texto1.split(' 1 ');
             art.shift(); //el primero no vale
-            // art.forEach((linea,i) => {
-            //     try {
-            //         console.log(i+linea + ":" + linea.length);
-            //     } catch (e) {
-            //         console.log("error en linea: " + linea);
-            //     }
-            // });
+            art.forEach((linea, i) => {
+                try {
+                    // console.log(linea+i);
+
+                    if (linea.length > 14) {
+                        console.log(linea+":"+linea.length);
+                        let m=linea.match(/(\d{1,2})/);
+                        // console.log(linea.match(/\s(\d+)\s/gi));
+                        console.log(linea.match(/(\d{1,2})/));
+                        console.log(linea.substring(15))
+                    }
+
+
+
+                } catch (e) {
+                    console.log("error en linea: " + linea);
+                }
+            });
             // console.log(art);
 
             var p;
@@ -74,7 +91,7 @@
             var resultado = document.getElementById("resultado");
 
             if (p) art.forEach((linea, i) => {
-                resultado.innerHTML+=art[i] + "->" + p[i]+"<br>"
+                resultado.innerHTML += art[i] + "->" + p[i] + "<br>"
                 console.log(art[i] + "->" + p[i]);
             });
 
