@@ -20,6 +20,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 var fbListasCollection = database.ref('/listas/');
+var fbListaActual;
 var fbActual;
 
 
@@ -126,12 +127,12 @@ function quitarNumero(str) {
 function nuevo() {
   nuevoArticulo(new Articulo("nombre", 0, ""));
   //nuevoArticulo guarda el articulo en lastArticulo
-  if ($("#cbMostrar").prop("checked")) //si es la opcion del menú
-    editar(lastArticulo, "modal", visibles)
-  else
-    editar(lastArticulo, "modal")
+  // if ($("#cbMostrar").prop("checked")) //si es la opcion del menú
+  //   editar(lastArticulo, "modal", visibles)
+  // else
+  //   editar(lastArticulo, "modal")
 
-    document.getElementById("editnombre").select();
+  //   document.getElementById("editnombre").select();
 }
 
 
@@ -179,61 +180,67 @@ function dark() {
 
 
 var objetoActual = "";
+/** Variable que dice si sincronizar o no
+ */
+var off= false;
+
+var onValueChange = function (listas) {
+  if(off) return;
+  // let visibles = ["nombre", "unidades", "precio", "total"]
+  visibles = $("#columnas").val();
+  articulos = [];
+
+  listas.forEach(function (firebaseListaReference) {
+    //this gets the actual data (JSON) for the order.
+    // var order = firebaseOrderReference.val().nombre;
+    // var precio = firebaseOrderReference.val().precioF;
+    let a = firebaseListaReference.val();
+    var clase = ArticuloLista;
+    // var art = new ArticuloLista(a.nombre);
+    var art = new clase(a.nombre);
+    art.setAll(a);
+
+    // console.log(a); //check your console to see it!
+    articulos.push(art);
+  });
+
+  //poner el header
+  createHeader();
+  lista = '/listas/' + $("#listas").val();
+
+  var listaCompra = new ListaCompra(lista, articulos, user);
+
+  listaCompra.marcados();
+  listaCompra.presupuesto();
+
+  // poblar la tabla
+  tablaLista(listaCompra.articulos);
+
+  // TODO: Un formato decente, pongo cosas en el footer
+  $("#footer").html(`  ${listaCompra.numMarcados()}/${listaCompra.numTotal()} marcados,
+      ${listaCompra.marcados()}/${listaCompra.presupuesto()} €
+      <button class="btn modal-close waves-effect waves-light red darken-4 right"  onclick="comprar()">Comprar</button>
+      `)
+  console.log(listaCompra.articulos);
+
+
+  // $('#header').css('textTransform', 'capitalize');
+}
 
 function cargarLista(l) {
   console.log("LISTA->" + $("#listas").val());
-  var fbListaActual
+ 
   if (l) { fbListaActual = database.ref('/listas/' + l); }
   else {
     fbListaActual = database.ref('/listas/' + $("#listas").val());
     localStorage.setItem("ultimaLista", $("#listas").val())
   }
+
+
   // fbListaActual.orderByChild("valor").on('value',function(listas){
-  fbListaActual.on('value', function (listas) {
 
-    // let visibles = ["nombre", "unidades", "precio", "total"]
-    visibles = $("#columnas").val();
-    articulos = [];
-
-    listas.forEach(function (firebaseListaReference) {
-      //this gets the actual data (JSON) for the order.
-      // var order = firebaseOrderReference.val().nombre;
-      // var precio = firebaseOrderReference.val().precioF;
-      let a = firebaseListaReference.val();
-      var clase = ArticuloLista;
-      // var art = new ArticuloLista(a.nombre);
-      var art = new clase(a.nombre);
-      art.setAll(a);
-
-      // console.log(a); //check your console to see it!
-      articulos.push(art);
-    });
-
-    //poner el header
-    createHeader();
-
-    lista = '/listas/' + $("#listas").val();
-
-    var listaCompra = new ListaCompra(lista, articulos, user);
-
-    listaCompra.marcados();
-    listaCompra.presupuesto();
-
-
-
-    // poblar la tabla
-    tablaLista(listaCompra.articulos);
-
-    // TODO: Un formato decente, pongo cosas en el footer
-    $("#footer").html(`  ${listaCompra.numMarcados()}/${listaCompra.numTotal()} marcados,
-      ${listaCompra.marcados()}/${listaCompra.presupuesto()} €
-      <button class="btn modal-close waves-effect waves-light red darken-4 right"  onclick="comprar()">Comprar</button>
-      `)
-    console.log(listaCompra.articulos);
-
-
-    // $('#header').css('textTransform', 'capitalize');
-  });
+    fbListaActual.off();
+  fbListaActual.on('value', onValueChange);
 
   $("#beta").html($("#listas").val())
   lista = '/listas/' + $("#listas").val();
@@ -493,7 +500,7 @@ function borrarLista(lista) {
 
 function borrarArticulo(a = lastArticulo, lista) {
   console.log(a);
-
+  //o id del articulo
   let ruta = `/listas/${$("#listas").val()}/${a.id}`
   console.log(ruta);
   database.ref(ruta).remove()
@@ -1021,9 +1028,17 @@ function cortar() {
 }
 
 function eliminar() {
-  selected.forEach(element => {
+
+  let l=selected.length;
+
+  //se quita la escucha
+  off=true
+
+  selected.forEach((element,i) => {
+    if(i==(l-1)) off=false; //si es el último se vuelve a activar la escucha
     element.borrar();
   });
+
   // $("#fb-pegar").hide();
 
   // M.toast({html: selected.length +" eliminados"})
