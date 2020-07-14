@@ -119,9 +119,22 @@ function quitarNumero(str) {
   var s = str.substring(str.search(separador) + 1);
   return s;
 }
-function añadir() {
-  nuevoArticulo(new Articulo("nombre", "cantidad", "marca"));
+
+/**
+ * Crea un nuevo artículo y lo edita
+ */
+function nuevo() {
+  nuevoArticulo(new Articulo("nombre", 0, ""));
+  //nuevoArticulo guarda el articulo en lastArticulo
+  if ($("#cbMostrar").prop("checked")) //si es la opcion del menú
+    editar(lastArticulo, "modal", visibles)
+  else
+    editar(lastArticulo, "modal")
+
+    document.getElementById("editnombre").select();
 }
+
+
 
 function addData(chart, label, data) {
   chart.data.labels.push(label);
@@ -461,13 +474,13 @@ function nuevoArticulo(articulo, lista) {
 
   var newPostRef = database.ref(ruta).push();
 
-  articulo = articulo.listar(ruta, newPostRef.key, localStorage.usuario || "Rober", articulo.unidades||1, articulo.precio||0);
+  articulo = articulo.listar(ruta, newPostRef.key, localStorage.usuario || "Rober", articulo.unidades || 1, articulo.precio || 0);
   console.log("lo ha listado");
-  
+
   // articulo.id=newPostRef.key;
   newPostRef.set(articulo)
   console.log(articulo);
-  
+
   lastArticulo = articulo
   toast(`Articulo ${articulo.nombre}`)
 
@@ -500,20 +513,20 @@ function guardarArticulo(articulo, lista) {
  */
 function comprar() {
 
-    let marcados = articulos.filter((a) => (a.ok == true) );
-    let fecha= new Date();
+  let marcados = articulos.filter((a) => (a.ok == true));
+  let fecha = new Date();
 
-    console.log(dateToISOLikeButLocal(fecha));
-    
-    let compra= new Compra(user,marcados, dateToISOLikeButLocal(fecha));
-    compra.guardar();
-	
+  console.log(dateToISOLikeButLocal(fecha));
+
+  let compra = new Compra(user, marcados, dateToISOLikeButLocal(fecha));
+  compra.guardar();
+
 }
 
 
 function dateToISOLikeButLocal(date) {
   const offsetMs = date.getTimezoneOffset() * 60 * 1000;
-  const msLocal =  date.getTime() - offsetMs;
+  const msLocal = date.getTime() - offsetMs;
   const dateLocal = new Date(msLocal);
   const iso = dateLocal.toISOString();
   const isoLocal = iso.slice(0, 19);
@@ -626,10 +639,10 @@ function editar(objeto, editor, propiedades) {
     cam.open();
 
     document.getElementById('go').click();
-    seguir=true;
+    seguir = true;
     //??
     // getStream(); //por si se ha cerrado antes
-    document.getElementById('add').hidden=true;
+    document.getElementById('add').hidden = true;
 
   });
 
@@ -885,7 +898,7 @@ function checkContexto() {
     $("#fb-cortar").show();
     $("#fb-eliminar").show();
     $("#fb-editar").show();
-     $("#fb-descuento").show();
+    $("#fb-descuento").show();
     $("#deseleccionarTodo").show();
     $("#fb-nuevo").hide();
 
@@ -1091,7 +1104,7 @@ function buscarEAN(ean) {
         return a
       }
       else
-    
+
         return false;
     }
   };
@@ -1104,14 +1117,14 @@ function buscarEAN(ean) {
 /**
  * Un escaneo continuado de distintos articulos WIP
  */
-function escanearNuevos(){
+function escanearNuevos() {
   var cam = M.Modal.getInstance(document.getElementById("modalcamara"));
   cam.open();
-  autoAddEAN=true; //que todo el que encuentre lo añada
-  seguir=true; //pos si lo habiamos parado
+  autoAddEAN = true; //que todo el que encuentre lo añada
+  seguir = true; //pos si lo habiamos parado
 
-  document.getElementById('add').hidden=false;
-  document.getElementById('add').disabled=false;
+  document.getElementById('add').hidden = false;
+  document.getElementById('add').disabled = false;
   document.getElementById('go').click();
 
 }
