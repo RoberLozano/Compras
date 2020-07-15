@@ -127,12 +127,12 @@ function quitarNumero(str) {
 function nuevo() {
   nuevoArticulo(new Articulo("nombre", 0, ""));
   //nuevoArticulo guarda el articulo en lastArticulo
-  // if ($("#cbMostrar").prop("checked")) //si es la opcion del menú
-  //   editar(lastArticulo, "modal", visibles)
-  // else
-  //   editar(lastArticulo, "modal")
+  if ($("#cbMostrar").prop("checked")) //si es la opcion del menú
+    editar(lastArticulo, "modal", visibles)
+  else
+    editar(lastArticulo, "modal")
 
-  //   document.getElementById("editnombre").select();
+    document.getElementById("editnombre").select();
 }
 
 
@@ -1147,7 +1147,7 @@ function escanearNuevos() {
 
 //cargo las opciones
 cargarOpciones();
-document.getElementById('version').innerHTML = "0.0137"
+document.getElementById('version').innerHTML = "0.014"
 
 // let listaGuardada = localStorage.getItem("ultimaLista");
 // if(listaGuardada){

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Pruebas Compras</title>
+</head>
+
+<body>
+    <input type="number" name="n" id="n" value="10" max="500">
+    <input type="range" name="rango" id="rango" min="0" max="500">
+    firestore
+    <button id=crear onclick="crear()">Crear</button>
+    <button id=crear onclick="crearBatch()">Crear Batch</button>
+    DB
+    <button id=crear onclick="crearDB()">Crear</button>
+    <br>
+    <button id=crear onclick="ordenarDB()">OrdenarDB</button>
+    <button id=crear onclick="ordenarFS()">OrdenarFS</button>
+    <!-- <button id=crear onclick="crearBatch()">Crear Batch</button> -->
+
+
+    <div id="resultado"></div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-firestore.js"></script>
+
+    <script src="js/compras.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDUMk_WnDHHg7FRT1zMEJnp1kykliprOCU",
+            authDomain: "fireui-777.firebaseapp.com",
+            databaseURL: "https://fireui-777.firebaseio.com",
+            projectId: "fireui-777",
+            storageBucket: "fireui-777.appspot.com",
+            messagingSenderId: "987970014632",
+            appId: "1:987970014632:web:8f1eef85cfe38570ab619d"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+        var db = firebase.firestore();
+    </script>
+
+    <script src="pruebas.js"></script>
+
+    <script>
+    </script>
+</body>
+
+</html>
