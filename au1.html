@@ -21,6 +21,7 @@
             var providerData = user.providerData;
             user.getIdToken().then(function(accessToken) {
                 document.getElementById('saludo').textContent = 'Hola '+displayName;
+                document.getElementById("imagen").src=photoURL;
               document.getElementById('sign-in-status').textContent = 'Signed in';
               document.getElementById('sign-in').textContent = 'Sign out';
               document.getElementById('account-details').textContent = JSON.stringify({
@@ -52,6 +53,7 @@
   </head>
   <body>
     <h1 id="saludo">Hola</h1>
+    <img id="imagen" src="" alt="Imagen de perfil" >
     <div id="sign-in-status"></div>
     <div id="sign-in"></div>
     <pre id="account-details"></pre>
