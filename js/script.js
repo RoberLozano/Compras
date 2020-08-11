@@ -17,6 +17,9 @@ var config = {
 
 //initialize your firebase
 firebase.initializeApp(config);
+
+var CLIENT_ID ='413603329074-9afr7gq1g037ldlhtar62r94rhbji099.apps.googleusercontent.com'
+
 var database = firebase.database();
 
 var fbListasCollection = database.ref('/listas/');
