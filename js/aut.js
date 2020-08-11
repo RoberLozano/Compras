@@ -13,6 +13,8 @@ initApp = function() {
        
             console.log(user);
             document.getElementById("userImg").src=photoURL;
+            document.getElementById('span-usuario').textContent = displayName;
+            document.getElementById('span-email').textContent = email;
     
         });
       } else {
