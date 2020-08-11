@@ -9,13 +9,20 @@
 </head>
 
 <body>
-    <input type="number" name="n" id="n" value="10" max="500">
-    <input type="range" name="rango" id="rango" min="0" max="500">
+    <label for="min">min</label>
+    <input type="number" name="min" id="min" value="1" max="500"  style="width: 5em;">
+    <label for="min">max</label>
+    <input type="number" name="max" id="max" value="10"  max="500" style="width: 5em;">
+
+    <!-- <input type="range" name="rango" id="rango" min="0" max="500"> -->
     firestore
     <button id=crear onclick="crear()">Crear</button>
     <button id=crear onclick="crearBatch()">Crear Batch</button>
+    <button id=preciosBatch onclick="preciosBatch(7)">Precios Batch</button>
     DB
-    <button id=crear onclick="crearDB()">Crear</button>
+    <button id=crear onclick="crearDB()">Crear DB</button>
+    <button id=borrar onclick="borrarDB()">Borrar DB</button>
+
     <br>
     <button id=crear onclick="ordenarDB()">OrdenarDB</button>
     <button id=crear onclick="ordenarFS()">OrdenarFS</button>
@@ -24,12 +31,32 @@
 
     <div id="resultado"></div>
 
+    <div id="charts" class="tab-pane fade">
+        <div>
+            <button id="change">Click to change the format</button>
+            <button id="datos" onclick="datos()">Nuevos datos</button>
+            <div id="chart_div"></div>
+            <canvas id="precioChart"></canvas>
+          <canvas id="barChart"></canvas>
+          <canvas id="radarChart"></canvas>
+      </div>
+      </div>
+
+      <!-- Charts de Google -->
+
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/es.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
     <script src="js/compras.js"></script>
+
+    <script src="charts.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->

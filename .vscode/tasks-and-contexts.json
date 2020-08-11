@@ -1,6 +1,6 @@
 {
   "lock": false,
-  "active": "43e4fdb907222d667549c25c6950ae0906c211b0",
+  "active": "b74e0f23cd9cd4e4cf0bc56588d8c0cca15daed0",
   "sets": {
     "default": {
       "source": "default",
@@ -25,18 +25,11 @@
         "43e4fdb907222d667549c25c6950ae0906c211b0": {
           "name": "clases",
           "data": [
-            "c:\\GitHub\\Compras\\compras.js",
-            "c:\\GitHub\\Compras\\js\\compras.js",
-            "c:\\GitHub\\Compras\\index.html",
-            "c:\\GitHub\\Compras\\script.js",
-            "c:\\GitHub\\Compras\\js\\script.js",
-            "c:\\Program Files\\Microsoft VS Code\\resources\\app\\extensions\\node_modules\\typescript\\lib\\lib.es5.d.ts",
-            "c:\\GitHub\\Compras\\ticket.html",
+            "c:\\GitHub\\Compras\\svg.html",
             "c:\\GitHub\\Compras\\p.html",
-            "c:\\GitHub\\Compras\\pruebas js",
             "c:\\GitHub\\Compras\\pruebas.js",
-            "c:\\Program Files\\Microsoft VS Code\\resources\\app\\extensions\\node_modules\\typescript\\lib\\lib.dom.d.ts",
-            "c:\\GitHub\\Compras\\barcode\\index.html"
+            "c:\\GitHub\\Compras\\charts.js",
+            "c:\\GitHub\\Compras\\js\\thumbnailViewer.js"
           ]
         },
         "cb839052042a4b689a67c0a97c10067b4f4cadc1": {
@@ -48,7 +41,7 @@
         "32b2dffaed8d2e6dbefacbefc08dc705a9a6bd43": {
           "name": "seleccionar",
           "data": [
-            "c:\\GitHub\\Compras\\\\script.js"
+            "c:\\GitHub\\Compras\\tiger.svg"
           ]
         },
         "f18e5a16fc94f5cdc3635c166611b28ab8379993": {
@@ -60,8 +53,25 @@
         "346d34a0f0d96ddaf66e2099f5ecba91b7674a31": {
           "name": "ticket",
           "data": [
-            "c:\\GitHub\\Compras\\ticket.html",
-            "c:\\GitHub\\Compras\\index.html"
+            "c:\\GitHub\\Compras\\index.html",
+            "c:\\GitHub\\Compras\\ticket.html"
+          ]
+        },
+        "b74e0f23cd9cd4e4cf0bc56588d8c0cca15daed0": {
+          "name": "Mapa",
+          "data": [
+            "c:\\GitHub\\Compras\\charts.js",
+            "c:\\GitHub\\Compras\\svg.html",
+            "c:\\GitHub\\Compras\\tiger.svg",
+            "c:\\GitHub\\Compras\\pruebas.js",
+            "c:\\GitHub\\Compras\\au.html",
+            "c:\\GitHub\\Compras\\config.js",
+            "c:\\GitHub\\Compras\\index.html",
+            "c:\\GitHub\\Compras\\js\\compras.js",
+            "c:\\GitHub\\Compras\\js\\script.js",
+            "c:\\GitHub\\Compras\\js\\svg-pan-zoom.min.js",
+            "c:\\GitHub\\Compras\\images\\Roshil.svg",
+            "c:\\GitHub\\Compras\\p.html"
           ]
         }
       }

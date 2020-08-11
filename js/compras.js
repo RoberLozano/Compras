@@ -597,6 +597,14 @@ class Fecha {
 
 }
 
+class Precio {
+		constructor(EAN,precio,fecha) {
+			this.EAN = EAN
+			this.precio = precio
+			this.fecha = fecha
+	}
+}
+
 // let base = 32;
 // var d = new Date();
 // // d = parseInt(d / 1000) //me suda la polla los ms y ahorramos datos
