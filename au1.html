@@ -20,6 +20,7 @@
             var phoneNumber = user.phoneNumber;
             var providerData = user.providerData;
             user.getIdToken().then(function(accessToken) {
+                document.getElementById('saludo').textContent = 'Hola '+displayName;
               document.getElementById('sign-in-status').textContent = 'Signed in';
               document.getElementById('sign-in').textContent = 'Sign out';
               document.getElementById('account-details').textContent = JSON.stringify({
@@ -50,7 +51,7 @@
     </script>
   </head>
   <body>
-    <h1>Welcome to My Awesome App</h1>
+    <h1 id="saludo">Hola</h1>
     <div id="sign-in-status"></div>
     <div id="sign-in"></div>
     <pre id="account-details"></pre>
