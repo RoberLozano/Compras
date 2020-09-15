@@ -65,7 +65,16 @@ fbListasCollection.on('value', function (listas) {
   });
 
 
+//carga la lista guardada excepto si se le pasa como parámetro
+
   let listaGuardada = localStorage.getItem("ultimaLista");
+
+  const url = new URL(location);
+  const param = url.searchParams.get('lista')
+  console.log("PERSONAJE:" + param);
+  if(param) listaGuardada=param;
+
+
   if (listaGuardada) {
 
     lista = listaGuardada;
