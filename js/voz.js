@@ -39,6 +39,7 @@ var hablado;
  */
 function hablar(varios=false) {
   if(varios) y=true
+  else y=false //para que no se guarde la última llamada
   boton= document.getElementById("hablar");
   hablado= document.getElementById("hablado");
   if(boton.style.color=="green") //ya esta escuchando y se para
