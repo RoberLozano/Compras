@@ -477,7 +477,7 @@ class Descuento {
  * Entidad para la gestión del historial de compras de usuario
  */
 class Compra {
-	constructor(user, lista, fecha, tienda) {
+	constructor(user, lista, fecha, tienda="") {
 		this.user = user
 		this.lista = lista
 		this.fecha = fecha
@@ -486,6 +486,8 @@ class Compra {
 		let p = 0;
 		this.lista.forEach(a => {
 			p += a.total;
+			//historial de precios
+			if(a.EAN && a.precio) new Precio(a.EAN,a.precio,this.fecha,this.tienda).guardar();
 		});
 
 		this.gastado= p / 100; //lo doy en €
@@ -494,7 +496,7 @@ class Compra {
 	guardar(){
 		console.log(` ${this.lista.length} articulos guardados en historial de ${this.user} el  ${this.fecha}`);
 		var ref = database.ref(`/usuarios/${this.user}/historial/`).child(this.fecha)
-		ref.set(a)
+		// ref.set(a)
 		ref.set(this)
 		console.log(this);
 	}
@@ -598,10 +600,22 @@ class Fecha {
 }
 
 class Precio {
-		constructor(EAN,precio,fecha) {
+		constructor(EAN,precio,fecha,tienda) {
 			this.EAN = EAN
 			this.precio = precio
 			this.fecha = fecha
+			if(tienda) this.tienda= tienda
+	}
+
+	guardar(){
+		var ref = database.ref(`/articulos/precios/historial/`).child(this.EAN).child(this.fecha);
+		ref.set(this);
+
+
+	}
+
+	static cargar(ean){
+		
 	}
 }
 

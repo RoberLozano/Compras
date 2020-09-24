@@ -4,7 +4,7 @@ const CP = ["FUE", "CON", "TAM", "INT", "POD", "DES", "ASP"];
 //#region charts
 
 
-google.charts.load('current', {'packages':['corechart']});
+google.charts.load('current', {'packages':['corechart'], 'language': 'es'}); 
 google.charts.setOnLoadCallback(drawChart);
 
 var chart;
@@ -32,8 +32,8 @@ function drawChart() {
 
   var options = {
     title: 'Rate the Day on a Scale of 1 to 10',
-    // width: 900,
-    // height: 500,
+    width: 700,
+    height: 300,
     hAxis: {
       format: 'd/M/yy',
       gridlines: {count: 15}

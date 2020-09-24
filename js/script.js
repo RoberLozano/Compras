@@ -37,7 +37,7 @@ var articulos = [];
 var lista;
 
 /** nombre del usuario  */
-var user;
+var user="Rober"
 
 
 
