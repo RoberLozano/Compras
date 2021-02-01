@@ -228,6 +228,7 @@ function getStream() {
 function closeStream(){
   if (window.stream) {
     console.log("Cierro el stream");
+    alert("Cierro el stream");
     
     window.stream.getTracks().forEach(function(track) {
       track.stop();

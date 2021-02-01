@@ -663,7 +663,7 @@ function editar(objeto, editor, propiedades) {
     seguir = true;
     //??
     // getStream(); //por si se ha cerrado antes
-    document.getElementById('add').hidden = true;
+    document.getElementById('salir').hidden = true;
 
   });
 
@@ -699,6 +699,11 @@ function editar(objeto, editor, propiedades) {
     xmlhttp.open("GET", "https://world.openfoodfacts.org/api/v0/product/" + $("#editEAN").val() + ".json", true);
     console.log("https://world.openfoodfacts.org/api/v0/product" + $("#editEAN").val() + ".json");
     xmlhttp.send();
+  });
+
+  $("#salir").on("click", function () {
+    closeStream();
+
   });
 
 
@@ -1153,8 +1158,8 @@ function escanearNuevos() {
   autoAddEAN = true; //que todo el que encuentre lo añada
   seguir = true; //pos si lo habiamos parado
 
-  document.getElementById('add').hidden = false;
-  document.getElementById('add').disabled = false;
+  document.getElementById('salir').hidden = false;
+  document.getElementById('salir').disabled = false;
   document.getElementById('go').click();
 
 }
