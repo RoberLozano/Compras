@@ -23,6 +23,8 @@ var isPC = true;
 var ZXing = null;
 var decodePtr = null;
 
+var videoSelect; //se inicializa con initVideo()
+
 var tick = function () {
   if (window.ZXing) {
     ZXing = ZXing();
@@ -188,13 +190,7 @@ function scanBarcode() {
     setTimeout(scanBarcode, 2777); //escaneamos con más tiempo
   }
 }
-// https://github.com/samdutton/simpl/tree/gh-pages/getusermedia/sources 
-var videoSelect = document.querySelector('select#videoSource');
 
-navigator.mediaDevices.enumerateDevices()
-  .then(gotDevices).then(getStream).catch(handleError);
-
-videoSelect.onchange = getStream;
 
 function gotDevices(deviceInfos) {
   for (var i = deviceInfos.length - 1; i >= 0; --i) {
@@ -246,4 +242,16 @@ function gotStream(stream) {
 
 function handleError(error) {
   console.log('Error: ', error);
+}
+
+function initVideo() {
+
+  // https://github.com/samdutton/simpl/tree/gh-pages/getusermedia/sources 
+var videoSelect = document.querySelector('select#videoSource');
+
+navigator.mediaDevices.enumerateDevices()
+  .then(gotDevices).then(getStream).catch(handleError);
+
+videoSelect.onchange = getStream;
+  
 }

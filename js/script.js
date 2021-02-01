@@ -653,6 +653,8 @@ function editar(objeto, editor, propiedades) {
 
   $("#scan").on("click", function () {
     console.log("click en scan");
+    //TODO:
+    initVideo();
 
     var cam = M.Modal.getInstance(document.getElementById("modalcamara"));
     cam.open();
@@ -1146,6 +1148,7 @@ function buscarEAN(ean) {
  */
 function escanearNuevos() {
   var cam = M.Modal.getInstance(document.getElementById("modalcamara"));
+  initVideo();
   cam.open();
   autoAddEAN = true; //que todo el que encuentre lo añada
   seguir = true; //pos si lo habiamos parado
