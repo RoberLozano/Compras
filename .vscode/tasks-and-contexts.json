@@ -1,6 +1,6 @@
 {
   "lock": false,
-  "active": "73d316965609fc4cf60385337cd65c01d48f9642",
+  "active": "aee0c47746f5663d0b5772d866d2ca10458f8369",
   "sets": {
     "default": {
       "source": "default",
@@ -9,18 +9,10 @@
         "73d316965609fc4cf60385337cd65c01d48f9642": {
           "name": "barrras",
           "data": [
-            "c:\\GitHub\\Compras\\js\\compras.js",
-            "c:\\GitHub\\Compras\\barcode\\index.html",
-            "c:\\GitHub\\Compras\\js\\video.js",
             "c:\\GitHub\\Compras\\js\\script.js",
-            "c:\\GitHub\\Compras\\js\\voz.js",
-            "c:\\GitHub\\Compras\\p.html",
-            "c:\\GitHub\\Compras\\charts.js",
-            "c:\\GitHub\\Compras\\pruebas.js",
             "c:\\GitHub\\Compras\\index.html",
-            "c:\\GitHub\\Compras\\js\\zxing.js",
-            "c:\\Program Files\\Microsoft VS Code\\resources\\app\\extensions\\node_modules\\typescript\\lib\\lib.dom.d.ts",
-            "c:\\GitHub\\Compras\\js\\aut.js"
+            "c:\\GitHub\\Compras\\opciones.html",
+            "c:\\GitHub\\Compras\\js\\video.js"
           ]
         },
         "b8374f8d6a9b671e3435e91018f09ad830c59c8d": {
@@ -71,6 +63,23 @@
             "c:\\GitHub\\Compras\\js\\voz.js",
             "c:\\GitHub\\Compras\\js\\script.js",
             "c:\\GitHub\\Compras\\index.html"
+          ]
+        },
+        "aee0c47746f5663d0b5772d866d2ca10458f8369": {
+          "name": "autentificacion",
+          "data": [
+            "c:\\GitHub\\Compras\\au.html",
+            "c:\\GitHub\\Compras\\js\\aut.js",
+            "c:\\GitHub\\Compras\\_config.yml",
+            "c:\\GitHub\\Compras\\au1.html",
+            "c:\\GitHub\\Compras\\pruebas.js",
+            "c:\\GitHub\\Compras\\p.html",
+            "c:\\GitHub\\Compras\\js\\compras.js",
+            "c:\\GitHub\\Compras\\js\\script.js",
+            "c:\\Program Files\\Microsoft VS Code\\resources\\app\\extensions\\node_modules\\typescript\\lib\\lib.dom.d.ts",
+            "c:\\GitHub\\Compras\\index.html",
+            "c:\\GitHub\\Compras\\js\\video.js",
+            "c:\\GitHub\\Compras\\js\\voz.js"
           ]
         }
       }

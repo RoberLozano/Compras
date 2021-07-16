@@ -427,6 +427,9 @@ function crearEventos(objeto, cell, key) {
 
       });
     }
+    if (key == "cantidad") {
+      console.log(objeto.cantidad);
+    }
     else {
       cell.addEventListener('click', function () {
         if ($("#cbMostrar").prop("checked")) //si es la opcion del menú

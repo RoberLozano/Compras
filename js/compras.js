@@ -302,7 +302,9 @@ class Articulo {
 		if (aEAN.product.product_name_es || aEAN.product.product_name)
 			this.nombre = aEAN.product.product_name_es || aEAN.product.product_name
 		if (aEAN.product.brands) this.marca = aEAN.product.brands
-		if (aEAN.product.quantity) this.cantidad = aEAN.product.quantity
+		if (aEAN.product.quantity) {this.cantidad = aEAN.product.quantity
+									this.dictado(aEAN.product.quantity)
+									}
 	}
 
 	/** Devuelve el Articulo que corresponde con ese EAN
@@ -323,6 +325,22 @@ class Articulo {
 			// objetoTabla(a, "myTable", visibles)
 			return a;
 		});
+	}
+
+	/**Comprueba que dos articulos son iguales
+	 * 
+	 * @param {Articulo} articulo el articulo con el cual comparar
+	 * @returns true si el articulo es igual o false si no
+	 */
+	igual(articulo){
+		if(this.nombre && this.nombre === a.nombre) return true;
+		if(this.nombre === a.nombre && this.cantidad === a.cantidad && this.marca === a.marca) return true;
+		return false;
+	}
+
+	similar(articulo){
+		if(this.nombre === a.nombre){}
+
 	}
 }
 

@@ -318,11 +318,16 @@ buscarEAN(900003);
 // myChart.data.datasets[0].data = articulos;
 // myChart.update();
 
+
+/**
+ * Crea la gráfica de los datos
+ * @param {*} params 
+ */
 function datos(params) {
 
     var data = new google.visualization.DataTable();
-    data.addColumn('date', 'Time of Day');
-    data.addColumn('number', 'Rating');
+    data.addColumn('date', 'Día');
+    data.addColumn('number', 'Precio');
 
     
   data.addRows(
