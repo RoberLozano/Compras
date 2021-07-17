@@ -303,7 +303,7 @@ class Articulo {
 			this.nombre = aEAN.product.product_name_es || aEAN.product.product_name
 		if (aEAN.product.brands) this.marca = aEAN.product.brands
 		if (aEAN.product.quantity) {this.cantidad = aEAN.product.quantity
-									this.dictado(aEAN.product.quantity)
+									this.dictado(aEAN.product.quantity)// para que te pille los g
 									}
 	}
 

@@ -427,6 +427,7 @@ function crearEventos(objeto, cell, key) {
 
       });
     }
+    else
     if (key == "cantidad") {
       console.log(objeto.cantidad);
     }
