@@ -245,7 +245,8 @@ class Articulo {
 				console.log(cifra + tipo);
 
 				switch (tipo) {//TODO: mirar si debo sumar cantidades del mismo tipo
-					case TipoCantidad.MASA:
+					case TipoCantidad.MASA:	this.cantidad = cifra;
+					break;
 					case TipoCantidad.VOLUMEN: this.cantidad = cifra;
 						break;
 					case TipoCantidad.PRECIO: this.precio = cifra;
