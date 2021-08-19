@@ -35,6 +35,8 @@ var tick = function () {
 };
 tick();
 
+var lastEAN=null; //para que no busque dos veces el mismo
+
 var decodeCallback = function (ptr, len, resultIndex, resultCount) {
   var result = new Uint8Array(ZXing.HEAPU8.buffer, ptr, len);
   console.log(String.fromCharCode.apply(null, result));
@@ -43,12 +45,14 @@ var decodeCallback = function (ptr, len, resultIndex, resultCount) {
   
   barcode_result.textContent = String.fromCharCode.apply(null, result);
   EAN=barcode_result.textContent;
-  toast(EAN);
-  if(autoAddEAN && EAN){//si hay codigo y que se añada automatico
+ 
+  if(autoAddEAN && EAN && (lastEAN!=EAN)){//si hay codigo y que se añada automatico y no es el último
+    toast(EAN);
     buscarEAN(EAN);
     // buttonGo.click(); //que busque otro
 
   }
+  lastEAN=EAN;
   buttonGo.disabled = false;
   if (isPC) {
     canvas.style.display = 'block';
