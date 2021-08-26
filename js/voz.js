@@ -4,10 +4,10 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 
 // var colors = [ 'aqua' , 'azure' , 'beige', 'bisque', 'black', 'blue', 'brown', 'chocolate', 'coral', 'crimson', 'cyan', 'fuchsia', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'indigo', 'ivory', 'khaki', 'lavender', 'lime', 'linen', 'magenta', 'maroon', 'moccasin', 'navy', 'olive', 'orange', 'orchid', 'peru', 'pink', 'plum', 'purple', 'red', 'salmon', 'sienna', 'silver', 'snow', 'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'white', 'yellow'];
 
-var colors = [ 'agua' , 'azul' , 'beis', 'negro', 'blanco', 'blue', 'marron', 'chocolate', 'coral', 'escarlata','rojo', 'verde']
+var colors = ['agua', 'azul', 'beis', 'negro', 'blanco', 'blue', 'marron', 'chocolate', 'coral', 'escarlata', 'rojo', 'verde']
 var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;'
 
-var resultado="";
+var resultado = "";
 
 var recognition = new SpeechRecognition();
 var speechRecognitionList = new SpeechGrammarList();
@@ -24,7 +24,7 @@ recognition.maxAlternatives = 3;
 
 /**separar los articulos por y
  */
-var y=false;
+var y = false;
 var boton;
 var hablado;
 
@@ -37,12 +37,12 @@ var hablado;
  * 
  * @param {boolean} varios Si los articulos están separados por y
  */
-function hablar(varios=false) {
-  if(varios) y=true
-  else y=false //para que no se guarde la última llamada
-  boton= document.getElementById("hablar");
-  hablado= document.getElementById("hablado");
-  if(boton.style.color=="green") //ya esta escuchando y se para
+function hablar(varios = false) {
+  if (varios) y = true
+  else y = false //para que no se guarde la última llamada
+  boton = document.getElementById("hablar");
+  hablado = document.getElementById("hablado");
+  if (boton.style.color == "green") //ya esta escuchando y se para
   {
     recognition.stop();
     return;
@@ -53,16 +53,16 @@ function hablar(varios=false) {
   console.log('Preparado para escuchar');
 
   boton.style.color = "green";
-  
+
 }
 
 
 // Controlo cuando genera los resultados para evitar el eco en Android https://issuetracker.google.com/issues/152628934
 // eliminarlo cuando el bug sea resuelto
-var lastTime=0;
+var lastTime = 0;
 
 
-recognition.onresult = function(event) {
+recognition.onresult = function (event) {
   // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
   // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
   // It has a getter so it can be accessed like an array
@@ -71,85 +71,172 @@ recognition.onresult = function(event) {
   // These also have getters so they can be accessed like arrays.
   // The second [0] returns the SpeechRecognitionAlternative at position 0.
   // We then return the transcript property of the SpeechRecognitionAlternative object
-  let last=event.results[event.results.length-1][0];
-  let lastArray=event.results[event.results.length-1];
+  let last = event.results[event.results.length - 1][0];
+  let lastArray = event.results[event.results.length - 1];
   // console.log(`Tamaño: ${size}`);
 
   // console.log('Confidence: ' + last.confidence);
-  var time= Date.now();
+  var time = Date.now();
 
   console.log(`${last.transcript}  (${last.confidence}) [${time}]`);
-  
 
- if((time-lastTime)<713){//si es el eco del anterior salimos (vamos con 300 ms)
-  console.log("repetido");
-   return;
-  } 
 
-  if(last.confidence<0.5) console.log(event.results[event.results.length-1]);
-  else hablado.innerHTML +=last.transcript+ " [" +time+ "] <br>"
-  lastTime=time;
+  if ((time - lastTime) < 713) {//si es el eco del anterior salimos (vamos con 300 ms)
+    console.log("repetido");
+    return;
+  }
 
-if(y){
-  
-  let listaArticulos= last.transcript.split(" y ");
-  listaArticulos.forEach(ar => {
-    let a=new Articulo();
-    a.dictado(ar);
+  if (last.confidence < 0.5) console.log(event.results[event.results.length - 1]);
+  else hablado.innerHTML += last.transcript + " [" + time + "] <br>"
+  lastTime = time;
+
+  if (voz(last.transcript)) return;
+  if (y) {
+
+    let listaArticulos = last.transcript.split(" y ");
+    listaArticulos.forEach(ar => {
+      let a = new Articulo();
+      a.dictado(ar);
+      console.log(a);
+      nuevoArticulo(a);
+
+    });
+
+  }
+  else {
+    let a = new Articulo();
+    a.dictado(last.transcript);
+
     console.log(a);
+
     nuevoArticulo(a);
-    
-  });
-
-}
-else{
-    let a=new Articulo();
-  a.dictado(last.transcript);
-
-  console.log(a);
-
-  nuevoArticulo(a);
-}
+  }
 
 
 
-  
+
   // let numProp=a.propiedades();
-  
+
 
   //#region alternativas solo si la primera lectura tiene baja confianza
-    // TODO: solo si la primera lectura tiene baja confianza
-    // var articulos=[];
-    // for (let index = 0; index < recognition.maxAlternatives; index++) {
-    //   console.log(lastArray[index].transcript +":"+lastArray[index].confidence);
-    //     // console.log("CREA:");
-    //   // articulos[index]=new Articulo();
-    //   // articulos[index].dictado(lastArray[index].transcript);
-    //   // console.log(articulos[index]+":"+articulos[index].propiedades());
-    // }
-    // console.log(articulos);
+  // TODO: solo si la primera lectura tiene baja confianza
+  // var articulos=[];
+  // for (let index = 0; index < recognition.maxAlternatives; index++) {
+  //   console.log(lastArray[index].transcript +":"+lastArray[index].confidence);
+  //     // console.log("CREA:");
+  //   // articulos[index]=new Articulo();
+  //   // articulos[index].dictado(lastArray[index].transcript);
+  //   // console.log(articulos[index]+":"+articulos[index].propiedades());
+  // }
+  // console.log(articulos);
   //#endregion 
-  
+
   // writeArticulo(new Articulo(last.transcript));
 
 
   // console.log(event.results[0][0].transcript);
   // console.log(event.results);
-  
+
 }
 
-recognition.onspeechend = function() {
+recognition.onspeechend = function () {
   recognition.stop();
   boton.style.color = "";
 }
 
-recognition.onnomatch = function(event) {
+recognition.onnomatch = function (event) {
   console.log("I didn't recognise that color.");
   boton.style.color = "red";
 }
 
-recognition.onerror = function(event) {
+recognition.onerror = function (event) {
   console.log('Error occurred in recognition: ' + event.error);
   boton.style.color = "red";
-  
+
+}
+
+
+function voz(dictado) {
+  // if(dictado.)
+
+  //no sé si será mejor con numeros
+  // dictado=conNumeros(dictado)
+  var expresion = /abrir lista (.*)/i;
+  var abrirLista = dictado.match(expresion);
+
+  // console.log(abrirLista);
+  if (abrirLista) {
+    let lista = abrirLista[1]
+    abreLista(lista);
+    return true;
+  }
+
+  // if (dictado.includes('localización')){
+  //     dictado.
+  // }
+
+  // var erPuntos = /puntos de (golpe|vida|magia|fatiga|resistencia)/i;
+  var erPuntos = /puntos de (.*)/i;
+  var p = dictado.match(erPuntos);
+  if (p) {
+    console.log(p);
+    puntos(p[1])
+  }
+
+  // var h=dictado.match(/habilidad (w+)/i);
+  var h = dictado.match(/quitar filtro (.*)/i);
+  if (h) {
+    console.log(h);
+    quitarFiltro();
+    return true;
+  }
+
+  var b = dictado.match(/buscar (.*)/i);
+  if (b) {
+    console.log(b);
+    buscarVoz(b[1])
+    return true;
+  }
+
+
+
+}
+
+function abreLista(lista) {
+  let al = nombresSelect('listas');
+
+  // console.log(lista);
+  // console.log(al);
+  var max = 0;
+  let mejor;
+  al.forEach(l => {
+    let similar = jaroWrinker(lista, l.toLowerCase())
+    console.log(l, similar, max);
+    if (similar >= max) {
+      mejor = l;
+      max = similar;
+    }
+  });
+  console.log(mejor);
+  //cambio el valor en el select y disparo el evento
+  let el = document.getElementById("listas");
+  el.value = mejor;
+  var event = new Event('change');
+  el.dispatchEvent(event);
+
+}
+
+function buscarVoz(busqueda) {
+  // iniciarBusqueda(busqueda);
+  let el = document.getElementById("buscar");
+  let x = document.getElementById("buscador");
+  x.style.display = "block"
+  el.value = busqueda;
+  var event = new Event("keyup");
+  el.dispatchEvent(event);
+}
+
+function quitarFiltro() {
+  iniciarBusqueda("");
+
 }

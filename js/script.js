@@ -242,7 +242,8 @@ var onValueChange = function (listas) {
 function cargarLista(l) {
   console.log("LISTA->" + $("#listas").val());
  
-  if (l) { fbListaActual = database.ref('/listas/' + l); }
+  if (l) { fbListaActual = database.ref('/listas/' + l);
+            $("#beta").html(l)}
   else {
     fbListaActual = database.ref('/listas/' + $("#listas").val());
     localStorage.setItem("ultimaLista", $("#listas").val())
@@ -864,13 +865,21 @@ function addElement2Select(element, select) {
 
 }
 
+function iniciarBusqueda(texto) {
+  $("#myTable tr").filter(function () {
+    $(this).toggle($(this).text().toLowerCase().indexOf(texto) > -1)
+  });
+  
+}
 
 //BUSCAR
 $("#buscar").on("keyup", function () {
   var value = $(this).val().toLowerCase();
-  $("#myTable tr").filter(function () {
-    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-  });
+  iniciarBusqueda(value);
+
+  // $("#myTable tr").filter(function () {
+  //   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+  // });
 });
 
 //#region edición
