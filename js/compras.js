@@ -127,7 +127,7 @@ class Articulo {
 				if (tipoConcreto) if (tipoConcreto.lastIndexOf(tipo) < 0) return;
 
 				switch (tipo) {//TODO: mirar si debo sumar cantidades del mismo tipo
-					case TipoCantidad.MASA:
+					case TipoCantidad.MASA: this.cantidad = cifra;
 					case TipoCantidad.VOLUMEN: this.cantidad = cifra;
 						break;
 					case TipoCantidad.PRECIO: this.precio = cifra;
@@ -376,6 +376,10 @@ class ArticuloLista extends Articulo {
 			return precioInicial - descuento;
 		}
 		return this.precio * this.unidades;
+	}
+
+	precioCantidad(){
+		if(this.precio && this.cantidad) return roundTo(2,this.precio/parseInt(this.cantidad)*10);
 	}
 
 	setDescuento(descuento, unidades) {

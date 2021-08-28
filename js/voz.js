@@ -171,19 +171,6 @@ function voz(dictado) {
     return true;
   }
 
-  // if (dictado.includes('localización')){
-  //     dictado.
-  // }
-
-  // var erPuntos = /puntos de (golpe|vida|magia|fatiga|resistencia)/i;
-  var erPuntos = /puntos de (.*)/i;
-  var p = dictado.match(erPuntos);
-  if (p) {
-    console.log(p);
-    puntos(p[1])
-  }
-
-  // var h=dictado.match(/habilidad (w+)/i);
   var h = dictado.match(/quitar filtro (.*)/i);
   if (h) {
     console.log(h);
@@ -198,6 +185,52 @@ function voz(dictado) {
     return true;
   }
 
+  //copiar a lista
+  b = dictado.match(/copiar a lista (.*)/i);
+  if (b) {
+    let lista = b[1]
+    copiar()
+    abreLista(lista);
+    pegar();
+    return true;
+  }
+
+  b = dictado.match(/invertir selección/i);
+  if (b) {
+    invertirSeleccion()
+    return true;
+  }
+
+  b = dictado.match(/deseleccionar todo/i);
+  if (b) {
+    deseleccionarTodo()
+    return true;
+  }
+  b = dictado.match(/seleccionar todo/i);
+  if (b) {
+    seleccionarTodo()
+    return true;
+  }
+  b = dictado.match(/copiar/i);
+  if (b) {
+    copiar()
+    return true;
+  }
+  b = dictado.match(/cortar/i);
+  if (b) {
+    cortar()
+    return true;
+  }
+  b = dictado.match(/eliminar/i);
+  if (b) {
+    eliminar()
+    return true;
+  }
+  b = dictado.match(/pegar/i);
+  if (b) {
+    pegar()
+    return true;
+  }
 
 
 }

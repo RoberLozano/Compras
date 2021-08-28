@@ -18,7 +18,7 @@ var config = {
 //initialize your firebase
 firebase.initializeApp(config);
 
-var CLIENT_ID ='413603329074-9afr7gq1g037ldlhtar62r94rhbji099.apps.googleusercontent.com'
+var CLIENT_ID = '413603329074-9afr7gq1g037ldlhtar62r94rhbji099.apps.googleusercontent.com'
 
 var database = firebase.database();
 
@@ -37,7 +37,7 @@ var articulos = [];
 var lista;
 
 /** nombre del usuario  */
-var user="Rober"
+var user = "Rober"
 
 
 
@@ -65,14 +65,14 @@ fbListasCollection.on('value', function (listas) {
   });
 
 
-//carga la lista guardada excepto si se le pasa como parámetro
+  //carga la lista guardada excepto si se le pasa como parámetro
 
   let listaGuardada = localStorage.getItem("ultimaLista");
 
   const url = new URL(location);
   const param = url.searchParams.get('lista')
   console.log("PERSONAJE:" + param);
-  if(param) listaGuardada=param;
+  if (param) listaGuardada = param;
 
 
   if (listaGuardada) {
@@ -144,7 +144,7 @@ function nuevo() {
   else
     editar(lastArticulo, "modal")
 
-    document.getElementById("editnombre").select();
+  document.getElementById("editnombre").select();
 }
 
 
@@ -194,10 +194,10 @@ function dark() {
 var objetoActual = "";
 /** Variable que dice si sincronizar o no
  */
-var off= false;
+var off = false;
 
 var onValueChange = function (listas) {
-  if(off) return;
+  if (off) return;
   // let visibles = ["nombre", "unidades", "precio", "total"]
   visibles = $("#columnas").val();
   articulos = [];
@@ -241,9 +241,11 @@ var onValueChange = function (listas) {
 
 function cargarLista(l) {
   console.log("LISTA->" + $("#listas").val());
- 
-  if (l) { fbListaActual = database.ref('/listas/' + l);
-            $("#beta").html(l)}
+
+  if (l) {
+    fbListaActual = database.ref('/listas/' + l);
+    $("#beta").html(l)
+  }
   else {
     fbListaActual = database.ref('/listas/' + $("#listas").val());
     localStorage.setItem("ultimaLista", $("#listas").val())
@@ -252,7 +254,7 @@ function cargarLista(l) {
 
   // fbListaActual.orderByChild("valor").on('value',function(listas){
 
-    fbListaActual.off();
+  fbListaActual.off();
   fbListaActual.on('value', onValueChange);
 
   $("#beta").html($("#listas").val())
@@ -429,18 +431,25 @@ function crearEventos(objeto, cell, key) {
       });
     }
     else
-    if (key == "cantidad") {
-      console.log(objeto.cantidad);
-    }
-    else {
-      cell.addEventListener('click', function () {
-        if ($("#cbMostrar").prop("checked")) //si es la opcion del menú
-          editar(objeto, "modal", visibles)
-        else
-          editar(objeto, "modal")
-        // $('#modal1').modal('open');
-      });
-    }
+      if (key == "cantidad") {
+        // console.log(objeto.cantidad);
+        cell.addEventListener('click', function () {
+          if (cell.innerHTML.includes('€'))
+            cell.innerHTML = objeto.cantidad;
+          else
+            if (objeto.cantidad && objeto.precio)
+              cell.innerHTML = objeto.precioCantidad() + '€/kg';
+        });
+      }
+      else {
+        cell.addEventListener('click', function () {
+          if ($("#cbMostrar").prop("checked")) //si es la opcion del menú
+            editar(objeto, "modal", visibles)
+          else
+            editar(objeto, "modal")
+          // $('#modal1').modal('open');
+        });
+      }
 
 }
 
@@ -869,7 +878,7 @@ function iniciarBusqueda(texto) {
   $("#myTable tr").filter(function () {
     $(this).toggle($(this).text().toLowerCase().indexOf(texto) > -1)
   });
-  
+
 }
 
 //BUSCAR
@@ -1061,13 +1070,13 @@ function cortar() {
 
 function eliminar() {
 
-  let l=selected.length;
+  let l = selected.length;
 
   //se quita la escucha
-  off=true
+  off = true
 
-  selected.forEach((element,i) => {
-    if(i==(l-1)) off=false; //si es el último se vuelve a activar la escucha
+  selected.forEach((element, i) => {
+    if (i == (l - 1)) off = false; //si es el último se vuelve a activar la escucha
     element.borrar();
   });
 
