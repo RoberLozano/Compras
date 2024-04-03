@@ -394,6 +394,13 @@ function crearEventos(objeto, cell, key) {
     // </div>`
 
   }
+  //si tiene EAN el icono
+  //TODO: click para cargar ultimo precio del historial
+  if (key == "nombre" && objeto.EAN) {
+    cell.innerHTML +=
+      `<img src="images/barcode-solid.svg" height="24" width="24"/>`
+  }
+
 
   if (key == "nombre" && objeto.usuario && objeto.usuario != user) {
     console.log(objeto.usuario + "!=" + user);
@@ -1169,6 +1176,18 @@ function buscarEAN(ean) {
   console.log("https://world.openfoodfacts.org/api/v0/product" + ean + ".json");
   xmlhttp.send();
 
+}
+
+//TODO: ACABARLO cuando decida la estructura
+function buscarHistorialEAN(id) {
+  //TODO: tal vez primero en el historial local
+  if(isNumber(parseInt(id))){ //busca el codigo EAN
+
+  }
+  else
+  {//busca por texto
+
+  }
 }
 /**
  * Un escaneo continuado de distintos articulos WIP

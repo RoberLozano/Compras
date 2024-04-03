@@ -587,7 +587,7 @@ class ListaCompra {
 
 }
 
-//TODO: ver si lo hado así o fecha normal y me dejo de mierdas
+//TODO: ver si lo hago así o fecha normal y me dejo de mierdas
 
 class Fecha {
 	// constructor(base) {
@@ -657,3 +657,35 @@ class Precio {
 // console.log(e);
 // console.log(Fecha.string2date(e, base));
 // console.log();
+
+
+// const historial = "historial"
+
+
+// class HistorialArticulo {
+//     constructor(articulo) {
+// 		this._articulo = articulo
+//         this._historial= {}
+//     }
+
+// 	get articulo() { return this._articulo}
+//     set articulo(articulo) { this._articulo =articulo} 
+
+//     add(fecha,precio,tienda){
+// 		if(!this._historial[tienda]) this._historial[tienda]={}
+//         this._historial[tienda][fecha]=precio;
+//     }
+
+// 	get (fecha,tienda){
+// 		if(!this._historial[tienda])
+// 		return this._historial[tienda][fecha];
+//     }
+
+// }
+
+// var his = new HistorialArticulo('Cosa');
+
+// his.add("20-20-2002",100,'Mercadona');
+// his.add("21-20-2002",150,'Mercadona');
+
+// his.get("20-20-2002",'Mercadona');
